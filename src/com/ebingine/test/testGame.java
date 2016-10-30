@@ -1,6 +1,6 @@
 package com.ebingine.test;
 
-import com.ebingine.Game;
+import com.ebingine.GameLoop;
 
 /**
  * TODO Short Description
@@ -11,7 +11,7 @@ import com.ebingine.Game;
  * @version 2016.1025
  * @since 1.7
  */
-public class testGame extends Game {
+public class testGame extends GameLoop {
 
 
 
