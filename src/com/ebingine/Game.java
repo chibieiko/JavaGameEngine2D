@@ -1,7 +1,5 @@
 package com.ebingine;
 
-import com.ebingine.GameLoop;
-
 /**
  * TODO Short Description
  * <p>
@@ -13,8 +11,8 @@ import com.ebingine.GameLoop;
  */
 public abstract class Game {
 
-    public abstract void update(GameLoop gameLoop, double deltaTime);
+    public abstract void update(Container container, double deltaTime);
 
-    public abstract void render(GameLoop gameLoop, Render renderer);
+    public abstract void render(Container container, Render renderer);
 
 }

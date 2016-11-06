@@ -14,15 +14,14 @@ import java.awt.image.BufferedImage;
  * @version 2016.1025
  * @since 1.7
  */
-abstract public class Screen {
+abstract public class Screen extends JFrame {
 
-    private JFrame frame;
-    private Canvas canvas;
+    private JPanel panel;
     private BufferedImage image;
     private Graphics g;
     private BufferStrategy bufferStrategy;
 
-    public Screen(GameLoop gameLoop) {
+    public Screen(Container container) {
 
     }
 

@@ -1,12 +1,12 @@
 package com.ebingine.test;
 
-import com.ebingine.GameLoop;
+import com.ebingine.Container;
 
 public class Main {
 
     public static void main(String[] args) {
-        GameLoop gameLoop = new GameLoop();
-        gameLoop.start();
-        gameLoop.run();
+        Container container = new Container();
+        container.start();
+        container.run();
     }
 }

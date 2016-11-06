@@ -9,10 +9,10 @@ package com.ebingine;
  * @version 2016.1025
  * @since 1.7
  */
-public class GameLoop implements Runnable{
+public class Container implements Runnable{
 
-    private int width = 800;
-    private int height = 600;
+    private int width = 1920;
+    private int height = 1080;
     private String title = "Ebingine 1.0";
     private Thread thread;
     private Game game;
@@ -21,7 +21,7 @@ public class GameLoop implements Runnable{
     // Enables 60fps
     private double frameRate = 1.0 / 60.0;
 
-    public GameLoop() {
+    public Container() {
 
     }
 
@@ -32,7 +32,7 @@ public class GameLoop implements Runnable{
 
         // todo initialize engine components
 
-        // GameLoop implements Runnable so it can be passed to Thread.
+        // Container implements Runnable so it can be passed to Thread.
         thread = new Thread(this);
         // Starts the game loop.
         thread.run();
@@ -52,7 +52,7 @@ public class GameLoop implements Runnable{
 
             stopTime = System.nanoTime() / 1000000000.0;
             // Indicates how long it takes for the while loop to loop once.
-            // Imitates delta time.
+            // Imitates delta time. Enables smooth movement.
             loopTime = stopTime - startTime;
             startTime = stopTime;
             unprocessedTime += loopTime;
