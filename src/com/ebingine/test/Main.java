@@ -1,12 +1,23 @@
 package com.ebingine.test;
 
-import com.ebingine.Container;
+import com.ebingine.GameContainer;
 
+/**
+ * TODO Short Description
+ * <p>
+ * TODO description and @since
+ *
+ * @author Erika Sankari
+ * @version 2016.1112
+ * @since 1.7
+ */
 public class Main {
 
+    static FeatureGame1 game1 = new FeatureGame1();
+
     public static void main(String[] args) {
-        Container container = new Container();
-        container.start();
-        container.run();
+        GameContainer gc = new GameContainer(game1);
+        gc.start();
+        gc.run();
     }
 }
