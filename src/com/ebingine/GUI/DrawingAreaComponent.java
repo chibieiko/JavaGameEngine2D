@@ -34,8 +34,11 @@ public class DrawingAreaComponent extends JPanel {
      */
     @Override
     public Dimension getPreferredSize() {
-        return new Dimension(cont.getWidth(),
+        Dimension test = new Dimension(cont.getWidth(),
                 cont.getHeight());
+        System.out.println("dac: " + test.getWidth());
+        System.out.println("dac: " + test.getHeight());
+        return test;
     }
 
     /**

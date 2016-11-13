@@ -1,5 +1,7 @@
 package com.ebingine.Utils;
 
+import com.ebingine.GameContainer;
+
 import java.awt.event.*;
 
 /**
@@ -13,8 +15,13 @@ import java.awt.event.*;
  */
 public class Input implements KeyListener, MouseListener, MouseMotionListener{
 
-    public Input() {
+    GameContainer gameContainer;
 
+    public Input(GameContainer gameContainer) {
+        this.gameContainer = gameContainer;
+        gameContainer.getScreen().getDac().addKeyListener(this);
+        gameContainer.getScreen().getDac().addMouseListener(this);
+        gameContainer.getScreen().getDac().addMouseMotionListener(this);
     }
 
     @Override

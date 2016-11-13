@@ -30,15 +30,11 @@ public class Screen extends JFrame {
         setContentPane(dac);
         pack();
 
-        double widthTe = getSize().getWidth();
-        double heightTe = getSize().getWidth();
-
-        System.out.println("width: " + widthTe);
-        System.out.println("height: " + heightTe);
+        System.out.println("window width: " + getSize().getWidth());
+        System.out.println("window height: " + getSize().getHeight());
 
         // Basic configurations for JFrame.
         setLocationRelativeTo(null);
-
         setVisible(true);
         setTitle(cont.getTitle());
         setDefaultCloseOperation(EXIT_ON_CLOSE);

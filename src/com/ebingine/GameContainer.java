@@ -3,6 +3,8 @@ package com.ebingine;
 import com.ebingine.GUI.Screen;
 import com.ebingine.Utils.Input;
 
+import java.awt.*;
+
 /**
  * TODO Short Description
  * <p>
@@ -14,8 +16,8 @@ import com.ebingine.Utils.Input;
  */
 public class GameContainer implements Runnable{
 
-    public static int width = 800;
-    public static int height = 600;
+    public static int width = 4000;
+    public static int height = 3000;
     private String title = "Ebingine";
     private Thread thread;
     private Game game;
@@ -23,17 +25,26 @@ public class GameContainer implements Runnable{
     private Input input;
     private Render renderer;
 
-    public Screen getScreen() {
-        return screen;
-    }
-
     // Indicates whether the game loop is running or not.
     private boolean running = false;
-    // Enables 60fps
+    // Limits frame rate to 60fps.
     private double frameRate = 1.0 / 60.0;
 
     public GameContainer(Game game) {
         this.game = game;
+
+        // Resize window to fit screens that are smaller than specified width
+        // and height.
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        System.out.println("screen width: " + screenSize.getWidth());
+        System.out.println("screen height: " +  screenSize.getHeight());
+        float ratio = (float) height / (float) width;
+        if (screenSize.getWidth() < width || screenSize.getHeight() < height) {
+            System.out.println("ratio: " + ratio);
+            height = (int) (Math.floor(screenSize.getHeight()));
+            width = (int) Math.floor(screenSize.getHeight() / ratio);
+            System.out.println("juttu: " + width);
+        }
     }
 
     public void start() {
@@ -43,7 +54,7 @@ public class GameContainer implements Runnable{
 
         screen = new Screen(this);
         renderer = new Render(this);
-        input = new Input();
+        //input = new Input();
 
         // GameContainer implements Runnable so it can be passed to Thread.
         thread = new Thread(this);
@@ -146,5 +157,9 @@ public class GameContainer implements Runnable{
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public Screen getScreen() {
+        return screen;
     }
 }
