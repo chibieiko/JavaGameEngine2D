@@ -3,6 +3,7 @@ package com.ebingine.test;
 import com.ebingine.GameContainer;
 import com.ebingine.Game;
 import com.ebingine.Render;
+import com.ebingine.gameObjects.Sprite;
 
 /**
  * TODO Short Description
@@ -16,7 +17,6 @@ import com.ebingine.Render;
 public class FeatureGame1 extends Game {
 
     public FeatureGame1() {
-
     }
 
     @Override

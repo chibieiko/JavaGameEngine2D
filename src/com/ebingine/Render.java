@@ -1,5 +1,6 @@
 package com.ebingine;
 
+import java.awt.*;
 import java.awt.image.DataBufferByte;
 
 /**
@@ -26,6 +27,9 @@ public class Render {
 
     // Clears screen.
     public void clearScreen() {
+
+
+
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
                 int index = (i + j * width) * 4;
@@ -35,6 +39,7 @@ public class Render {
                 pixels[index + 3] = (byte) 0; // red
             }
         }
+
     }
 
 }

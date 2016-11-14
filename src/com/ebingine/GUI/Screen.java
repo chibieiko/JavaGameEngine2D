@@ -49,7 +49,6 @@ public class Screen extends JFrame {
         dac.clear();
     }
 
-
     public DrawingAreaComponent getDac() {
         return dac;
     }

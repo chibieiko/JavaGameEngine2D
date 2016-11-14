@@ -1,7 +1,7 @@
 package com.ebingine;
 
 import com.ebingine.GUI.Screen;
-import com.ebingine.Utils.Input;
+import com.ebingine.utils.Input;
 
 import java.awt.*;
 
@@ -22,7 +22,7 @@ public class GameContainer implements Runnable{
     private Thread thread;
     private Game game;
     private Screen screen;
-    private Input input;
+    public Input input;
     private Render renderer;
 
     // Indicates whether the game loop is running or not.
@@ -36,15 +36,21 @@ public class GameContainer implements Runnable{
         // Resize window to fit screens that are smaller than specified width
         // and height.
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+
+        Rectangle screenMax = GraphicsEnvironment.getLocalGraphicsEnvironment()
+                 .getMaximumWindowBounds();
+        // todo reduce title height
         System.out.println("screen width: " + screenSize.getWidth());
         System.out.println("screen height: " +  screenSize.getHeight());
         float ratio = (float) height / (float) width;
-        if (screenSize.getWidth() < width || screenSize.getHeight() < height) {
+        if (screenMax.getWidth() < width || screenMax.getHeight() < height) {
             System.out.println("ratio: " + ratio);
-            height = (int) (Math.floor(screenSize.getHeight()));
-            width = (int) Math.floor(screenSize.getHeight() / ratio);
+            height = (int) (Math.floor(screenMax.getHeight()));
+            width = (int) Math.floor(screenMax.getHeight() / ratio);
             System.out.println("juttu: " + width);
         }
+
+        System.setProperty("sun.java2d.opengl", "false");
     }
 
     public void start() {
@@ -54,7 +60,8 @@ public class GameContainer implements Runnable{
 
         screen = new Screen(this);
         renderer = new Render(this);
-        //input = new Input();
+        input = new Input(this);
+        input.addInputKey("pressed SPACE");
 
         // GameContainer implements Runnable so it can be passed to Thread.
         thread = new Thread(this);
@@ -88,7 +95,7 @@ public class GameContainer implements Runnable{
 
             // Updates game every time loopTime in total equals or goes over
             // frameRate.
-            while (unprocessedTime >= frameRate) {
+          //  while (unprocessedTime >= frameRate) {
 
                 // Updates game, todo consider passing frameRate as float
                 game.update(this, frameRate);
@@ -102,7 +109,7 @@ public class GameContainer implements Runnable{
                     System.out.println(frames);
                     frames = 0;
                 }
-            }
+           // }
 
             if (render) {
                 renderer.clearScreen();

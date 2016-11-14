@@ -22,9 +22,16 @@ public class DrawingAreaComponent extends JPanel {
 
     public DrawingAreaComponent(GameContainer cont) {
         this.cont = cont;
+        GraphicsEnvironment env = GraphicsEnvironment
+                .getLocalGraphicsEnvironment();
+        GraphicsDevice device = env.getDefaultScreenDevice();
+        GraphicsConfiguration config = device.getDefaultConfiguration();
+
         image = new BufferedImage(cont.getWidth(), cont.getHeight(),
                 BufferedImage.TYPE_4BYTE_ABGR);
-
+/*
+        image = config.createCompatibleImage(cont.getWidth(), cont.getHeight
+                (), Transparency.TRANSLUCENT);*/
     }
 
     /**
