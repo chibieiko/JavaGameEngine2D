@@ -33,24 +33,9 @@ public class GameContainer implements Runnable{
     public GameContainer(Game game) {
         this.game = game;
 
-        // Resize window to fit screens that are smaller than specified width
-        // and height.
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
-        Rectangle screenMax = GraphicsEnvironment.getLocalGraphicsEnvironment()
-                 .getMaximumWindowBounds();
-        // todo reduce title height
-        System.out.println("screen width: " + screenSize.getWidth());
-        System.out.println("screen height: " +  screenSize.getHeight());
-        float ratio = (float) height / (float) width;
-        if (screenMax.getWidth() < width || screenMax.getHeight() < height) {
-            System.out.println("ratio: " + ratio);
-            height = (int) (Math.floor(screenMax.getHeight()));
-            width = (int) Math.floor(screenMax.getHeight() / ratio);
-            System.out.println("juttu: " + width);
-        }
 
-        System.setProperty("sun.java2d.opengl", "false");
+        System.setProperty("sun.java2d.opengl", "true");
     }
 
     public void start() {
@@ -61,7 +46,8 @@ public class GameContainer implements Runnable{
         screen = new Screen(this);
         renderer = new Render(this);
         input = new Input(this);
-        input.addInputKey("pressed SPACE");
+        String[] keyArray = {"SPACE", "w", "a", "s", "d"};
+        input.addInputKeys(keyArray);
 
         // GameContainer implements Runnable so it can be passed to Thread.
         thread = new Thread(this);

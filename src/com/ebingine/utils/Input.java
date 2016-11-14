@@ -75,23 +75,33 @@ public class Input implements MouseListener, MouseMotionListener{
      */
     private ActionMap actionMap;
 
+    public static String[] keyCodes;
+
     /**
      * Configures which keys can be used in the game.
      */
-    public void addInputKey(String keyCode) {
-        if (keyCode.length() == 1) {
-            System.out.println("char type");
-            inputMap.put(KeyStroke.getKeyStroke(keyCode.charAt(0)),
-                    keyCode);
-        } else {
-            System.out.println("string type: " + keyCode);
-            inputMap.put(KeyStroke.getKeyStroke(keyCode), keyCode);
-        }
+    public void addInputKeys(String[] keyCodes) {
+        this.keyCodes = keyCodes;
 
-        actionMap.put(keyCode, new KeyAction(keyCode));
+        for (int i = 0; i < keyCodes.length; i++) {
+            if (keyCodes[i].length() == 1) {
+                System.out.println("char type");
+                inputMap.put(KeyStroke.getKeyStroke(keyCodes[i].charAt(0)),
+                        keyCodes[i]);
+            } else {
+                System.out.println("string type: " + keyCodes[i]);
+                inputMap.put(KeyStroke.getKeyStroke(keyCodes[i]), keyCodes[i]);
+            }
+
+            actionMap.put(keyCodes[i], new KeyAction(keyCodes[i]));
+        }
     }
 
     public void deleteInputKey(String keyCode) {
-        inputMap.put(KeyStroke.getKeyStroke(keyCode), "none");
+        if (keyCode.length() > 1) {
+            inputMap.put(KeyStroke.getKeyStroke(keyCode), "none");
+        } else {
+            inputMap.put(KeyStroke.getKeyStroke(keyCode.charAt(0)), "none");
+        }
     }
 }

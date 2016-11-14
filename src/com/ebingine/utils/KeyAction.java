@@ -2,6 +2,7 @@ package com.ebingine.utils;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
 
 /**
  * TODO Short Description
@@ -19,6 +20,9 @@ public class KeyAction extends AbstractAction {
      */
     private String key;
 
+    private boolean[] keys = new boolean[Input.keyCodes.length];
+    private boolean[] keysLast = new boolean[Input.keyCodes.length];
+
     /**
      * Constructor sets key value.
      *
@@ -30,19 +34,27 @@ public class KeyAction extends AbstractAction {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (key.equalsIgnoreCase("g")) {
-            System.out.println("You just pressed G");
+
+        System.out.println(e.toString());
+        System.out.println(e.getActionCommand());
+
+        if (key.equalsIgnoreCase("a")) {
+            System.out.println("You just pressed a");
         }
 
         if (key.equalsIgnoreCase("w")) {
             System.out.println("You just pressed w");
         }
 
-        if (key.equalsIgnoreCase("h")) {
-            System.out.println("You just pressed h");
+        if (key.equalsIgnoreCase("s")) {
+            System.out.println("You just pressed s");
         }
 
-        if (key.equalsIgnoreCase("pressed space")) {
+        if (key.equalsIgnoreCase("d")) {
+            System.out.println("You just pressed d");
+        }
+
+        if (key.equalsIgnoreCase("space")) {
             System.out.println("SPACE pressed");
         }
 
