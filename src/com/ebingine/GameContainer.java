@@ -45,9 +45,12 @@ public class GameContainer implements Runnable{
 
         screen = new Screen(this);
         renderer = new Render(this);
-        input = new Input(this);
+        input = new Input(this, 0);
         String[] keyArray = {"SPACE", "w", "a", "s", "d"};
-        input.addInputKeys(keyArray);
+        input.addInputKey("UP", 0, 5);
+        input.addInputKey("DOWN", 0, -5);
+        input.addInputKey("RIGHT", 5, 0);
+        input.addInputKey("LEFT", -5, 0);
 
         // GameContainer implements Runnable so it can be passed to Thread.
         thread = new Thread(this);

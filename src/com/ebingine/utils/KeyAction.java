@@ -1,8 +1,12 @@
-package com.ebingine.utils;
+/*package com.ebingine.utils;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * TODO Short Description
@@ -13,53 +17,49 @@ import java.util.ArrayList;
  * @version 2016.1114
  * @since 1.7
  */
-public class KeyAction extends AbstractAction {
+/*public class KeyAction extends AbstractAction implements
+        ActionListener {
 
-    /**
-     * Contains the name for the key.
-     */
-    private String key;
-
-    private boolean[] keys = new boolean[Input.keyCodes.length];
-    private boolean[] keysLast = new boolean[Input.keyCodes.length];
+    private Point moveDelta;
 
     /**
      * Constructor sets key value.
      *
      * @param key String key value
      */
-    public KeyAction(String key) {
-        this.key = key;
+/*    public KeyAction(String key, Point moveDelta) {
+        super(key);
+
+        this.moveDelta = moveDelta;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        handleKeyEvent((String)getValue(NAME), moveDelta);
+    }
 
-        System.out.println(e.toString());
-        System.out.println(e.getActionCommand());
+    private void handleKeyEvent(String key, Point moveDelta)
+    {
+        //  Keep track of which keys are pressed
 
-        if (key.equalsIgnoreCase("a")) {
-            System.out.println("You just pressed a");
+        if (moveDelta == null)
+            Input.pressedKeys.remove( key );
+        else
+            Input.pressedKeys.put(key, moveDelta);
+
+        //  Start the Timer when the first key is pressed
+
+        if (Input.pressedKeys.size() == 1)
+        {
+            Input.timer.start();
         }
 
-        if (key.equalsIgnoreCase("w")) {
-            System.out.println("You just pressed w");
-        }
+        //  Stop the Timer when all keys have been released
 
-        if (key.equalsIgnoreCase("s")) {
-            System.out.println("You just pressed s");
-        }
-
-        if (key.equalsIgnoreCase("d")) {
-            System.out.println("You just pressed d");
-        }
-
-        if (key.equalsIgnoreCase("space")) {
-            System.out.println("SPACE pressed");
-        }
-
-        if (key.equalsIgnoreCase("released space")) {
-            System.out.println("SPACE released");
+        if (Input.pressedKeys.size() == 0)
+        {
+            Input.timer.stop();
         }
     }
 }
+*/

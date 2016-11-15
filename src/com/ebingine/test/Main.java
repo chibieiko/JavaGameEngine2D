@@ -16,8 +16,6 @@ public class Main {
     static FeatureGame1 game1 = new FeatureGame1();
 
     public static void main(String[] args) {
-        GameContainer gc = new GameContainer(game1);
-        gc.start();
-        gc.run();
+        FeatureGame1 fg = new FeatureGame1();
     }
 }

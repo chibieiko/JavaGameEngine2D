@@ -17,6 +17,11 @@ import com.ebingine.gameObjects.Sprite;
 public class FeatureGame1 extends Game {
 
     public FeatureGame1() {
+
+        GameContainer gc = new GameContainer(this);
+        gc.start();
+        gc.run();
+
     }
 
     @Override
