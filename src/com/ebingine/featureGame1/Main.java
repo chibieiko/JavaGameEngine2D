@@ -1,6 +1,4 @@
-package com.ebingine.test;
-
-import com.ebingine.GameContainer;
+package com.ebingine.featureGame1;
 
 /**
  * TODO Short Description
@@ -12,8 +10,6 @@ import com.ebingine.GameContainer;
  * @since 1.7
  */
 public class Main {
-
-    static FeatureGame1 game1 = new FeatureGame1();
 
     public static void main(String[] args) {
         FeatureGame1 fg = new FeatureGame1();

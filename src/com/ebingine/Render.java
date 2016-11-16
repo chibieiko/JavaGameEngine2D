@@ -1,6 +1,5 @@
 package com.ebingine;
 
-import java.awt.*;
 import java.awt.image.DataBufferByte;
 
 /**
@@ -25,7 +24,7 @@ public class Render {
                 .getRaster().getDataBuffer()).getData();
     }
 
-    // Clears screen.
+    /* Clears screen.
     public void clearScreen() {
 
 
@@ -41,5 +40,6 @@ public class Render {
         }
 
     }
+    */
 
 }

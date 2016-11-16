@@ -78,7 +78,7 @@ public class DrawingAreaComponent extends JPanel {
 
         super.paintComponent(g);
 
-        g.drawImage(image, 0, 0, cont.getWidth(), cont.getHeight(), null);
+        setBackground(Color.blue);
 
         updateDrawingArea();
     }

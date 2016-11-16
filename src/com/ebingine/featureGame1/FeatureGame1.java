@@ -1,9 +1,9 @@
-package com.ebingine.test;
+package com.ebingine.featureGame1;
 
 import com.ebingine.GameContainer;
 import com.ebingine.Game;
 import com.ebingine.Render;
-import com.ebingine.gameObjects.Sprite;
+import com.ebingine.utils.Input;
 
 /**
  * TODO Short Description
@@ -21,7 +21,7 @@ public class FeatureGame1 extends Game {
         GameContainer gc = new GameContainer(this);
         gc.start();
         gc.run();
-
+        Player player = new Player(gc.getHeight()/2, gc.getWidth()/2, 50, 50);
     }
 
     @Override

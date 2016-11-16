@@ -1,6 +1,7 @@
 package com.ebingine.utils;
 
 import com.ebingine.GameContainer;
+import com.ebingine.gameObjects.GameObject;
 
 import javax.swing.*;
 import java.awt.*;
@@ -21,21 +22,22 @@ public class Input implements ActionListener, MouseListener,
         MouseMotionListener {
 
     GameContainer gameContainer;
+    private GameObject gameObject = new GameObject();
     private final static String PRESSED = "pressed ";
     private final static String RELEASED = "released ";
 
     /**
      * Input map for key bindings.
      */
-    private InputMap inputMap;
+    private static InputMap inputMap;
 
     /**
      * Action map for key bindings.
      */
-    private ActionMap actionMap;
+    private static ActionMap actionMap;
 
     public static Timer timer;
-    public static Map<String, Point> pressedKeys = new HashMap<String, Point>();
+    public static Map<String, Point> pressedKeys = new HashMap<>();
 
     public static String[] keyCodes;
 
@@ -91,25 +93,21 @@ public class Input implements ActionListener, MouseListener,
     /**
      * Configures which keys can be used in the game.
      */
-    public void addInputKey(String keyCode, int deltaX, int deltaY) {
+    public static void addInputKey(String keyCode, int deltaX, int deltaY) {
 
-
-        //  Separate the key identifier from the modifiers of the KeyStroke
-
+        //  Separates the key identifier from the modifiers of the KeyStroke.
         int offset = keyCode.lastIndexOf(" ");
         String key = offset == -1 ? keyCode :  keyCode.substring( offset + 1 );
         String modifiers = keyCode.replace(key, "");
 
-        //  Create Action and add binding for the pressed key
-
+        //  Creates Action and add binding for the pressed key.
         Action pressedAction = new KeyAction(key, new Point(deltaX, deltaY));
         String pressedKey = modifiers + PRESSED + key;
         KeyStroke pressedKeyStroke = KeyStroke.getKeyStroke(pressedKey);
         inputMap.put(pressedKeyStroke, pressedKey);
         actionMap.put(pressedKey, pressedAction);
 
-        //  Create Action and add binding for the released key
-
+        //  Creates Action and adds binding for the released key.
         Action releasedAction = new KeyAction(key, null);
         String releasedKey = modifiers + RELEASED + key;
         KeyStroke releasedKeyStroke = KeyStroke.getKeyStroke(releasedKey);
@@ -141,34 +139,30 @@ public class Input implements ActionListener, MouseListener,
         }
     }
 
-    private void handleKeyEvent(String key, Point moveDelta) {
-        //  Keep track of which keys are pressed
-
-        if (moveDelta == null)
-            Input.pressedKeys.remove( key );
-        else
+    //  Invoked whenever a key is pressed or released.
+    private static void handleKeyEvent(String key, Point moveDelta) {
+        //  Keeps track of which keys are pressed.
+        if (moveDelta == null) {
+            Input.pressedKeys.remove(key);
+        } else {
             Input.pressedKeys.put(key, moveDelta);
+        }
 
-        //  Start the Timer when the first key is pressed
-
-        if (Input.pressedKeys.size() == 1)
-        {
+        //  Starts the Timer when the first key is pressed.
+        if (Input.pressedKeys.size() == 1) {
             Input.timer.start();
         }
 
-        //  Stop the Timer when all keys have been released
-
-        if (Input.pressedKeys.size() == 0)
-        {
+        //  Stops the Timer when all keys have been released.
+        if (Input.pressedKeys.size() == 0) {
             Input.timer.stop();
         }
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.println(e.getActionCommand());
+        // Call some method
     }
-
 
     /**
      * TODO Short Description
@@ -179,10 +173,11 @@ public class Input implements ActionListener, MouseListener,
      * @version 2016.1114
      * @since 1.7
      */
-    public class KeyAction extends AbstractAction implements
+    public static class KeyAction extends AbstractAction implements
             ActionListener {
 
         private Point moveDelta;
+        private String key;
 
         /**
          * Constructor sets key value.
@@ -191,12 +186,13 @@ public class Input implements ActionListener, MouseListener,
          */
         public KeyAction(String key, Point moveDelta) {
             super(key);
-
+            this.key = key;
             this.moveDelta = moveDelta;
         }
 
         @Override
         public void actionPerformed(ActionEvent e) {
+            System.out.println(getValue(NAME));
             handleKeyEvent((String)getValue(NAME), moveDelta);
         }
     }

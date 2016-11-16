@@ -1,9 +1,5 @@
 package com.ebingine.gameObjects;
 
-
-
-import java.awt.*;
-
 /**
  * Handles variables for all objects extending Sprite.
  * <p>
@@ -14,7 +10,7 @@ import java.awt.*;
  * @version 2016.1114
  * @since 1.7
  */
-public abstract class Sprite extends GameObject{
+public abstract class Sprite extends GameObject {
 
     /**
      * Contains coordinate x value.
@@ -27,12 +23,12 @@ public abstract class Sprite extends GameObject{
     private int coordinateY;
 
     /**
-     * Informs how much to advance on the x coordinate level when player moves.
+     * Informs how much to advance on the x coordinate level when Player moves.
      */
     private int speedX;
 
     /**
-     * Informs how much to advance on the y coordinate level when player moves.
+     * Informs how much to advance on the y coordinate level when Player moves.
      */
     private int speedY;
 

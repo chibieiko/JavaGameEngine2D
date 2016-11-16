@@ -33,8 +33,6 @@ public class GameContainer implements Runnable{
     public GameContainer(Game game) {
         this.game = game;
 
-
-
         System.setProperty("sun.java2d.opengl", "true");
     }
 
@@ -47,10 +45,12 @@ public class GameContainer implements Runnable{
         renderer = new Render(this);
         input = new Input(this, 0);
         String[] keyArray = {"SPACE", "w", "a", "s", "d"};
-        input.addInputKey("UP", 0, 5);
-        input.addInputKey("DOWN", 0, -5);
-        input.addInputKey("RIGHT", 5, 0);
-        input.addInputKey("LEFT", -5, 0);
+
+        Input.addInputKey("SPACE", 3, 0);
+        Input.addInputKey("W", 0, 3);
+        Input.addInputKey("A", -3, 0);
+        Input.addInputKey("S", 0, 3);
+        Input.addInputKey("D", 3, 0);
 
         // GameContainer implements Runnable so it can be passed to Thread.
         thread = new Thread(this);
@@ -83,8 +83,8 @@ public class GameContainer implements Runnable{
             frameTime += loopTime;
 
             // Updates game every time loopTime in total equals or goes over
-            // frameRate.
-          //  while (unprocessedTime >= frameRate) {
+            // frameRate. Basically limits fps to frame rate value.
+            while (unprocessedTime >= frameRate) {
 
                 // Updates game, todo consider passing frameRate as float
                 game.update(this, frameRate);
@@ -98,10 +98,9 @@ public class GameContainer implements Runnable{
                     System.out.println(frames);
                     frames = 0;
                 }
-           // }
+            }
 
             if (render) {
-                renderer.clearScreen();
                 // render the game game.render(this, renderer);
                 screen.update();
                 frames++;
