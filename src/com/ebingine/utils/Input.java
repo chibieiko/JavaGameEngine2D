@@ -44,12 +44,12 @@ public class Input implements ActionListener, MouseListener,
     public Input(GameContainer gameContainer, int delay) {
         this.gameContainer = gameContainer;
 
-        inputMap = gameContainer.getScreen().getDac().
+        inputMap = gameContainer.getWindow().getScreen().
                 getInputMap(JPanel.WHEN_IN_FOCUSED_WINDOW);
-        actionMap = gameContainer.getScreen().getDac().getActionMap();
+        actionMap = gameContainer.getWindow().getScreen().getActionMap();
 
-        gameContainer.getScreen().getDac().addMouseListener(this);
-        gameContainer.getScreen().getDac().addMouseMotionListener(this);
+        gameContainer.getWindow().getScreen().addMouseListener(this);
+        gameContainer.getWindow().getScreen().addMouseMotionListener(this);
 
         timer = new Timer(delay, this);
         timer.setInitialDelay( 0 );

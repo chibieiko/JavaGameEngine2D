@@ -1,9 +1,7 @@
 package com.ebingine;
 
-import com.ebingine.GUI.Screen;
+import com.ebingine.GUI.Window;
 import com.ebingine.utils.Input;
-
-import java.awt.*;
 
 /**
  * TODO Short Description
@@ -21,7 +19,7 @@ public class GameContainer implements Runnable{
     private String title = "Ebingine";
     private Thread thread;
     private Game game;
-    private Screen screen;
+    private Window window;
     public Input input;
     private Render renderer;
 
@@ -33,7 +31,9 @@ public class GameContainer implements Runnable{
     public GameContainer(Game game) {
         this.game = game;
 
+        // Draws images faster.
         System.setProperty("sun.java2d.opengl", "true");
+        input = new Input(this, 0);
     }
 
     public void start() {
@@ -41,16 +41,8 @@ public class GameContainer implements Runnable{
         if (running)
             return;
 
-        screen = new Screen(this);
+        window = new Window(this);
         renderer = new Render(this);
-        input = new Input(this, 0);
-        String[] keyArray = {"SPACE", "w", "a", "s", "d"};
-
-        Input.addInputKey("SPACE", 3, 0);
-        Input.addInputKey("W", 0, 3);
-        Input.addInputKey("A", -3, 0);
-        Input.addInputKey("S", 0, 3);
-        Input.addInputKey("D", 3, 0);
 
         // GameContainer implements Runnable so it can be passed to Thread.
         thread = new Thread(this);
@@ -101,8 +93,9 @@ public class GameContainer implements Runnable{
             }
 
             if (render) {
-                // render the game game.render(this, renderer);
-                screen.update();
+                // render the game
+                game.render(this, renderer);
+                window.update();
                 frames++;
             } else {
                 // When there is nothing to render, puts thread to sleep
@@ -127,7 +120,7 @@ public class GameContainer implements Runnable{
     }
 
     public void clear() {
-        screen.clear();
+        window.clear();
     }
 
     public int getWidth() {
@@ -154,7 +147,7 @@ public class GameContainer implements Runnable{
         this.title = title;
     }
 
-    public Screen getScreen() {
-        return screen;
+    public Window getWindow() {
+        return window;
     }
 }

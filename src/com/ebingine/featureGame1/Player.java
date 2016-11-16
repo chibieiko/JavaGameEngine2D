@@ -29,6 +29,8 @@ public class Player extends Sprite {
     }
 
     public void setKeys() {
+       // String[] keyArray = {"SPACE", "w", "a", "s", "d"};
+
         System.out.println("I'm a player key");
         Input.addInputKey("SPACE", 3, 0);
         Input.addInputKey("W", 0, 3);

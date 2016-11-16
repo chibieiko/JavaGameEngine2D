@@ -14,7 +14,7 @@ import java.awt.geom.Rectangle2D;
  * @version 2016.1114
  * @since 1.7
  */
-public class GameObject {
+public abstract class GameObject {
 
     /**
      * Contains height value.

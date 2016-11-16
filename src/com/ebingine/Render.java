@@ -20,7 +20,7 @@ public class Render {
     public Render(GameContainer cont) {
         width = cont.getWidth();
         height = cont.getHeight();
-        pixels = ((DataBufferByte)cont.getScreen().getDac().getImage()
+        pixels = ((DataBufferByte)cont.getWindow().getScreen().getImage()
                 .getRaster().getDataBuffer()).getData();
     }
 

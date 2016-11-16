@@ -21,16 +21,17 @@ public class FeatureGame1 extends Game {
         GameContainer gc = new GameContainer(this);
         gc.start();
         gc.run();
+
         Player player = new Player(gc.getHeight()/2, gc.getWidth()/2, 50, 50);
     }
 
     @Override
     public void update(GameContainer gc, double deltaTime) {
-
+       // System.out.println("In game update");
     }
 
     @Override
     public void render(GameContainer gc, Render renderer) {
-
+      //  System.out.println("in game render");
     }
 }
