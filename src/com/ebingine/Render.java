@@ -24,7 +24,9 @@ public class Render {
                 .getRaster().getDataBuffer()).getData();
     }
 
-
+    public void clearDrawables() {
+        GameContainer.drawables.clear();
+    }
 
     /* Clears screen.
     public void clearScreen() {

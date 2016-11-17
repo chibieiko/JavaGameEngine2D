@@ -49,6 +49,7 @@ public class Window extends JFrame {
         screen.clear();
     }
 
+    /*
     // Defines which screen to show in the event of multiple screens.
     public void setScreen(Screen screen) {
         this.screen = screen;
@@ -58,6 +59,7 @@ public class Window extends JFrame {
         setContentPane(screen);
         pack();
     }
+*/
 
     public Screen getScreen() {
         return screen;

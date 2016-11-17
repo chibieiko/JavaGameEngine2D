@@ -17,7 +17,7 @@ import java.util.ArrayList;
  * @version 2016.1025
  * @since 1.7
  */
-public class GameContainer implements Runnable{
+public class GameContainer implements Runnable {
 
     public static int width = 4000;
     public static int height = 3000;
@@ -27,12 +27,70 @@ public class GameContainer implements Runnable{
     private Window window;
     public Input input;
     private Render renderer;
-    public static ArrayList<GameObject> gameObjectArray = new ArrayList<>();
+    public static ArrayList<Drawable> drawables = new ArrayList<>();
+    private boolean draw = false;
 
     // Indicates whether the game loop is running or not.
     private boolean running = false;
     // Limits frame rate to 60fps.
     private double frameRate = 1.0 / 60.0;
+
+    // Inner class for objects, pictures, anything you want to draw.
+    public class Drawable {
+        Image img;
+        int x;
+        int y;
+        int width;
+        int height;
+
+        public Drawable(Image img, int x, int y, int width, int height) {
+            this.img = img;
+            this.x = x;
+            this.y = y;
+            this.width = width;
+            this.height = height;
+        }
+
+        public Image getImg() {
+            return img;
+        }
+
+        public void setImg(Image img) {
+            this.img = img;
+        }
+
+        public int getX() {
+            return x;
+        }
+
+        public void setX(int x) {
+            this.x = x;
+        }
+
+        public int getY() {
+            return y;
+        }
+
+        public void setY(int y) {
+            this.y = y;
+        }
+
+        public int getWidth() {
+            return width;
+        }
+
+        public void setWidth(int width) {
+            this.width = width;
+        }
+
+        public int getHeight() {
+            return height;
+        }
+
+        public void setHeight(int height) {
+            this.height = height;
+        }
+    }
 
     public GameContainer(Game game) {
         this.game = game;
@@ -109,6 +167,7 @@ public class GameContainer implements Runnable{
                 game.render(this, renderer);
                 // Repaints the screen.
                 window.update();
+
                 frames++;
             } else {
                 // When there is nothing to render, puts thread to sleep.
@@ -118,8 +177,6 @@ public class GameContainer implements Runnable{
                     e.printStackTrace();
                 }
             }
-
-            //gameObjectArray.clear();
         }
 
         clear();
@@ -135,22 +192,22 @@ public class GameContainer implements Runnable{
     }
 
     public void drawGameObject(GameObject go) {
-        gameObjectArray.add(go);
+        synchronized (drawables) {
+            drawables.add(new Drawable(go.getImg(), go.getX(), go.getY(), go
+                    .getWidth(), go.getHeight()));
+        }
     }
 
-  /*  public void drawImage(Image img, int x, int y, int width, int
-            height, ImageObserver observer) {
-        this.img = img;
-        this.x = x;
-        this.y = y;
-        this.width = width;
-        this.height = height;
-        this.observer = observer;
-    }*/
+    public void drawImg(Image img, int x, int y, int width, int height) {
+        synchronized (drawables) {
+            drawables.add(new Drawable(img, x, y, width, height));
+        }
+    }
 
     public void clear() {
         window.clear();
         game.clear(this);
+        drawables.clear();
     }
 
     public int getWidth() {

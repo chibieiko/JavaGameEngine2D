@@ -82,13 +82,14 @@ public class Screen extends JPanel {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-
-        for (GameObject obj : cont.gameObjectArray) {
-            g.drawImage(obj.getImg(), obj.getX(), obj.getY(), obj.getWidth(),
-                    obj.getHeight(), null);
+        System.out.println(GameContainer.drawables.size());
+        synchronized (GameContainer.drawables) {
+            for (GameContainer.Drawable obj : GameContainer.drawables) {
+                g.drawImage(obj.getImg(), obj.getX(), obj.getY(), obj.getWidth(),
+                        obj.getHeight(), null);
+            }
         }
 
-        GameContainer.gameObjectArray.clear();
         update();
     }
 

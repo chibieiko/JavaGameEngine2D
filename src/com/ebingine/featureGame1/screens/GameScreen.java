@@ -28,8 +28,8 @@ public class GameScreen extends Game {
 
     @Override
     public void create(GameContainer gc) {
-        player = new Player(FeatureGame1.height/2,
-                FeatureGame1.width/2, 50, 50);
+        player = new Player(gc.getWidth()/2,
+                gc.getHeight()/2, 50, 50);
     }
 
     @Override
@@ -39,7 +39,9 @@ public class GameScreen extends Game {
 
     @Override
     public void render(GameContainer gc, Render renderer) {
+        gc.drawImg(AssetManager.background, 0, 0, gc.getWidth(), gc.getHeight());
         gc.drawGameObject(player);
+
         //System.out.println("Game screen render");
     }
 
