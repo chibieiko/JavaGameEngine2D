@@ -1,10 +1,14 @@
 package com.ebingine.GUI;
 
 import com.ebingine.GameContainer;
+import com.ebingine.featureGame1.AssetManager;
+import com.ebingine.gameObjects.GameObject;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.awt.image.ImageObserver;
+import java.util.Observer;
 
 /**
  * TODO Short Description
@@ -52,6 +56,8 @@ public class Screen extends JPanel {
 /*
         image = config.createCompatibleImage(cont.getWidth(), cont.getHeight
                 (), Transparency.TRANSLUCENT);*/
+
+        setBackground(Color.black);
     }
 
     /**
@@ -75,11 +81,14 @@ public class Screen extends JPanel {
      */
     @Override
     public void paintComponent(Graphics g) {
-
         super.paintComponent(g);
 
-        setBackground(Color.blue);
+        for (GameObject obj : cont.gameObjectArray) {
+            g.drawImage(obj.getImg(), obj.getX(), obj.getY(), obj.getWidth(),
+                    obj.getHeight(), null);
+        }
 
+        GameContainer.gameObjectArray.clear();
         update();
     }
 

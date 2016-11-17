@@ -12,6 +12,7 @@ package com.ebingine.featureGame1;
 public class Main {
 
     public static void main(String[] args) {
+        AssetManager assets = new AssetManager();
         FeatureGame1 fg = new FeatureGame1();
     }
 }

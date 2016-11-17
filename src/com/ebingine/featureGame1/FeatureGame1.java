@@ -3,6 +3,7 @@ package com.ebingine.featureGame1;
 import com.ebingine.GameContainer;
 import com.ebingine.Game;
 import com.ebingine.Render;
+import com.ebingine.featureGame1.screens.GameScreen;
 import com.ebingine.utils.Input;
 
 /**
@@ -14,24 +15,18 @@ import com.ebingine.utils.Input;
  * @version 2016.1025
  * @since 1.7
  */
-public class FeatureGame1 extends Game {
+public class FeatureGame1 {
+
+    GameScreen gameScreen;
+    public static int height;
+    public static int width;
 
     public FeatureGame1() {
-
-        GameContainer gc = new GameContainer(this);
-        gc.start();
-        gc.run();
-
-        Player player = new Player(gc.getHeight()/2, gc.getWidth()/2, 50, 50);
+        gameScreen = new GameScreen();
+        GameContainer gc = new GameContainer(gameScreen);
+        height = gc.getHeight();
+        width = gc.getWidth();
     }
 
-    @Override
-    public void update(GameContainer gc, double deltaTime) {
-       // System.out.println("In game update");
-    }
 
-    @Override
-    public void render(GameContainer gc, Render renderer) {
-      //  System.out.println("in game render");
-    }
 }

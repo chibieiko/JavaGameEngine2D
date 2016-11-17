@@ -30,6 +30,8 @@ public abstract class GameObject {
      * Contains the image of the sprite.
      */
     private Image img;
+    private int x;
+    private int y;
 
     private Rectangle2D.Float rectangle;
 
@@ -99,4 +101,19 @@ public abstract class GameObject {
         this.width = width;
     }
 
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
 }

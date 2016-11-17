@@ -24,7 +24,7 @@ public class Player extends Sprite {
      */
     public Player(int coordinateX, int coordinateY, int height, int width) {
         super(coordinateX, coordinateY, height, width);
-        System.out.println("jou");
+        setImg(AssetManager.player);
         setKeys();
     }
 

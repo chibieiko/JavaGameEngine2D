@@ -22,7 +22,6 @@ public class Input implements ActionListener, MouseListener,
         MouseMotionListener {
 
     GameContainer gameContainer;
-    private GameObject gameObject = new GameObject();
     private final static String PRESSED = "pressed ";
     private final static String RELEASED = "released ";
 

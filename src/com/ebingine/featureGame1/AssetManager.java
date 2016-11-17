@@ -40,13 +40,15 @@ public class AssetManager {
      */
     public AssetManager() {
         try {
-            player = ImageIO.read(new File("src/com/sankari/assets/mog.png"));
+            player = ImageIO.read(new File
+                    ("src/com/ebingine/featureGame1/assets/mog.png"));
             monster = ImageIO.read(new File
-                    ("src/com/sankari/assets/enemy.png"));
+                    ("src/com/ebingine/featureGame1/assets/enemy.png"));
             background = ImageIO.read(new File
-                    ("src/com/sankari/assets/background.png"));
+                    ("src/com/ebingine/featureGame1/assets/background.png"));
+            System.out.println(background);
             bullet = ImageIO.read(new File
-                    ("src/com/sankari/assets/bullet.png"));
+                    ("src/com/ebingine/featureGame1/assets/bullet.png"));
         } catch (Exception e) {
             e.printStackTrace();
         }

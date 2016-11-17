@@ -1,5 +1,7 @@
 package com.ebingine.gameObjects;
 
+import java.awt.*;
+
 /**
  * Handles variables for all objects extending Sprite.
  * <p>
@@ -11,16 +13,6 @@ package com.ebingine.gameObjects;
  * @since 1.7
  */
 public abstract class Sprite extends GameObject {
-
-    /**
-     * Contains coordinate x value.
-     */
-    private int coordinateX;
-
-    /**
-     * Contains coordinate y value.
-     */
-    private int coordinateY;
 
     /**
      * Informs how much to advance on the x coordinate level when Player moves.
@@ -37,6 +29,8 @@ public abstract class Sprite extends GameObject {
      */
     private boolean alive;
 
+    private Image img;
+
     /**
      * Constructor sets sprite's variable values.
      *
@@ -46,49 +40,13 @@ public abstract class Sprite extends GameObject {
      * @param width int width
      */
     public Sprite(int coordinateX, int coordinateY, int height, int width) {
-        this.coordinateX = coordinateX;
-        this.coordinateY = coordinateY;
+        setX(coordinateX);
+        setY(coordinateY);
         super.setHeight(height);
         super.setWidth(width);
         speedX = 10;
         speedY = 10;
         alive = true;
-    }
-
-    /**
-     * Gets coordinate x.
-     *
-     * @return int coordinateX
-     */
-    public int getCoordinateX() {
-        return coordinateX;
-    }
-
-    /**
-     * Sets coordinate x.
-     *
-     * @param coordinateX int coordinate x
-     */
-    public void setCoordinateX(int coordinateX) {
-        this.coordinateX = coordinateX;
-    }
-
-    /**
-     * Gets coordinate y.
-     *
-     * @return int coordinateY
-     */
-    public int getCoordinateY() {
-        return coordinateY;
-    }
-
-    /**
-     * Sets coordinate y.
-     *
-     * @param coordinateY int coordinate y
-     */
-    public void setCoordinateY(int coordinateY) {
-        this.coordinateY = coordinateY;
     }
 
     /**
@@ -143,5 +101,15 @@ public abstract class Sprite extends GameObject {
      */
     public void setAlive(boolean alive) {
         this.alive = alive;
+    }
+
+    @Override
+    public Image getImg() {
+        return img;
+    }
+
+    @Override
+    public void setImg(Image img) {
+        this.img = img;
     }
 }

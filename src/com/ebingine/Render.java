@@ -24,6 +24,8 @@ public class Render {
                 .getRaster().getDataBuffer()).getData();
     }
 
+
+
     /* Clears screen.
     public void clearScreen() {
 

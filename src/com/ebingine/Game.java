@@ -11,8 +11,12 @@ package com.ebingine;
  */
 public abstract class Game {
 
+    public abstract void create(GameContainer gc);
+
     public abstract void update(GameContainer gc, double deltaTime);
 
     public abstract void render(GameContainer gc, Render renderer);
+
+    public abstract void clear(GameContainer gc);
 
 }

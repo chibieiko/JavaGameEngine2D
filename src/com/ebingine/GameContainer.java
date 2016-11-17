@@ -1,7 +1,12 @@
 package com.ebingine;
 
 import com.ebingine.GUI.Window;
+import com.ebingine.gameObjects.GameObject;
 import com.ebingine.utils.Input;
+
+import java.awt.*;
+import java.awt.image.ImageObserver;
+import java.util.ArrayList;
 
 /**
  * TODO Short Description
@@ -22,6 +27,7 @@ public class GameContainer implements Runnable{
     private Window window;
     public Input input;
     private Render renderer;
+    public static ArrayList<GameObject> gameObjectArray = new ArrayList<>();
 
     // Indicates whether the game loop is running or not.
     private boolean running = false;
@@ -33,7 +39,8 @@ public class GameContainer implements Runnable{
 
         // Draws images faster.
         System.setProperty("sun.java2d.opengl", "true");
-        input = new Input(this, 0);
+
+        start();
     }
 
     public void start() {
@@ -42,12 +49,17 @@ public class GameContainer implements Runnable{
             return;
 
         window = new Window(this);
+        input = new Input(this, 0);
+        game.create(this);
+
         renderer = new Render(this);
 
         // GameContainer implements Runnable so it can be passed to Thread.
         thread = new Thread(this);
         // Starts the game loop.
         thread.run();
+
+        run();
     }
 
     public void run() {
@@ -78,13 +90,13 @@ public class GameContainer implements Runnable{
             // frameRate. Basically limits fps to frame rate value.
             while (unprocessedTime >= frameRate) {
 
-                // Updates game, todo consider passing frameRate as float
+                // Updates game.
                 game.update(this, frameRate);
 
                 unprocessedTime -= frameRate;
                 render = true;
 
-                // Prints fps (frames per second)
+                // Prints fps (frames per second).
                 if (frameTime >= 1) {
                     frameTime = 0;
                     System.out.println(frames);
@@ -93,18 +105,21 @@ public class GameContainer implements Runnable{
             }
 
             if (render) {
-                // render the game
+                // Calls the render method of game.
                 game.render(this, renderer);
+                // Repaints the screen.
                 window.update();
                 frames++;
             } else {
-                // When there is nothing to render, puts thread to sleep
+                // When there is nothing to render, puts thread to sleep.
                 try {
                     Thread.sleep(1);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
+
+            //gameObjectArray.clear();
         }
 
         clear();
@@ -119,8 +134,23 @@ public class GameContainer implements Runnable{
         running = false;
     }
 
+    public void drawGameObject(GameObject go) {
+        gameObjectArray.add(go);
+    }
+
+  /*  public void drawImage(Image img, int x, int y, int width, int
+            height, ImageObserver observer) {
+        this.img = img;
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
+        this.observer = observer;
+    }*/
+
     public void clear() {
         window.clear();
+        game.clear(this);
     }
 
     public int getWidth() {
@@ -149,5 +179,18 @@ public class GameContainer implements Runnable{
 
     public Window getWindow() {
         return window;
+    }
+
+    public Game getGame() {
+        return game;
+    }
+
+    // Stops one of game's screens, changes to another screen and renders that
+    // screen.
+    // todo when returning to the previous screen, does it look the same?
+    public void setGame(Game game) {
+        stop();
+        this.game = game;
+        run();
     }
 }
