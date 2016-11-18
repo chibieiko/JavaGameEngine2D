@@ -36,7 +36,7 @@ public class Input implements ActionListener, MouseListener,
     private static ActionMap actionMap;
 
     public static Timer timer;
-    public static Map<String, Point> pressedKeys = new HashMap<>();
+    public static Map<String, Boolean> pressedKeys = new HashMap<>();
 
     public static String[] keyCodes;
 
@@ -92,7 +92,7 @@ public class Input implements ActionListener, MouseListener,
     /**
      * Configures which keys can be used in the game.
      */
-    public static void addInputKey(String keyCode, int deltaX, int deltaY) {
+    public static void addInputKey(String keyCode) {
 
         //  Separates the key identifier from the modifiers of the KeyStroke.
         int offset = keyCode.lastIndexOf(" ");
@@ -100,14 +100,14 @@ public class Input implements ActionListener, MouseListener,
         String modifiers = keyCode.replace(key, "");
 
         //  Creates Action and add binding for the pressed key.
-        Action pressedAction = new KeyAction(key, new Point(deltaX, deltaY));
+        Action pressedAction = new KeyAction(key, true);
         String pressedKey = modifiers + PRESSED + key;
         KeyStroke pressedKeyStroke = KeyStroke.getKeyStroke(pressedKey);
         inputMap.put(pressedKeyStroke, pressedKey);
         actionMap.put(pressedKey, pressedAction);
 
         //  Creates Action and adds binding for the released key.
-        Action releasedAction = new KeyAction(key, null);
+        Action releasedAction = new KeyAction(key, false);
         String releasedKey = modifiers + RELEASED + key;
         KeyStroke releasedKeyStroke = KeyStroke.getKeyStroke(releasedKey);
         inputMap.put(releasedKeyStroke, releasedKey);
@@ -139,12 +139,12 @@ public class Input implements ActionListener, MouseListener,
     }
 
     //  Invoked whenever a key is pressed or released.
-    private static void handleKeyEvent(String key, Point moveDelta) {
+    private static void handleKeyEvent(String key, boolean pressed) {
         //  Keeps track of which keys are pressed.
-        if (moveDelta == null) {
+        if (!pressed) {
             Input.pressedKeys.remove(key);
         } else {
-            Input.pressedKeys.put(key, moveDelta);
+            Input.pressedKeys.put(key, pressed);
         }
 
         //  Starts the Timer when the first key is pressed.
@@ -175,7 +175,7 @@ public class Input implements ActionListener, MouseListener,
     public static class KeyAction extends AbstractAction implements
             ActionListener {
 
-        private Point moveDelta;
+        private boolean pressed;
         private String key;
 
         /**
@@ -183,16 +183,16 @@ public class Input implements ActionListener, MouseListener,
          *
          * @param key String key value
          */
-        public KeyAction(String key, Point moveDelta) {
+        public KeyAction(String key, boolean pressed) {
             super(key);
             this.key = key;
-            this.moveDelta = moveDelta;
+            this.pressed = pressed;
         }
 
         @Override
         public void actionPerformed(ActionEvent e) {
             System.out.println(getValue(NAME));
-            handleKeyEvent((String)getValue(NAME), moveDelta);
+            handleKeyEvent((String)getValue(NAME), pressed);
         }
     }
 }

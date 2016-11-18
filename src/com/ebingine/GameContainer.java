@@ -163,6 +163,10 @@ public class GameContainer implements Runnable {
             }
 
             if (render) {
+                // Clears the drawables array.
+                synchronized (drawables) {
+                    drawables.clear();
+                }
                 // Calls the render method of game.
                 game.render(this, renderer);
                 // Repaints the screen.

@@ -25,17 +25,20 @@ public class Player extends Sprite {
     public Player(int coordinateX, int coordinateY, int height, int width) {
         super(coordinateX, coordinateY, height, width);
         setImg(AssetManager.player);
-        setKeys();
+    }
+
+    @Override
+    public void move() {
+
     }
 
     public void setKeys() {
        // String[] keyArray = {"SPACE", "w", "a", "s", "d"};
 
-        System.out.println("I'm a player key");
-        Input.addInputKey("SPACE", 3, 0);
-        Input.addInputKey("W", 0, 3);
-        Input.addInputKey("A", -3, 0);
-        Input.addInputKey("S", 0, 3);
-        Input.addInputKey("D", 3, 0);
+        Input.addInputKey("SPACE");
+        Input.addInputKey("W");
+        Input.addInputKey("A");
+        Input.addInputKey("S");
+        Input.addInputKey("D");
     }
 }

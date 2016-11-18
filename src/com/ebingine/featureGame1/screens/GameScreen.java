@@ -21,6 +21,7 @@ import com.sun.deploy.association.AssociationException;
 public class GameScreen extends Game {
 
     Player player;
+    Player player2;
 
     public GameScreen() {
 
@@ -30,6 +31,9 @@ public class GameScreen extends Game {
     public void create(GameContainer gc) {
         player = new Player(gc.getWidth()/2,
                 gc.getHeight()/2, 50, 50);
+
+        player2 = new Player(gc.getWidth()/2 - 50,
+                gc.getHeight()/2 - 50, 50, 50);
     }
 
     @Override
@@ -41,8 +45,7 @@ public class GameScreen extends Game {
     public void render(GameContainer gc, Render renderer) {
         gc.drawImg(AssetManager.background, 0, 0, gc.getWidth(), gc.getHeight());
         gc.drawGameObject(player);
-
-        //System.out.println("Game screen render");
+        gc.drawGameObject(player2);
     }
 
     @Override
