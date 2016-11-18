@@ -30,10 +30,11 @@ public class GameScreen extends Game {
     @Override
     public void create(GameContainer gc) {
         player = new Player(gc.getWidth()/2,
-                gc.getHeight()/2, 50, 50);
+                gc.getHeight()/2, 100, 100);
+        player.setKey("w");
 
         player2 = new Player(gc.getWidth()/2 - 50,
-                gc.getHeight()/2 - 50, 50, 50);
+                gc.getHeight()/2 - 50, 100, 100);
     }
 
     @Override

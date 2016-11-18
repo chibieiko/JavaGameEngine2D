@@ -146,29 +146,23 @@ public class GameContainer implements Runnable {
 
             // Updates game every time loopTime in total equals or goes over
             // frameRate. Basically limits fps to frame rate value.
-            while (unprocessedTime >= frameRate) {
+        //    while (unprocessedTime >= frameRate) {
 
-                // Updates game.
-                game.update(this, frameRate);
+            // Updates game.
+            game.update(this, frameRate);
 
-                unprocessedTime -= frameRate;
-                render = true;
+            unprocessedTime -= frameRate;
+            render = true;
 
-                // Prints fps (frames per second).
-                if (frameTime >= 1) {
-                    frameTime = 0;
-                    System.out.println(frames);
-                    frames = 0;
-                }
+            // Prints fps (frames per second).
+            if (frameTime >= 1) {
+                frameTime = 0;
+                System.out.println(frames);
+                frames = 0;
             }
+            //      }
 
             if (render) {
-                // Clears the drawables array.
-                synchronized (drawables) {
-                    drawables.clear();
-                }
-                // Calls the render method of game.
-                game.render(this, renderer);
                 // Repaints the screen.
                 window.update();
 
@@ -196,16 +190,12 @@ public class GameContainer implements Runnable {
     }
 
     public void drawGameObject(GameObject go) {
-        synchronized (drawables) {
-            drawables.add(new Drawable(go.getImg(), go.getX(), go.getY(), go
-                    .getWidth(), go.getHeight()));
-        }
+        drawables.add(new Drawable(go.getImg(), go.getX(), go.getY(), go
+                .getWidth(), go.getHeight()));
     }
 
     public void drawImg(Image img, int x, int y, int width, int height) {
-        synchronized (drawables) {
-            drawables.add(new Drawable(img, x, y, width, height));
-        }
+        drawables.add(new Drawable(img, x, y, width, height));
     }
 
     public void clear() {
@@ -253,5 +243,9 @@ public class GameContainer implements Runnable {
         stop();
         this.game = game;
         run();
+    }
+
+    public Render getRenderer() {
+        return renderer;
     }
 }

@@ -2,6 +2,7 @@ package com.ebingine.utils;
 
 import com.ebingine.GameContainer;
 import com.ebingine.gameObjects.GameObject;
+import com.ebingine.gameObjects.Sprite;
 
 import javax.swing.*;
 import java.awt.*;
@@ -37,6 +38,7 @@ public class Input implements ActionListener, MouseListener,
 
     public static Timer timer;
     public static Map<String, Boolean> pressedKeys = new HashMap<>();
+    Sprite sprite =
 
     public static String[] keyCodes;
 
@@ -92,7 +94,9 @@ public class Input implements ActionListener, MouseListener,
     /**
      * Configures which keys can be used in the game.
      */
+    // todo support for giving all input keys as an array
     public static void addInputKey(String keyCode) {
+        System.out.println("Adding input key: " + keyCode);
 
         //  Separates the key identifier from the modifiers of the KeyStroke.
         int offset = keyCode.lastIndexOf(" ");
@@ -138,8 +142,9 @@ public class Input implements ActionListener, MouseListener,
         }
     }
 
-    //  Invoked whenever a key is pressed or released.
+    // Invoked whenever a key is pressed or released.
     private static void handleKeyEvent(String key, boolean pressed) {
+        System.out.println(pressed);
         //  Keeps track of which keys are pressed.
         if (!pressed) {
             Input.pressedKeys.remove(key);
@@ -160,7 +165,7 @@ public class Input implements ActionListener, MouseListener,
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        // Call some method
+        System.out.println("cmd: " + e.getActionCommand());
     }
 
     /**
@@ -193,6 +198,9 @@ public class Input implements ActionListener, MouseListener,
         public void actionPerformed(ActionEvent e) {
             System.out.println(getValue(NAME));
             handleKeyEvent((String)getValue(NAME), pressed);
+
         }
+
+
     }
 }

@@ -35,7 +35,7 @@ public class Screen extends JPanel {
                 .getMaximumWindowBounds();
         // todo reduce title height
         System.out.println("screen width: " + screenSize.getWidth());
-        System.out.println("screen height: " +  screenSize.getHeight());
+        System.out.println("screen height: " + screenSize.getHeight());
         float ratio = (float) cont.getHeight() / (float) cont.getWidth();
         if (screenMax.getWidth() < cont.getWidth() ||
                 screenMax.getHeight() < cont.getHeight()) {
@@ -81,15 +81,18 @@ public class Screen extends JPanel {
      */
     @Override
     public void paintComponent(Graphics g) {
+        // Calls the render method of game.
+        cont.getGame().render(cont, cont.getRenderer());
+
         super.paintComponent(g);
-        synchronized (GameContainer.drawables) {
-            for (GameContainer.Drawable obj : GameContainer.drawables) {
-                g.drawImage(obj.getImg(), obj.getX(), obj.getY(), obj.getWidth(),
-                        obj.getHeight(), null);
-            }
+
+        for (GameContainer.Drawable obj : GameContainer.drawables) {
+            g.drawImage(obj.getImg(), obj.getX(), obj.getY(), obj.getWidth(),
+                    obj.getHeight(), null);
         }
 
-        update();
+        //update();
+        GameContainer.drawables.clear();
     }
 
     /**

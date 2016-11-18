@@ -49,7 +49,7 @@ public abstract class Sprite extends GameObject {
         alive = true;
     }
 
-    public abstract void move();
+    public abstract void move(String key);
 
     /**
      * Gets speed for coordinate level x.

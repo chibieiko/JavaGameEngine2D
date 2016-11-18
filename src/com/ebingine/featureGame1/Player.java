@@ -28,17 +28,17 @@ public class Player extends Sprite {
     }
 
     @Override
-    public void move() {
-
+    public void move(String key) {
+        System.out.println("player key: " + key);
     }
 
-    public void setKeys() {
+    public void setKey(String key) {
        // String[] keyArray = {"SPACE", "w", "a", "s", "d"};
 
-        Input.addInputKey("SPACE");
-        Input.addInputKey("W");
+        Input.addInputKey(key);
+     /*   Input.addInputKey("W");
         Input.addInputKey("A");
         Input.addInputKey("S");
-        Input.addInputKey("D");
+        Input.addInputKey("D");*/
     }
 }
