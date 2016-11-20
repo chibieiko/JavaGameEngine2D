@@ -26,6 +26,7 @@ public class FeatureGame1 {
         GameContainer gc = new GameContainer(gameScreen);
         height = gc.getHeight();
         width = gc.getWidth();
+
     }
 
 

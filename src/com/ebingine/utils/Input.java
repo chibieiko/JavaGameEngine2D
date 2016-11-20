@@ -22,9 +22,11 @@ import java.util.Map;
 public class Input implements ActionListener, MouseListener,
         MouseMotionListener {
 
-    GameContainer gameContainer;
-    private final static String PRESSED = "pressed ";
-    private final static String RELEASED = "released ";
+    private GameContainer gameContainer;
+    private static final String PRESSED = "pressed ";
+    private static final String RELEASED = "released ";
+    static String key1 = "";
+    static boolean pressed1 = false;
 
     /**
      * Input map for key bindings.
@@ -38,9 +40,8 @@ public class Input implements ActionListener, MouseListener,
 
     public static Timer timer;
     public static Map<String, Boolean> pressedKeys = new HashMap<>();
-    Sprite sprite =
 
-    public static String[] keyCodes;
+    public String[] keyCodes;
 
     public Input(GameContainer gameContainer, int delay) {
         this.gameContainer = gameContainer;
@@ -95,27 +96,36 @@ public class Input implements ActionListener, MouseListener,
      * Configures which keys can be used in the game.
      */
     // todo support for giving all input keys as an array
-    public static void addInputKey(String keyCode) {
-        System.out.println("Adding input key: " + keyCode);
+    public static void addInputKey(String[] keyCodes) {
+        String keyCode;
 
-        //  Separates the key identifier from the modifiers of the KeyStroke.
-        int offset = keyCode.lastIndexOf(" ");
-        String key = offset == -1 ? keyCode :  keyCode.substring( offset + 1 );
-        String modifiers = keyCode.replace(key, "");
+        for (int i = 0; i < keyCodes.length; i++) {
+            keyCode = keyCodes[i];
 
-        //  Creates Action and add binding for the pressed key.
-        Action pressedAction = new KeyAction(key, true);
-        String pressedKey = modifiers + PRESSED + key;
-        KeyStroke pressedKeyStroke = KeyStroke.getKeyStroke(pressedKey);
-        inputMap.put(pressedKeyStroke, pressedKey);
-        actionMap.put(pressedKey, pressedAction);
+            System.out.println("Adding input key: " + keyCode);
 
-        //  Creates Action and adds binding for the released key.
-        Action releasedAction = new KeyAction(key, false);
-        String releasedKey = modifiers + RELEASED + key;
-        KeyStroke releasedKeyStroke = KeyStroke.getKeyStroke(releasedKey);
-        inputMap.put(releasedKeyStroke, releasedKey);
-        actionMap.put(releasedKey, releasedAction);
+            //  Separates the key identifier from the modifiers of the KeyStroke.
+            int offset = keyCode.lastIndexOf(" ");
+            String key = offset == -1 ? keyCode :  keyCode.substring( offset + 1 );
+            String modifiers = keyCode.replace(key, "");
+            System.out.println("modifiers: " + modifiers);
+
+            //  Creates Action and adds binding for the pressed key.
+            Action pressedAction = new KeyAction(key, true);
+            String pressedKey = modifiers + PRESSED + key;
+            System.out.println("pressedKey: " + pressedKey);
+            KeyStroke pressedKeyStroke = KeyStroke.getKeyStroke(pressedKey);
+            inputMap.put(pressedKeyStroke, pressedKey);
+            actionMap.put(pressedKey, pressedAction);
+
+            //  Creates Action and adds binding for the released key.
+            Action releasedAction = new KeyAction(key, false);
+            String releasedKey = modifiers + RELEASED + key;
+            System.out.println("released key: " + releasedKey);
+            KeyStroke releasedKeyStroke = KeyStroke.getKeyStroke(releasedKey);
+            inputMap.put(releasedKeyStroke, releasedKey);
+            actionMap.put(releasedKey, releasedAction);
+        }
 
         /*
          this.keyCodes = keyCodes;
@@ -134,6 +144,7 @@ public class Input implements ActionListener, MouseListener,
         }*/
     }
 
+    // todo fix
     public void deleteInputKey(String keyCode) {
         if (keyCode.length() > 1) {
             inputMap.put(KeyStroke.getKeyStroke(keyCode), "none");
@@ -144,29 +155,59 @@ public class Input implements ActionListener, MouseListener,
 
     // Invoked whenever a key is pressed or released.
     private static void handleKeyEvent(String key, boolean pressed) {
+        key1 = key;
+        pressed1 = pressed;
         System.out.println(pressed);
         //  Keeps track of which keys are pressed.
         if (!pressed) {
-            Input.pressedKeys.remove(key);
+            pressedKeys.remove(key);
         } else {
-            Input.pressedKeys.put(key, pressed);
+            pressedKeys.put(key, pressed);
         }
 
         //  Starts the Timer when the first key is pressed.
-        if (Input.pressedKeys.size() == 1) {
-            Input.timer.start();
+        if (pressedKeys.size() == 1) {
+            timer.start();
         }
 
         //  Stops the Timer when all keys have been released.
-        if (Input.pressedKeys.size() == 0) {
-            Input.timer.stop();
+        if (pressedKeys.size() == 0) {
+            timer.stop();
         }
+
+        /*
+        for (Map.Entry<String,Boolean> entry : pressedKeys.entrySet()) {
+            String first = entry.getKey();
+            boolean value = entry.getValue();
+            System.out.println("key: " + first);
+            System.out.println("value: " + value);
+        }
+        */
+    }
+
+    public static boolean keyPressed(String key) {
+        boolean isPressed = false;
+        if (key1.equals(key) && pressed1)
+            isPressed = true;
+
+        return isPressed;
+    }
+
+    public static boolean keyReleased(String key) {
+        boolean isReleased = false;
+        if (key1.equals(key) && !pressed1) {
+            isReleased = true;
+        }
+
+        return isReleased;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.println("cmd: " + e.getActionCommand());
+       // System.out.println("moi");
     }
+
+
 
     /**
      * TODO Short Description
@@ -180,8 +221,8 @@ public class Input implements ActionListener, MouseListener,
     public static class KeyAction extends AbstractAction implements
             ActionListener {
 
-        private boolean pressed;
-        private String key;
+        public boolean pressed;
+        public String key;
 
         /**
          * Constructor sets key value.
@@ -196,11 +237,18 @@ public class Input implements ActionListener, MouseListener,
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            System.out.println(getValue(NAME));
+            System.out.println("hahhoo: " + key);
+            System.out.println("name: " + getValue(NAME));
+            System.out.println("pressed: " + pressed);
             handleKeyEvent((String)getValue(NAME), pressed);
-
         }
 
+        public String getKey() {
+            return key;
+        }
 
+        public boolean isPressed() {
+            return pressed;
+        }
     }
 }

@@ -17,12 +17,12 @@ public abstract class Sprite extends GameObject {
     /**
      * Informs how much to advance on the x coordinate level when Player moves.
      */
-    private int speedX;
+    private float speedX;
 
     /**
      * Informs how much to advance on the y coordinate level when Player moves.
      */
-    private int speedY;
+    private float speedY;
 
     /**
      * Indicates whether sprite is alive or not.
@@ -49,14 +49,14 @@ public abstract class Sprite extends GameObject {
         alive = true;
     }
 
-    public abstract void move(String key);
+   // public abstract void move();
 
     /**
      * Gets speed for coordinate level x.
      *
      * @return int speedX
      */
-    public int getSpeedX() {
+    public float getSpeedX() {
         return speedX;
     }
 
@@ -65,7 +65,7 @@ public abstract class Sprite extends GameObject {
      *
      * @param speedX int speedX
      */
-    public void setSpeedX(int speedX) {
+    public void setSpeedX(float speedX) {
         this.speedX = speedX;
     }
 
@@ -74,7 +74,7 @@ public abstract class Sprite extends GameObject {
      *
      * @return int speedY
      */
-    public int getSpeedY() {
+    public float getSpeedY() {
         return speedY;
     }
 
@@ -83,7 +83,7 @@ public abstract class Sprite extends GameObject {
      *
      * @param speedY int speedY
      */
-    public void setSpeedY(int speedY) {
+    public void setSpeedY(float speedY) {
         this.speedY = speedY;
     }
 

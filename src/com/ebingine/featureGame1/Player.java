@@ -1,5 +1,7 @@
 package com.ebingine.featureGame1;
 
+import com.ebingine.Game;
+import com.ebingine.GameContainer;
 import com.ebingine.gameObjects.Sprite;
 import com.ebingine.utils.Input;
 
@@ -25,20 +27,28 @@ public class Player extends Sprite {
     public Player(int coordinateX, int coordinateY, int height, int width) {
         super(coordinateX, coordinateY, height, width);
         setImg(AssetManager.player);
+        setSpeedY(50);
+        setSpeedX(50);
     }
 
-    @Override
-    public void move(String key) {
-        System.out.println("player key: " + key);
-    }
+  //  @Override
+    public void move(double delta) {
+        if (Input.keyPressed("W")) {
+            System.out.println("UP");
+            setY(getY() - (getSpeedY() * (float) delta));
+        }
 
-    public void setKey(String key) {
-       // String[] keyArray = {"SPACE", "w", "a", "s", "d"};
+        if (Input.keyPressed("S")) {
+            setY(getY() + (getSpeedY() * (float) delta));
+        }
 
-        Input.addInputKey(key);
-     /*   Input.addInputKey("W");
-        Input.addInputKey("A");
-        Input.addInputKey("S");
-        Input.addInputKey("D");*/
+        if (Input.keyPressed("A")) {
+            setX(getX() - (getSpeedX() * (float) delta));
+        }
+
+        if (Input.keyPressed("D")) {
+            System.out.println("LEFT");
+            setX(getX() + (getSpeedX() * (float) delta));
+        }
     }
 }

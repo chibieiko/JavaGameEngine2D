@@ -28,7 +28,6 @@ public class GameContainer implements Runnable {
     public Input input;
     private Render renderer;
     public static ArrayList<Drawable> drawables = new ArrayList<>();
-    private boolean draw = false;
 
     // Indicates whether the game loop is running or not.
     private boolean running = false;
@@ -38,12 +37,12 @@ public class GameContainer implements Runnable {
     // Inner class for objects, pictures, anything you want to draw.
     public class Drawable {
         Image img;
-        int x;
-        int y;
+        float x;
+        float y;
         int width;
         int height;
 
-        public Drawable(Image img, int x, int y, int width, int height) {
+        public Drawable(Image img, float x, float y, int width, int height) {
             this.img = img;
             this.x = x;
             this.y = y;
@@ -59,7 +58,7 @@ public class GameContainer implements Runnable {
             this.img = img;
         }
 
-        public int getX() {
+        public float getX() {
             return x;
         }
 
@@ -67,7 +66,7 @@ public class GameContainer implements Runnable {
             this.x = x;
         }
 
-        public int getY() {
+        public float getY() {
             return y;
         }
 
@@ -123,19 +122,20 @@ public class GameContainer implements Runnable {
     public void run() {
         running = true;
         // Divider converts the time to seconds.
-        double startTime = System.nanoTime() / 1000000000.0;
-        double stopTime;
-        double loopTime;
-        double unprocessedTime = 0;
+        float startTime = (float) (System.nanoTime() / 1000000000.0);
+        float stopTime;
+        float loopTime;
+        float unprocessedTime = 0;
 
         // For calculating fps.
         double frameTime = 0;
         int frames = 0;
+
         // Loops the game.
         while (running) {
             boolean render = false;
 
-            stopTime = System.nanoTime() / 1000000000.0;
+            stopTime = (float) (System.nanoTime() / 1000000000.0);
             // Indicates how long it takes for the while loop to loop once.
             // Imitates delta time. Enables smooth movement.
             loopTime = stopTime - startTime;
@@ -146,21 +146,21 @@ public class GameContainer implements Runnable {
 
             // Updates game every time loopTime in total equals or goes over
             // frameRate. Basically limits fps to frame rate value.
-        //    while (unprocessedTime >= frameRate) {
+            while (unprocessedTime >= frameRate) {
 
-            // Updates game.
-            game.update(this, frameRate);
+                // Updates game.
+                game.update(this, frameRate);
 
-            unprocessedTime -= frameRate;
-            render = true;
+                unprocessedTime -= frameRate;
+                render = true;
 
-            // Prints fps (frames per second).
-            if (frameTime >= 1) {
-                frameTime = 0;
-                System.out.println(frames);
-                frames = 0;
+                // Prints fps (frames per second).
+                if (frameTime >= 1) {
+                    frameTime = 0;
+                    System.out.println(frames);
+                    frames = 0;
+                }
             }
-            //      }
 
             if (render) {
                 // Repaints the screen.
@@ -202,6 +202,10 @@ public class GameContainer implements Runnable {
         window.clear();
         game.clear(this);
         drawables.clear();
+    }
+
+    public Input getInput() {
+        return input;
     }
 
     public int getWidth() {

@@ -87,7 +87,8 @@ public class Screen extends JPanel {
         super.paintComponent(g);
 
         for (GameContainer.Drawable obj : GameContainer.drawables) {
-            g.drawImage(obj.getImg(), obj.getX(), obj.getY(), obj.getWidth(),
+            g.drawImage(obj.getImg(), (int) obj.getX(),(int) obj.getY(), obj
+                    .getWidth(),
                     obj.getHeight(), null);
         }
 

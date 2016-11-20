@@ -7,6 +7,7 @@ import com.ebingine.Render;
 import com.ebingine.featureGame1.AssetManager;
 import com.ebingine.featureGame1.FeatureGame1;
 import com.ebingine.featureGame1.Player;
+import com.ebingine.featureGame1.Utils;
 import com.sun.deploy.association.AssociationException;
 
 /**
@@ -23,15 +24,13 @@ public class GameScreen extends Game {
     Player player;
     Player player2;
 
-    public GameScreen() {
-
-    }
+    public GameScreen() {}
 
     @Override
     public void create(GameContainer gc) {
+        Utils utils = new Utils();
         player = new Player(gc.getWidth()/2,
                 gc.getHeight()/2, 100, 100);
-        player.setKey("w");
 
         player2 = new Player(gc.getWidth()/2 - 50,
                 gc.getHeight()/2 - 50, 100, 100);
@@ -39,6 +38,7 @@ public class GameScreen extends Game {
 
     @Override
     public void update(GameContainer gc, double deltaTime) {
+        player.move(deltaTime);
        // System.out.println("Game screen update");
     }
 
@@ -47,6 +47,8 @@ public class GameScreen extends Game {
         gc.drawImg(AssetManager.background, 0, 0, gc.getWidth(), gc.getHeight());
         gc.drawGameObject(player);
         gc.drawGameObject(player2);
+
+
     }
 
     @Override
