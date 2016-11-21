@@ -54,40 +54,20 @@ public class GameContainer implements Runnable {
             return img;
         }
 
-        public void setImg(Image img) {
-            this.img = img;
-        }
-
         public float getX() {
             return x;
-        }
-
-        public void setX(int x) {
-            this.x = x;
         }
 
         public float getY() {
             return y;
         }
 
-        public void setY(int y) {
-            this.y = y;
-        }
-
         public int getWidth() {
             return width;
         }
 
-        public void setWidth(int width) {
-            this.width = width;
-        }
-
         public int getHeight() {
             return height;
-        }
-
-        public void setHeight(int height) {
-            this.height = height;
         }
     }
 
@@ -114,9 +94,7 @@ public class GameContainer implements Runnable {
         // GameContainer implements Runnable so it can be passed to Thread.
         thread = new Thread(this);
         // Starts the game loop.
-        thread.run();
-
-        run();
+        thread.start();
     }
 
     public void run() {

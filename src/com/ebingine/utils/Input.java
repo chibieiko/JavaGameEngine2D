@@ -187,16 +187,25 @@ public class Input implements ActionListener, MouseListener,
 
     public static boolean keyPressed(String key) {
         boolean isPressed = false;
-        if (key1.equals(key) && pressed1)
-            isPressed = true;
+
+        for (Map.Entry<String,Boolean> entry : pressedKeys.entrySet()) {
+            String first = entry.getKey();
+            boolean value = entry.getValue();
+            if (key.equals(first) && value)
+                isPressed = true;
+        }
 
         return isPressed;
     }
 
     public static boolean keyReleased(String key) {
         boolean isReleased = false;
-        if (key1.equals(key) && !pressed1) {
-            isReleased = true;
+
+        for (Map.Entry<String,Boolean> entry : pressedKeys.entrySet()) {
+            String first = entry.getKey();
+            boolean value = entry.getValue();
+            if (key.equals(first) && !value)
+                isReleased = true;
         }
 
         return isReleased;
