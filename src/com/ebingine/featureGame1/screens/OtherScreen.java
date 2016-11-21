@@ -1,6 +1,5 @@
 package com.ebingine.featureGame1.screens;
 
-import com.ebingine.GUI.Screen;
 import com.ebingine.Game;
 import com.ebingine.GameContainer;
 import com.ebingine.Render;

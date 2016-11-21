@@ -175,14 +175,26 @@ public class Input implements ActionListener, MouseListener,
             timer.stop();
         }
 
-        /*
         for (Map.Entry<String,Boolean> entry : pressedKeys.entrySet()) {
             String first = entry.getKey();
             boolean value = entry.getValue();
-            System.out.println("key: " + first);
-            System.out.println("value: " + value);
+            System.out.println("keyhash: " + first);
+            System.out.println("valuehash: " + value);
         }
-        */
+
+    }
+
+    public static boolean keyTyped(String key) {
+        boolean onPress = false;
+
+        for (Map.Entry<String,Boolean> entry : pressedKeys.entrySet()) {
+            String first = entry.getKey();
+            boolean value = entry.getValue();
+            if (key.equals(first) && value)
+                onPress = true;
+        }
+
+        return onPress;
     }
 
     public static boolean keyPressed(String key) {
@@ -204,7 +216,9 @@ public class Input implements ActionListener, MouseListener,
         for (Map.Entry<String,Boolean> entry : pressedKeys.entrySet()) {
             String first = entry.getKey();
             boolean value = entry.getValue();
-            if (key.equals(first) && !value)
+         //   System.out.println("key: " + first);
+         //   System.out.println("value: " + value);
+            if (!key.equals(first) && !pressed1)
                 isReleased = true;
         }
 
@@ -215,8 +229,6 @@ public class Input implements ActionListener, MouseListener,
     public void actionPerformed(ActionEvent e) {
        // System.out.println("moi");
     }
-
-
 
     /**
      * TODO Short Description
@@ -230,8 +242,8 @@ public class Input implements ActionListener, MouseListener,
     public static class KeyAction extends AbstractAction implements
             ActionListener {
 
-        public boolean pressed;
-        public String key;
+        private boolean pressed;
+        private String key;
 
         /**
          * Constructor sets key value.
@@ -246,18 +258,7 @@ public class Input implements ActionListener, MouseListener,
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            System.out.println("hahhoo: " + key);
-            System.out.println("name: " + getValue(NAME));
-            System.out.println("pressed: " + pressed);
             handleKeyEvent((String)getValue(NAME), pressed);
-        }
-
-        public String getKey() {
-            return key;
-        }
-
-        public boolean isPressed() {
-            return pressed;
         }
     }
 }

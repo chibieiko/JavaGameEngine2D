@@ -14,7 +14,6 @@ import com.ebingine.utils.Input;
 public class Utils {
 
     public Utils() {
-        System.out.println("moi");
         String[] keyArray = {"SPACE", "W", "A", "S", "D", "RIGHT", "LEFT",
                 "UP", "DOWN", "control S"};
         Input.addInputKey(keyArray);

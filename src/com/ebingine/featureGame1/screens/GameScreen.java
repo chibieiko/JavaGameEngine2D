@@ -8,6 +8,7 @@ import com.ebingine.featureGame1.AssetManager;
 import com.ebingine.featureGame1.FeatureGame1;
 import com.ebingine.featureGame1.Player;
 import com.ebingine.featureGame1.Utils;
+import com.ebingine.utils.Input;
 import com.sun.deploy.association.AssociationException;
 
 /**
@@ -39,7 +40,7 @@ public class GameScreen extends Game {
     @Override
     public void update(GameContainer gc, double deltaTime) {
         player.move(deltaTime);
-       // System.out.println("Game screen update");
+        // System.out.println("Game screen update");
     }
 
     @Override
@@ -48,7 +49,13 @@ public class GameScreen extends Game {
         gc.drawGameObject(player);
         gc.drawGameObject(player2);
 
+        if (Input.keyReleased("SPACE")) {
+            System.out.println("yo!");
+        }
 
+        if (Input.keyTyped("UP")) {
+            System.out.println("MOI!");
+        }
     }
 
     @Override

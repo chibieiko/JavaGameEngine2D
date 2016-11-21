@@ -34,7 +34,6 @@ public class Player extends Sprite {
   //  @Override
     public void move(double delta) {
         if (Input.keyPressed("W")) {
-            System.out.println("UP");
             setY(getY() - (getSpeedY() * (float) delta));
         }
 
@@ -47,7 +46,6 @@ public class Player extends Sprite {
         }
 
         if (Input.keyPressed("D")) {
-            System.out.println("LEFT");
             setX(getX() + (getSpeedX() * (float) delta));
         }
     }

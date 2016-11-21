@@ -1,14 +1,11 @@
 package com.ebingine.GUI;
 
 import com.ebingine.GameContainer;
-import com.ebingine.featureGame1.AssetManager;
-import com.ebingine.gameObjects.GameObject;
+import com.ebingine.utils.Drawable;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.awt.image.ImageObserver;
-import java.util.Observer;
 
 /**
  * TODO Short Description
@@ -22,10 +19,10 @@ import java.util.Observer;
 public class Screen extends JPanel {
 
     private BufferedImage image;
-    private GameContainer cont;
+    private GameContainer gc;
 
-    public Screen(GameContainer cont) {
-        this.cont = cont;
+    public Screen(GameContainer gc) {
+        this.gc = gc;
 
         // Resize window to fit screens that are smaller than specified width
         // and height.
@@ -36,13 +33,13 @@ public class Screen extends JPanel {
         // todo reduce title height
         System.out.println("screen width: " + screenSize.getWidth());
         System.out.println("screen height: " + screenSize.getHeight());
-        float ratio = (float) cont.getHeight() / (float) cont.getWidth();
-        if (screenMax.getWidth() < cont.getWidth() ||
-                screenMax.getHeight() < cont.getHeight()) {
+        float ratio = (float) gc.getHeight() / (float) gc.getWidth();
+        if (screenMax.getWidth() < gc.getWidth() ||
+                screenMax.getHeight() < gc.getHeight()) {
             System.out.println("ratio: " + ratio);
-            cont.setHeight((int) (Math.floor(screenMax.getHeight())));
-            cont.setWidth((int) Math.floor(screenMax.getHeight() / ratio));
-            System.out.println("juttu: " + cont.getWidth());
+            gc.setHeight((int) (Math.floor(screenMax.getHeight())));
+            gc.setWidth((int) Math.floor(screenMax.getHeight() / ratio));
+            System.out.println("juttu: " + gc.getWidth());
         }
 
         // TODO
@@ -51,10 +48,10 @@ public class Screen extends JPanel {
         GraphicsDevice device = env.getDefaultScreenDevice();
         GraphicsConfiguration config = device.getDefaultConfiguration();
 
-        image = new BufferedImage(cont.getWidth(), cont.getHeight(),
+        image = new BufferedImage(gc.getWidth(), gc.getHeight(),
                 BufferedImage.TYPE_4BYTE_ABGR);
 /*
-        image = config.createCompatibleImage(cont.getWidth(), cont.getHeight
+        image = config.createCompatibleImage(gc.getWidth(), gc.getHeight
                 (), Transparency.TRANSLUCENT);*/
 
         setBackground(Color.black);
@@ -67,8 +64,8 @@ public class Screen extends JPanel {
      */
     @Override
     public Dimension getPreferredSize() {
-        Dimension test = new Dimension(cont.getWidth(),
-                cont.getHeight());
+        Dimension test = new Dimension(gc.getWidth(),
+                gc.getHeight());
         System.out.println("dac: " + test.getWidth());
         System.out.println("dac: " + test.getHeight());
         return test;
@@ -81,18 +78,19 @@ public class Screen extends JPanel {
      */
     @Override
     public void paintComponent(Graphics g) {
+
         // Calls the render method of game.
-        cont.getGame().render(cont, cont.getRenderer());
+        gc.getGame().render(gc, gc.getRenderer());
 
         super.paintComponent(g);
 
-        for (GameContainer.Drawable obj : GameContainer.drawables) {
+        for (Drawable obj : GameContainer.drawables) {
             g.drawImage(obj.getImg(), (int) obj.getX(),(int) obj.getY(), obj
                     .getWidth(),
                     obj.getHeight(), null);
         }
 
-        //update();
+        update();
         GameContainer.drawables.clear();
     }
 
