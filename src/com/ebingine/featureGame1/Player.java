@@ -5,6 +5,8 @@ import com.ebingine.GameContainer;
 import com.ebingine.gameObjects.Sprite;
 import com.ebingine.utils.Input;
 
+import java.awt.*;
+
 /**
  * TODO Short Description
  * <p>
@@ -48,5 +50,11 @@ public class Player extends Sprite {
         if (Input.keyPressed("D")) {
             setX(getX() + (getSpeedX() * (float) delta));
         }
+    }
+
+    @Override
+    public void draw(Graphics2D g2d) {
+        g2d.drawImage(getImg(), (int) getX(), (int) getY(), getWidth(),
+                getHeight(), null);
     }
 }

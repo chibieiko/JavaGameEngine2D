@@ -4,10 +4,7 @@ import com.ebingine.GUI.Screen;
 import com.ebingine.Game;
 import com.ebingine.GameContainer;
 import com.ebingine.Render;
-import com.ebingine.featureGame1.AssetManager;
-import com.ebingine.featureGame1.FeatureGame1;
-import com.ebingine.featureGame1.Player;
-import com.ebingine.featureGame1.Utils;
+import com.ebingine.featureGame1.*;
 import com.ebingine.utils.Input;
 import com.sun.deploy.association.AssociationException;
 
@@ -21,7 +18,7 @@ import com.sun.deploy.association.AssociationException;
  * @since 1.7
  */
 public class GameScreen extends Game {
-
+    Img background;
     Player player;
     Player player2;
 
@@ -30,6 +27,8 @@ public class GameScreen extends Game {
     @Override
     public void create(GameContainer gc) {
         Utils utils = new Utils();
+        background = new Img(AssetManager.background, 0, 0, gc.getWidth(), gc
+                .getHeight());
         player = new Player(gc.getWidth()/2,
                 gc.getHeight()/2, 100, 100);
 
@@ -45,9 +44,8 @@ public class GameScreen extends Game {
 
     @Override
     public void render(GameContainer gc, Render renderer) {
-        gc.drawImg(AssetManager.background, 0, 0, gc.getWidth(), gc.getHeight());
-        gc.drawGameObject(player);
-        gc.drawGameObject(player2);
+       // gc.drawImg(AssetManager.Img, 0, 0, gc.getWidth(), gc
+              //  .getHeight());
 
         if (Input.keyReleased("SPACE")) {
             System.out.println("yo!");

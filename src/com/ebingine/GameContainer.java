@@ -87,7 +87,7 @@ public class GameContainer implements Runnable {
 
             // Updates game every time loopTime in total equals or goes over
             // frameRate. Basically limits fps to frame rate value.
-            while (unprocessedTime >= frameRate) {
+       //     while (unprocessedTime >= frameRate) {
 
                 // Updates game.
                 game.update(this, frameRate);
@@ -101,9 +101,11 @@ public class GameContainer implements Runnable {
                     System.out.println(frames);
                     frames = 0;
                 }
-            }
+//            }
 
             if (render) {
+                // Calls the render method of game.
+                getGame().render(this, getRenderer());
                 // Repaints the screen.
                 window.update();
 
@@ -128,15 +130,6 @@ public class GameContainer implements Runnable {
 
         // Stops the game loop.
         running = false;
-    }
-
-    public void drawGameObject(GameObject go) {
-        drawables.add(new Drawable(go.getImg(), go.getX(), go.getY(), go
-                .getWidth(), go.getHeight()));
-    }
-
-    public void drawImg(Image img, int x, int y, int width, int height) {
-        drawables.add(new Drawable(img, x, y, width, height));
     }
 
     public void clear() {

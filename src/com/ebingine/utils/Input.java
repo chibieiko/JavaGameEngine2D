@@ -102,18 +102,14 @@ public class Input implements ActionListener, MouseListener,
         for (int i = 0; i < keyCodes.length; i++) {
             keyCode = keyCodes[i];
 
-            System.out.println("Adding input key: " + keyCode);
-
             //  Separates the key identifier from the modifiers of the KeyStroke.
             int offset = keyCode.lastIndexOf(" ");
             String key = offset == -1 ? keyCode :  keyCode.substring( offset + 1 );
             String modifiers = keyCode.replace(key, "");
-            System.out.println("modifiers: " + modifiers);
 
             //  Creates Action and adds binding for the pressed key.
             Action pressedAction = new KeyAction(key, true);
             String pressedKey = modifiers + PRESSED + key;
-            System.out.println("pressedKey: " + pressedKey);
             KeyStroke pressedKeyStroke = KeyStroke.getKeyStroke(pressedKey);
             inputMap.put(pressedKeyStroke, pressedKey);
             actionMap.put(pressedKey, pressedAction);
@@ -121,7 +117,6 @@ public class Input implements ActionListener, MouseListener,
             //  Creates Action and adds binding for the released key.
             Action releasedAction = new KeyAction(key, false);
             String releasedKey = modifiers + RELEASED + key;
-            System.out.println("released key: " + releasedKey);
             KeyStroke releasedKeyStroke = KeyStroke.getKeyStroke(releasedKey);
             inputMap.put(releasedKeyStroke, releasedKey);
             actionMap.put(releasedKey, releasedAction);
@@ -157,7 +152,6 @@ public class Input implements ActionListener, MouseListener,
     private static void handleKeyEvent(String key, boolean pressed) {
         key1 = key;
         pressed1 = pressed;
-        System.out.println(pressed);
         //  Keeps track of which keys are pressed.
         if (!pressed) {
             pressedKeys.remove(key);
@@ -178,8 +172,6 @@ public class Input implements ActionListener, MouseListener,
         for (Map.Entry<String,Boolean> entry : pressedKeys.entrySet()) {
             String first = entry.getKey();
             boolean value = entry.getValue();
-            System.out.println("keyhash: " + first);
-            System.out.println("valuehash: " + value);
         }
 
     }

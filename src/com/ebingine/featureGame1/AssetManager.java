@@ -26,7 +26,7 @@ public class AssetManager {
     public static Image monster;
 
     /**
-     * Holds image for background.
+     * Holds image for Img.
      */
     public static Image background;
 

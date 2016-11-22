@@ -39,7 +39,7 @@ public abstract class Sprite extends GameObject {
      * @param height int height
      * @param width int width
      */
-    public Sprite(int coordinateX, int coordinateY, int height, int width) {
+    public Sprite(int coordinateX, int coordinateY, int width, int height) {
         setX(coordinateX);
         setY(coordinateY);
         super.setHeight(height);

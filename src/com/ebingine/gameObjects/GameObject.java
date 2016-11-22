@@ -1,6 +1,9 @@
 package com.ebingine.gameObjects;
 
 
+import com.ebingine.GameContainer;
+import com.ebingine.utils.Drawable;
+
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Rectangle2D;
@@ -14,7 +17,7 @@ import java.awt.geom.Rectangle2D;
  * @version 2016.1114
  * @since 1.7
  */
-public abstract class GameObject {
+public abstract class GameObject implements Drawable {
 
     /**
      * Contains height value.
@@ -38,7 +41,7 @@ public abstract class GameObject {
     private Ellipse2D.Float ellipse;
 
     public GameObject() {
-
+        GameContainer.drawables.add(this);
     }
 
     public Ellipse2D getEllipse() {

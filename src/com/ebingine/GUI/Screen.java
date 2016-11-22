@@ -2,6 +2,7 @@ package com.ebingine.GUI;
 
 import com.ebingine.GameContainer;
 import com.ebingine.utils.Drawable;
+import com.ebingine.utils.Utils;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,6 +21,7 @@ public class Screen extends JPanel {
 
     private BufferedImage image;
     private GameContainer gc;
+    Utils util = new Utils();
 
     public Screen(GameContainer gc) {
         this.gc = gc;
@@ -78,20 +80,19 @@ public class Screen extends JPanel {
      */
     @Override
     public void paintComponent(Graphics g) {
-
-        // Calls the render method of game.
-        gc.getGame().render(gc, gc.getRenderer());
-
+        // Clears the screen.
         super.paintComponent(g);
+        Graphics2D g2d = (Graphics2D) g;
+ //       g2d.setFont(util.getFont("featureGame1/assets/font_1_honokamin.ttf"));
 
-        for (Drawable obj : GameContainer.drawables) {
-            g.drawImage(obj.getImg(), (int) obj.getX(),(int) obj.getY(), obj
-                    .getWidth(),
-                    obj.getHeight(), null);
+        // Smoothes the borders of drawables.
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints
+                .VALUE_ANTIALIAS_ON);
+
+        for (Drawable d : GameContainer.drawables) {
+            d.draw(g2d);
+         //   g2d.drawString("moi", gc.getWidth()/2, gc.getHeight()/2);
         }
-
-        update();
-        GameContainer.drawables.clear();
     }
 
     /**
