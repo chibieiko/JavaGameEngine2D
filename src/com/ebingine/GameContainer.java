@@ -90,7 +90,7 @@ public class GameContainer implements Runnable {
        //     while (unprocessedTime >= frameRate) {
 
                 // Updates game.
-                game.update(this, frameRate);
+                game.update(this, loopTime);
 
                 unprocessedTime -= frameRate;
                 render = true;

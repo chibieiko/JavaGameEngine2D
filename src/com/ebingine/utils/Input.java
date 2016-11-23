@@ -7,6 +7,7 @@ import com.ebingine.gameObjects.Sprite;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,6 +28,7 @@ public class Input implements ActionListener, MouseListener,
     private static final String RELEASED = "released ";
     static String key1 = "";
     static boolean pressed1 = false;
+    static boolean keyDown = false;
 
     /**
      * Input map for key bindings.
@@ -40,6 +42,7 @@ public class Input implements ActionListener, MouseListener,
 
     public static Timer timer;
     public static Map<String, Boolean> pressedKeys = new HashMap<>();
+    public static ArrayList<String> typedKeys = new ArrayList<>();
 
     public String[] keyCodes;
 
@@ -54,7 +57,7 @@ public class Input implements ActionListener, MouseListener,
         gameContainer.getWindow().getScreen().addMouseMotionListener(this);
 
         timer = new Timer(delay, this);
-        timer.setInitialDelay( 0 );
+        timer.setInitialDelay(0);
     }
 
     @Override
@@ -95,7 +98,6 @@ public class Input implements ActionListener, MouseListener,
     /**
      * Configures which keys can be used in the game.
      */
-    // todo support for giving all input keys as an array
     public static void addInputKey(String[] keyCodes) {
         String keyCode;
 
@@ -104,7 +106,7 @@ public class Input implements ActionListener, MouseListener,
 
             //  Separates the key identifier from the modifiers of the KeyStroke.
             int offset = keyCode.lastIndexOf(" ");
-            String key = offset == -1 ? keyCode :  keyCode.substring( offset + 1 );
+            String key = offset == -1 ? keyCode : keyCode.substring(offset + 1);
             String modifiers = keyCode.replace(key, "");
 
             //  Creates Action and adds binding for the pressed key.
@@ -152,51 +154,104 @@ public class Input implements ActionListener, MouseListener,
     private static void handleKeyEvent(String key, boolean pressed) {
         key1 = key;
         pressed1 = pressed;
-        //  Keeps track of which keys are pressed.
-        if (!pressed) {
-            pressedKeys.remove(key);
-        } else {
-            pressedKeys.put(key, pressed);
-        }
 
-        //  Starts the Timer when the first key is pressed.
-        if (pressedKeys.size() == 1) {
-            timer.start();
+        //  Keeps track of which keys are pressed.
+        // if (!pressed) {
+        //     pressedKeys.remove(key);
+        // } else {
+
+        synchronized (pressedKeys) {
+            pressedKeys.put(key, pressed);
+            // }
+
+            //  Starts the Timer when the first key is pressed.
+            if (pressedKeys.size() == 1) {
+                timer.start();
+            }
+
+            boolean allReleased = true;
+            for (Map.Entry<String, Boolean> entry : pressedKeys.entrySet()) {
+                if (entry.getValue()) {
+                    allReleased = false;
+                }
+
+                synchronized (typedKeys) {
+                    // In case typed key has been released, then removes it
+                    // from the typedKeys array.
+                    boolean remove = false;
+                    for (String typedKey : typedKeys) {
+                        if (key.equals(typedKey) && !pressed) {
+                            remove = true;
+                        }
+                    }
+
+                    if (remove)
+                    typedKeys.remove(key);
+                }
+            }
+
+            if (allReleased) {
+                keyDown = false;
+                pressedKeys.clear();
+                timer.stop();
+            }
         }
 
         //  Stops the Timer when all keys have been released.
-        if (pressedKeys.size() == 0) {
-            timer.stop();
-        }
+        // if (pressedKeys.size() == 0) {
+        //     timer.stop();
+        //  }
 
-        for (Map.Entry<String,Boolean> entry : pressedKeys.entrySet()) {
+       /* for (Map.Entry<String,Boolean> entry : pressedKeys.entrySet()) {
             String first = entry.getKey();
             boolean value = entry.getValue();
-        }
+        } */
 
     }
 
     public static boolean keyTyped(String key) {
-        boolean onPress = false;
+        boolean typed = false;
 
-        for (Map.Entry<String,Boolean> entry : pressedKeys.entrySet()) {
-            String first = entry.getKey();
-            boolean value = entry.getValue();
-            if (key.equals(first) && value)
-                onPress = true;
+        if (keyDown) {
+            boolean alreadyTyped = false;
+
+            synchronized (typedKeys) {
+                for (String typedKey : typedKeys) {
+                    //  System.out.println("typed Keys:");
+                    //  System.out.print(typedKey + " \n");
+                    if (key.equals(typedKey)) {
+                        alreadyTyped = true;
+                    }
+                }
+            }
+
+            synchronized (pressedKeys) {
+                for (Map.Entry<String, Boolean> entry : pressedKeys.entrySet()) {
+                    if (key.equals(entry.getKey()) && entry.getValue() &&
+                            !alreadyTyped) {
+                        typed = true;
+                        synchronized (typedKeys) {
+                            typedKeys.add(entry.getKey());
+                        }
+                    }
+
+                }
+            }
         }
 
-        return onPress;
+        return typed;
     }
 
     public static boolean keyPressed(String key) {
         boolean isPressed = false;
 
-        for (Map.Entry<String,Boolean> entry : pressedKeys.entrySet()) {
-            String first = entry.getKey();
-            boolean value = entry.getValue();
-            if (key.equals(first) && value)
-                isPressed = true;
+        if (keyDown) {
+            synchronized (pressedKeys) {
+                for (Map.Entry<String, Boolean> entry : pressedKeys.entrySet()) {
+                    if (key.equals(entry.getKey()) && entry.getValue())
+                        isPressed = true;
+                }
+            }
         }
 
         return isPressed;
@@ -204,14 +259,16 @@ public class Input implements ActionListener, MouseListener,
 
     public static boolean keyReleased(String key) {
         boolean isReleased = false;
+   //     System.out.println("RELEASE");
 
-        for (Map.Entry<String,Boolean> entry : pressedKeys.entrySet()) {
-            String first = entry.getKey();
-            boolean value = entry.getValue();
-         //   System.out.println("key: " + first);
-         //   System.out.println("value: " + value);
-            if (!key.equals(first) && !pressed1)
-                isReleased = true;
+        if (keyDown) {
+            synchronized (pressedKeys) {
+                for (Map.Entry<String, Boolean> entry : pressedKeys.entrySet()) {
+                    if (key.equals(entry.getKey()) && !pressed1) {
+                        isReleased = true;
+                    }
+                }
+            }
         }
 
         return isReleased;
@@ -219,7 +276,7 @@ public class Input implements ActionListener, MouseListener,
 
     @Override
     public void actionPerformed(ActionEvent e) {
-       // System.out.println("moi");
+        keyDown = true;
     }
 
     /**
@@ -250,7 +307,7 @@ public class Input implements ActionListener, MouseListener,
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            handleKeyEvent((String)getValue(NAME), pressed);
+            handleKeyEvent((String) getValue(NAME), pressed);
         }
     }
 }

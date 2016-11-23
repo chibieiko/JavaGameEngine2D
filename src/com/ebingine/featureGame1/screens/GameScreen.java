@@ -48,7 +48,8 @@ public class GameScreen extends Game {
               //  .getHeight());
 
         if (Input.keyReleased("SPACE")) {
-            System.out.println("yo!");
+            System.out.println(Input.keyReleased("SPACE"));
+            System.out.println("space");
         }
 
         if (Input.keyTyped("UP")) {
