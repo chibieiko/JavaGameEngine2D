@@ -23,7 +23,7 @@ public class Utils {
             GraphicsEnvironment ge = GraphicsEnvironment
             .getLocalGraphicsEnvironment();
             Font font = Font.createFont(Font.TRUETYPE_FONT, new File
-                    ("/featureGame1/assets/font_1_honokamin.ttf"));
+                    (filePath));
 
             ge.registerFont(font);
             return font;

@@ -1,11 +1,8 @@
 package com.ebingine.utils;
 
 import com.ebingine.GameContainer;
-import com.ebingine.gameObjects.GameObject;
-import com.ebingine.gameObjects.Sprite;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,6 +25,7 @@ public class Input implements ActionListener, MouseListener,
     private static final String RELEASED = "released ";
     static String key1 = "";
     static boolean pressed1 = false;
+    // Makes sure key events are only queried when at least one key is down.
     static boolean keyDown = false;
 
     /**

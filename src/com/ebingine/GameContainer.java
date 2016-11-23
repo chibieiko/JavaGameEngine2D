@@ -1,11 +1,9 @@
 package com.ebingine;
 
 import com.ebingine.GUI.Window;
-import com.ebingine.gameObjects.GameObject;
 import com.ebingine.utils.Drawable;
 import com.ebingine.utils.Input;
 
-import java.awt.*;
 import java.util.ArrayList;
 
 /**
@@ -32,15 +30,13 @@ public class GameContainer implements Runnable {
     // Indicates whether the game loop is running or not.
     private boolean running = false;
     // Limits frame rate to 60fps.
-    private double frameRate = 1.0 / 60.0;
+    private double deltaTime = 1.0 / 60.0;
 
     public GameContainer(Game game) {
         this.game = game;
 
         // Draws images faster.
         System.setProperty("sun.java2d.opengl", "true");
-
-        start();
     }
 
     public void start() {
@@ -56,43 +52,48 @@ public class GameContainer implements Runnable {
 
         // GameContainer implements Runnable so it can be passed to Thread.
         thread = new Thread(this);
-        // Starts the game loop.
+        // Starts the game loop thread.
         thread.start();
     }
 
+    // Runnable's run method;
     public void run() {
         running = true;
         // Divider converts the time to seconds.
-        float startTime = (float) (System.nanoTime() / 1000000000.0);
-        float stopTime;
-        float loopTime;
-        float unprocessedTime = 0;
+        double currentTime = System.nanoTime() / 1000000000.0;
+        double newTime;
+        // Tells how long it takes to loop through the game.
+        double loopTime;
+        double unprocessedTime = 0;
 
         // For calculating fps.
         double frameTime = 0;
         int frames = 0;
+        boolean render;
 
         // Loops the game.
         while (running) {
-            boolean render = false;
+            render = false;
 
-            stopTime = (float) (System.nanoTime() / 1000000000.0);
+            newTime = System.nanoTime() / 1000000000.0;
             // Indicates how long it takes for the while loop to loop once.
-            // Imitates delta time. Enables smooth movement.
-            loopTime = stopTime - startTime;
-            startTime = stopTime;
+            loopTime = newTime - currentTime;
+            if (loopTime > 0.25)
+                loopTime = 0.25;
+
+            currentTime = newTime;
 
             unprocessedTime += loopTime;
             frameTime += loopTime;
 
             // Updates game every time loopTime in total equals or goes over
-            // frameRate. Basically limits fps to frame rate value.
-       //     while (unprocessedTime >= frameRate) {
+            // deltaTime. Basically limits fps to frame rate value.
+            while (unprocessedTime >= deltaTime) {
 
-                // Updates game.
-                game.update(this, loopTime);
+                // Updates game with fixed deltaTime.
+                game.update(this, deltaTime);
 
-                unprocessedTime -= frameRate;
+                unprocessedTime -= deltaTime;
                 render = true;
 
                 // Prints fps (frames per second).
@@ -101,7 +102,7 @@ public class GameContainer implements Runnable {
                     System.out.println(frames);
                     frames = 0;
                 }
-//            }
+            }
 
             if (render) {
                 // Calls the render method of game.

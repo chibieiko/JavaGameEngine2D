@@ -29,8 +29,8 @@ public class Player extends Sprite {
     public Player(int coordinateX, int coordinateY, int height, int width) {
         super(coordinateX, coordinateY, height, width);
         setImg(AssetManager.player);
-        setSpeedY(50);
-        setSpeedX(50);
+        setSpeedY(100);
+        setSpeedX(100);
     }
 
   //  @Override
