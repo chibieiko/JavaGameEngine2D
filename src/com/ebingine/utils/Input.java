@@ -42,6 +42,14 @@ public class Input implements ActionListener, MouseListener,
     public static Map<String, Boolean> pressedKeys = new HashMap<>();
     public static ArrayList<String> typedKeys = new ArrayList<>();
 
+    private static boolean mouseClicked = false;
+    private static boolean mousePressed = false;
+    private static boolean mouseReleased = false;
+    private static boolean mouseEntered = false;
+    private static boolean mouseExited = false;
+    private static boolean mouseDragged = false;
+    private static boolean mouseMoved = false;
+
     public String[] keyCodes;
 
     public Input(GameContainer gameContainer, int delay) {
@@ -58,39 +66,81 @@ public class Input implements ActionListener, MouseListener,
         timer.setInitialDelay(0);
     }
 
+    public static boolean mouseClicked() {
+        boolean temp = mouseClicked;
+        mouseClicked = false;
+        return temp;
+    }
+
     @Override
     public void mouseClicked(MouseEvent e) {
+        mouseClicked = true;
+    }
 
+    public static boolean mousePressed() {
+        boolean temp = mousePressed;
+        mousePressed = false;
+        return temp;
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
+        mousePressed = true;
+    }
 
+    public static boolean mouseReleased() {
+        boolean temp = mouseReleased;
+        mouseReleased = false;
+        return temp;
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
+        mouseReleased = true;
+    }
 
+    public static boolean mouseEntered() {
+        boolean temp = mouseEntered;
+        mouseEntered = false;
+        return temp;
     }
 
     @Override
     public void mouseEntered(MouseEvent e) {
+        mouseEntered = true;
+    }
 
+    public static boolean mouseExited() {
+        boolean temp = mouseExited;
+        mouseExited = false;
+        return temp;
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
+        mouseExited = true;
+    }
 
+    public static boolean mouseDragged() {
+        boolean temp = mouseDragged;
+        mouseDragged = false;
+        return temp;
     }
 
     @Override
     public void mouseDragged(MouseEvent e) {
+        mouseDragged = true;
+    }
 
+    public static boolean mouseMoved() {
+        boolean temp = mouseMoved;
+        mouseMoved = false;
+        return temp;
     }
 
     @Override
     public void mouseMoved(MouseEvent e) {
-
+        mouseMoved = true;
     }
 
     /**
@@ -120,6 +170,8 @@ public class Input implements ActionListener, MouseListener,
             KeyStroke releasedKeyStroke = KeyStroke.getKeyStroke(releasedKey);
             inputMap.put(releasedKeyStroke, releasedKey);
             actionMap.put(releasedKey, releasedAction);
+
+            pressedKeys.put(keyCode, false);
         }
 
         /*
@@ -150,9 +202,6 @@ public class Input implements ActionListener, MouseListener,
 
     // Invoked whenever a key is pressed or released.
     private static void handleKeyEvent(String key, boolean pressed) {
-        key1 = key;
-        pressed1 = pressed;
-
         //  Keeps track of which keys are pressed.
         // if (!pressed) {
         //     pressedKeys.remove(key);
@@ -215,8 +264,6 @@ public class Input implements ActionListener, MouseListener,
 
             synchronized (typedKeys) {
                 for (String typedKey : typedKeys) {
-                    //  System.out.println("typed Keys:");
-                    //  System.out.print(typedKey + " \n");
                     if (key.equals(typedKey)) {
                         alreadyTyped = true;
                     }

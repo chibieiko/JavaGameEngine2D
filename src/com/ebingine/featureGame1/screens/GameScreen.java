@@ -39,6 +39,7 @@ public class GameScreen extends Game {
     @Override
     public void update(GameContainer gc, double deltaTime) {
         player.move(deltaTime);
+        player2.moveP2(deltaTime);
         // System.out.println("Game screen update");
     }
 
@@ -52,8 +53,20 @@ public class GameScreen extends Game {
             System.out.println("space");
         }
 
-        if (Input.keyTyped("UP")) {
-            System.out.println("MOI!");
+        if (Input.keyTyped("control E")) {
+            System.out.println("SAVE!");
+        }
+
+        if (Input.mouseDragged()) {
+            System.out.println("MOUSE DRAGGED");
+        }
+
+        if (Input.mouseClicked()) {
+            System.out.println("MOUSE CLICKED");
+        }
+
+        if (Input.mouseMoved()) {
+            System.out.println("MOUSE MOVED");
         }
     }
 

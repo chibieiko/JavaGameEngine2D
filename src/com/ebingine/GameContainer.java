@@ -60,7 +60,7 @@ public class GameContainer implements Runnable {
     public void run() {
         running = true;
         // Divider converts the time to seconds.
-        double currentTime = System.nanoTime() / 1000000000.0;
+        double currentTime = System.nanoTime() / 1_000_000_000.0;
         double newTime;
         // Tells how long it takes to loop through the game.
         double loopTime;
@@ -75,7 +75,7 @@ public class GameContainer implements Runnable {
         while (running) {
             render = false;
 
-            newTime = System.nanoTime() / 1000000000.0;
+            newTime = System.nanoTime() / 1_000_000_000.0;
             // Indicates how long it takes for the while loop to loop once.
             loopTime = newTime - currentTime;
             if (loopTime > 0.25)

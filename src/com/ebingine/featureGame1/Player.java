@@ -29,8 +29,8 @@ public class Player extends Sprite {
     public Player(int coordinateX, int coordinateY, int height, int width) {
         super(coordinateX, coordinateY, height, width);
         setImg(AssetManager.player);
-        setSpeedY(100);
-        setSpeedX(100);
+        setSpeedY(50);
+        setSpeedX(50);
     }
 
   //  @Override
@@ -51,6 +51,25 @@ public class Player extends Sprite {
             setX(getX() + (getSpeedX() * (float) delta));
         }
     }
+
+    public void moveP2(double delta) {
+        if (Input.keyPressed("UP")) {
+            setY(getY() - (getSpeedY() * (float) delta));
+        }
+
+        if (Input.keyPressed("DOWN")) {
+            setY(getY() + (getSpeedY() * (float) delta));
+        }
+
+        if (Input.keyPressed("LEFT")) {
+            setX(getX() - (getSpeedX() * (float) delta));
+        }
+
+        if (Input.keyPressed("RIGHT")) {
+            setX(getX() + (getSpeedX() * (float) delta));
+        }
+    }
+
 
     @Override
     public void draw(Graphics2D g2d) {
