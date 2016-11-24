@@ -45,7 +45,7 @@ public class AssetManager {
             monster = ImageIO.read(new File
                     ("src/com/ebingine/featureGame1/assets/enemy.png"));
             background = ImageIO.read(new File
-                    ("src/com/ebingine/featureGame1/assets/background.png"));
+                    ("src/com/ebingine/featureGame1/assets/Background.png"));
             System.out.println(background);
             bullet = ImageIO.read(new File
                     ("src/com/ebingine/featureGame1/assets/bullet.png"));

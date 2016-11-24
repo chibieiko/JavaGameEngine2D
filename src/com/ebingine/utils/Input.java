@@ -170,34 +170,12 @@ public class Input implements ActionListener, MouseListener,
             KeyStroke releasedKeyStroke = KeyStroke.getKeyStroke(releasedKey);
             inputMap.put(releasedKeyStroke, releasedKey);
             actionMap.put(releasedKey, releasedAction);
-
-            pressedKeys.put(keyCode, false);
         }
-
-        /*
-         this.keyCodes = keyCodes;
-
-        for (int i = 0; i < keyCodes.length; i++) {
-            if (keyCodes[i].length() == 1) {
-                System.out.println("char type");
-                inputMap.put(KeyStroke.getKeyStroke(keyCodes[i].charAt(0)),
-                        keyCodes[i]);
-            } else {
-                System.out.println("string type: " + keyCodes[i]);
-                inputMap.put(KeyStroke.getKeyStroke(keyCodes[i]), keyCodes[i]);
-            }
-
-            actionMap.put(keyCodes[i], new KeyAction(keyCodes[i], i, i +1));
-        }*/
     }
 
     // todo fix
     public void deleteInputKey(String keyCode) {
-        if (keyCode.length() > 1) {
-            inputMap.put(KeyStroke.getKeyStroke(keyCode), "none");
-        } else {
-            inputMap.put(KeyStroke.getKeyStroke(keyCode.charAt(0)), "none");
-        }
+        inputMap.put(KeyStroke.getKeyStroke(keyCode), "none");
     }
 
     // Invoked whenever a key is pressed or released.
@@ -261,6 +239,7 @@ public class Input implements ActionListener, MouseListener,
 
         if (keyDown) {
             boolean alreadyTyped = false;
+            System.out.println("Typed: " + key);
 
             synchronized (typedKeys) {
                 for (String typedKey : typedKeys) {
@@ -337,7 +316,6 @@ public class Input implements ActionListener, MouseListener,
             ActionListener {
 
         private boolean pressed;
-        private String key;
 
         /**
          * Constructor sets key value.
@@ -346,12 +324,12 @@ public class Input implements ActionListener, MouseListener,
          */
         public KeyAction(String key, boolean pressed) {
             super(key);
-            this.key = key;
             this.pressed = pressed;
         }
 
         @Override
         public void actionPerformed(ActionEvent e) {
+            System.out.println("key: " + getValue(NAME));
             handleKeyEvent((String) getValue(NAME), pressed);
         }
     }

@@ -83,7 +83,8 @@ public class Screen extends JPanel {
         // Clears the screen.
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
-      //  g2d.setFont(util.getFont
+        //    g2d.translate(-gc.getCamera().getCamX(), -gc.getCamera().getCamY());
+        //  g2d.setFont(util.getFont
         //        ("src/com/ebingine/featureGame1/assets/font_1_honokamin
         // .ttf"));
 
@@ -91,14 +92,12 @@ public class Screen extends JPanel {
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints
                 .VALUE_ANTIALIAS_ON);
 
-     //   gc.getGame().update(gc, 1/60);
-
         for (Drawable d : GameContainer.drawables) {
             d.draw(g2d);
-     //       g2d.drawString("こんにちは", gc.getWidth()/2, gc.getHeight()/2);
+         //   g2d.drawString("こんにちは", gc.getWidth()/2, gc.getHeight()/2);
         }
 
-        g2d.translate(-gc.getCamera().getCamX(), -gc.getCamera().getCamY());
+
     }
 
     /**

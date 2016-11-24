@@ -31,7 +31,6 @@ public class GameScreen extends Game {
                 .getHeight());
         player = new Player(gc.getWidth()/2,
                 gc.getHeight()/2, 100, 100);
-
         player2 = new Player(gc.getWidth()/2 - 50,
                 gc.getHeight()/2 - 50, 100, 100);
     }
@@ -40,15 +39,13 @@ public class GameScreen extends Game {
     public void update(GameContainer gc, double deltaTime) {
         player.move(deltaTime);
         player2.moveP2(deltaTime);
-        // System.out.println("Game screen update");
     }
 
     @Override
     public void render(GameContainer gc, Render renderer) {
-       // gc.drawImg(AssetManager.Img, 0, 0, gc.getWidth(), gc
-              //  .getHeight());
-
+        // todo
         gc.getCamera().update((int) player.getX(), (int) player.getY());
+
 
         if (Input.keyReleased("SPACE")) {
             System.out.println(Input.keyReleased("SPACE"));
@@ -57,6 +54,10 @@ public class GameScreen extends Game {
 
         if (Input.keyTyped("control E")) {
             System.out.println("SAVE!");
+        }
+
+        if (Input.keyTyped("R")) {
+            System.out.println("R!");
         }
 
     /*    if (Input.mouseDragged()) {

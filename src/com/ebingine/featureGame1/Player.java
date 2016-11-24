@@ -26,11 +26,11 @@ public class Player extends Sprite {
      * @param height      int height
      * @param width       int width
      */
-    public Player(int coordinateX, int coordinateY, int height, int width) {
-        super(coordinateX, coordinateY, height, width);
+    public Player(int coordinateX, int coordinateY, int width, int height) {
+        super(coordinateX, coordinateY, width, height);
         setImg(AssetManager.player);
-        setSpeedY(50);
-        setSpeedX(50);
+        setSpeedY(100);
+        setSpeedX(100);
     }
 
   //  @Override

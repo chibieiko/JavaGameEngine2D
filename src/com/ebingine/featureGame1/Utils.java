@@ -15,7 +15,7 @@ public class Utils {
 
     public Utils() {
         String[] keyArray = {"SPACE", "W", "A", "S", "D", "RIGHT", "LEFT",
-                "UP", "DOWN", "control S"};
+                "UP", "DOWN", "control E", "R"};
         Input.addInputKey(keyArray);
     }
 
