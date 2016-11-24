@@ -97,6 +97,8 @@ public class Screen extends JPanel {
             d.draw(g2d);
      //       g2d.drawString("こんにちは", gc.getWidth()/2, gc.getHeight()/2);
         }
+
+        g2d.translate(-gc.getCamera().getCamX(), -gc.getCamera().getCamY());
     }
 
     /**

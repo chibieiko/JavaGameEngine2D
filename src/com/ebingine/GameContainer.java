@@ -1,6 +1,7 @@
 package com.ebingine;
 
 import com.ebingine.GUI.Window;
+import com.ebingine.utils.Camera;
 import com.ebingine.utils.Drawable;
 import com.ebingine.utils.Input;
 
@@ -19,22 +20,25 @@ public class GameContainer implements Runnable {
 
     public static int width = 4000;
     public static int height = 3000;
+
     private String title = "Ebingine";
     private Thread thread;
     private Game game;
     private Window window;
-    public Input input;
+    private Input input;
     private Render renderer;
     public static ArrayList<Drawable> drawables = new ArrayList<>();
-
+    private Camera camera;
     // Indicates whether the game loop is running or not.
     private boolean running = false;
     // Limits frame rate to 60fps.
     private double deltaTime = 1.0 / 60.0;
 
+
+
     public GameContainer(Game game) {
         this.game = game;
-
+        camera = new Camera(this);
         // Draws images faster.
         System.setProperty("sun.java2d.opengl", "true");
     }
@@ -186,5 +190,13 @@ public class GameContainer implements Runnable {
 
     public Render getRenderer() {
         return renderer;
+    }
+
+    public Camera getCamera() {
+        return camera;
+    }
+
+    public void setCamera(Camera camera) {
+        this.camera = camera;
     }
 }

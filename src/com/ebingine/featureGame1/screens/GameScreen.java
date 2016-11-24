@@ -48,6 +48,8 @@ public class GameScreen extends Game {
        // gc.drawImg(AssetManager.Img, 0, 0, gc.getWidth(), gc
               //  .getHeight());
 
+        gc.getCamera().update((int) player.getX(), (int) player.getY());
+
         if (Input.keyReleased("SPACE")) {
             System.out.println(Input.keyReleased("SPACE"));
             System.out.println("space");
@@ -57,7 +59,7 @@ public class GameScreen extends Game {
             System.out.println("SAVE!");
         }
 
-        if (Input.mouseDragged()) {
+    /*    if (Input.mouseDragged()) {
             System.out.println("MOUSE DRAGGED");
         }
 
@@ -67,7 +69,7 @@ public class GameScreen extends Game {
 
         if (Input.mouseMoved()) {
             System.out.println("MOUSE MOVED");
-        }
+        }*/
     }
 
     @Override

@@ -4,6 +4,7 @@ import com.ebingine.GameContainer;
 import com.ebingine.Game;
 import com.ebingine.Render;
 import com.ebingine.featureGame1.screens.GameScreen;
+import com.ebingine.utils.Camera;
 import com.ebingine.utils.Input;
 
 /**
@@ -24,6 +25,8 @@ public class FeatureGame1 {
     public FeatureGame1() {
         gameScreen = new GameScreen();
         GameContainer gc = new GameContainer(gameScreen);
+        gc.getCamera().setViewportSizeX(800);
+        gc.getCamera().setViewportSizeY(400);
         gc.start();
         height = gc.getHeight();
         width = gc.getWidth();
