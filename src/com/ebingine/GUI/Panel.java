@@ -17,13 +17,13 @@ import java.awt.image.BufferedImage;
  * @version 2016.1112
  * @since 1.7
  */
-public class Screen extends JPanel {
+public class Panel extends JPanel {
 
     private BufferedImage image;
     private GameContainer gc;
     Utils util = new Utils();
 
-    public Screen(GameContainer gc) {
+    public Panel(GameContainer gc) {
         this.gc = gc;
 
         // Resize window to fit screens that are smaller than specified width

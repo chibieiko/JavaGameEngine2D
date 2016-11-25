@@ -48,8 +48,8 @@ public abstract class GameObject implements Drawable {
         return ellipse;
     }
 
-    public void setEllipse(Ellipse2D.Float ellipse) {
-        this.ellipse = ellipse;
+    public void setEllipse(float x, float y, float width, float height) {
+        this.ellipse = new Ellipse2D.Float(x, y, width, height);
     }
 
     public Image getImg() {
@@ -64,8 +64,8 @@ public abstract class GameObject implements Drawable {
         return rectangle;
     }
 
-    public void setRectangle(Rectangle2D.Float rectangle) {
-        this.rectangle = rectangle;
+    public void setRectangle(int x, int y, int width, int height) {
+        this.rectangle = new Rectangle2D.Float(x, y, width, height);
     }
 
     /**
@@ -110,6 +110,12 @@ public abstract class GameObject implements Drawable {
 
     public void setX(float x) {
         this.x = x;
+        if (rectangle != null)
+            updateRect((int) x, (int) rectangle.getY());
+
+        if (ellipse != null) {
+            updateEllipse(x, (float) ellipse.getY());
+        }
     }
 
     public float getY() {
@@ -118,5 +124,78 @@ public abstract class GameObject implements Drawable {
 
     public void setY(float y) {
         this.y = y;
+        if (rectangle != null)
+            updateRect((int) rectangle.getX(), (int) y);
+
+        if (ellipse != null)
+            updateEllipse((float) ellipse.getX(), y);
     }
+
+    public abstract void move(double delta);
+
+    public void updateRect(int x, int y) {
+        if (rectangle != null) {
+            rectangle.setRect(x, y, rectangle.getWidth(), rectangle.getHeight());
+        }
+    }
+
+    public void updateEllipse(float x, float y) {
+        if (ellipse != null) {
+            ellipse.setFrameFromCenter(x / 2, y / 2, x, y);
+        }
+    }
+
+    public boolean collidesWith(Rectangle2D rect) {
+        boolean collision = false;
+        if (rectangle != null && rectangle.intersects(rect))
+            collision = true;
+
+        if (!collision && ellipse != null && ellipse.intersects(rect))
+            collision = true;
+
+        return collision;
+    }
+
+    public boolean collidesWith(Rectangle2D rect, boolean rectangl) {
+        boolean collision = false;
+        if (rectangl) {
+            if (rectangle != null && rectangle.intersects(rect))
+                collision = true;
+        } else {
+            if (ellipse != null && ellipse.intersects(rect))
+                collision = true;
+        }
+
+        return collision;
+    }
+
+    public boolean collidesWith(Ellipse2D circle) {
+        boolean collision = false;
+
+        if (rectangle != null && circle.intersects(rectangle))
+            collision = true;
+
+        int coordX = (int) ellipse.getX() / 2;
+        int coordY = (int) ellipse.getY() / 2;
+        int radius = width / 2;
+
+        int coordX2 = (int) circle.getX() / 2;
+        int coordY2 = (int) circle.getY() / 2;
+        int radius2 = (int) circle.getWidth() / 2;
+
+        int distanceX = Math.abs(coordX - coordX2);
+        int distanceY = Math.abs(coordY - coordY2);
+
+        int distance = (int) Math.sqrt(distanceX * distanceX + distanceY *
+                distanceY);
+
+        int collisionDistance = radius + radius2;
+
+        if (distance < collisionDistance)
+            collision = true;
+
+        return collision;
+    }
+
+
 }

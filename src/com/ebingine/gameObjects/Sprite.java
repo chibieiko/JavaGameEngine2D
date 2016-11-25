@@ -29,8 +29,6 @@ public abstract class Sprite extends GameObject {
      */
     private boolean alive;
 
-    private Image img;
-
     /**
      * Constructor sets sprite's variable values.
      *
@@ -103,15 +101,5 @@ public abstract class Sprite extends GameObject {
      */
     public void setAlive(boolean alive) {
         this.alive = alive;
-    }
-
-    @Override
-    public Image getImg() {
-        return img;
-    }
-
-    @Override
-    public void setImg(Image img) {
-        this.img = img;
     }
 }

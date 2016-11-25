@@ -31,9 +31,11 @@ public class Player extends Sprite {
         setImg(AssetManager.player);
         setSpeedY(100);
         setSpeedX(100);
+        setEllipse((int) getX(), (int) getY(), getWidth(),
+                getHeight());
     }
 
-  //  @Override
+    @Override
     public void move(double delta) {
         if (Input.keyPressed("W")) {
             setY(getY() - (getSpeedY() * (float) delta));
@@ -69,7 +71,6 @@ public class Player extends Sprite {
             setX(getX() + (getSpeedX() * (float) delta));
         }
     }
-
 
     @Override
     public void draw(Graphics2D g2d) {

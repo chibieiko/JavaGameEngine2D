@@ -1,12 +1,9 @@
 package com.ebingine.featureGame1.screens;
 
-import com.ebingine.GUI.Screen;
 import com.ebingine.Game;
 import com.ebingine.GameContainer;
 import com.ebingine.Render;
 import com.ebingine.featureGame1.*;
-import com.ebingine.utils.Input;
-import com.sun.deploy.association.AssociationException;
 
 /**
  * TODO Short Description
@@ -37,28 +34,23 @@ public class GameScreen extends Game {
 
     @Override
     public void update(GameContainer gc, double deltaTime) {
-        player.move(deltaTime);
-        player2.moveP2(deltaTime);
+
+        if (player.collidesWith(player2.getEllipse())) {
+            System.out.println("COLLISION");
+          /*for (int i = 1; i < 5; i++) {
+                player.setX(player.getX() + (float) (i * deltaTime));
+                player2.setX(player2.getX() - (float) (i * deltaTime));
+            }*/
+        } //else {*/
+            player.move(deltaTime);
+            player2.moveP2(deltaTime);
+        //}
     }
 
     @Override
     public void render(GameContainer gc, Render renderer) {
         // todo
-        gc.getCamera().update((int) player.getX(), (int) player.getY());
-
-
-        if (Input.keyReleased("SPACE")) {
-            System.out.println(Input.keyReleased("SPACE"));
-            System.out.println("space");
-        }
-
-        if (Input.keyTyped("control E")) {
-            System.out.println("SAVE!");
-        }
-
-        if (Input.keyTyped("R")) {
-            System.out.println("R!");
-        }
+      //  gc.getCamera().update((int) player.getX(), (int) player.getY());
 
     /*    if (Input.mouseDragged()) {
             System.out.println("MOUSE DRAGGED");

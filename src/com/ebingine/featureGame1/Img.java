@@ -30,4 +30,9 @@ public class Img extends GameObject implements Drawable {
         g2d.drawImage(getImg(), (int) getX(), (int) getY(), getWidth(),
                 getHeight(), null);
     }
+
+    @Override
+    public void move(double delta) {
+
+    }
 }

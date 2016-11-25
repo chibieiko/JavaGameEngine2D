@@ -16,18 +16,18 @@ import java.awt.*;
  */
 public class Window extends JFrame {
 
-    private Screen screen;
+    private Panel panel;
     private GameContainer cont;
 
     public Window(GameContainer cont) {
         setResizable(false);
         this.cont = cont;
-        screen = new Screen(cont);
+        panel = new Panel(cont);
         setLayout(new BorderLayout());
-        add(screen, BorderLayout.CENTER);
+        add(panel, BorderLayout.CENTER);
 
-        // Sets the size to match screen's preferred size.
-        setContentPane(screen);
+        // Sets the size to match panel's preferred size.
+        setContentPane(panel);
         pack();
 
         System.out.println("window width: " + getSize().getWidth());
@@ -41,27 +41,27 @@ public class Window extends JFrame {
     }
 
     public void update() {
-        screen.update();
+        panel.update();
     }
 
     public void clear() {
         this.dispose();
-        screen.clear();
+        panel.clear();
     }
 
     /*
-    // Defines which screen to show in the event of multiple screens.
-    public void setScreen(Screen screen) {
-        this.screen = screen;
-        add(screen, BorderLayout.CENTER);
+    // Defines which panel to show in the event of multiple screens.
+    public void setScreen(Panel panel) {
+        this.panel = panel;
+        add(panel, BorderLayout.CENTER);
 
         // Sets the size to match drawing area component's preferred size.
-        setContentPane(screen);
+        setContentPane(panel);
         pack();
     }
 */
 
-    public Screen getScreen() {
-        return screen;
+    public Panel getPanel() {
+        return panel;
     }
 }

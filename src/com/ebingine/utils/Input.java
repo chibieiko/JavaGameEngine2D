@@ -55,12 +55,12 @@ public class Input implements ActionListener, MouseListener,
     public Input(GameContainer gameContainer, int delay) {
         this.gameContainer = gameContainer;
 
-        inputMap = gameContainer.getWindow().getScreen().
+        inputMap = gameContainer.getWindow().getPanel().
                 getInputMap(JPanel.WHEN_IN_FOCUSED_WINDOW);
-        actionMap = gameContainer.getWindow().getScreen().getActionMap();
+        actionMap = gameContainer.getWindow().getPanel().getActionMap();
 
-        gameContainer.getWindow().getScreen().addMouseListener(this);
-        gameContainer.getWindow().getScreen().addMouseMotionListener(this);
+        gameContainer.getWindow().getPanel().addMouseListener(this);
+        gameContainer.getWindow().getPanel().addMouseMotionListener(this);
 
         timer = new Timer(delay, this);
         timer.setInitialDelay(0);
@@ -329,7 +329,6 @@ public class Input implements ActionListener, MouseListener,
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            System.out.println("key: " + getValue(NAME));
             handleKeyEvent((String) getValue(NAME), pressed);
         }
     }

@@ -21,7 +21,7 @@ public class GameContainer implements Runnable {
     public static int width = 4000;
     public static int height = 3000;
 
-    private String title = "Ebingine";
+    private String title = "Ebiswingine";
     private Thread thread;
     private Game game;
     private Window window;
@@ -33,8 +33,6 @@ public class GameContainer implements Runnable {
     private boolean running = false;
     // Limits frame rate to 60fps.
     private double deltaTime = 1.0 / 60.0;
-
-
 
     public GameContainer(Game game) {
         this.game = game;
