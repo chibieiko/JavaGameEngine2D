@@ -29,7 +29,8 @@ public class GameScreen extends Game {
                 .getHeight());
         player = new Player(gc.getWidth() / 2,
                 gc.getHeight() / 2, 100, 100);
-        player2 = new Player(0, 0, 100, 100);
+        player2 = new Player(gc.getWidth() / 2 + player.getWidth(),
+                gc.getHeight() / 2 + player.getHeight(), 100, 100);
     }
 
     @Override

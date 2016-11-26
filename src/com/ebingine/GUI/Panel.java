@@ -26,22 +26,23 @@ public class Panel extends JPanel {
     public Panel(GameContainer gc) {
         this.gc = gc;
 
-        // Resize window to fit screens that are smaller than specified width
-        // and height.
+        // Resize game to fit screens that are smaller than the specified width
+        // and height in the game container.
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
         Rectangle screenMax = GraphicsEnvironment.getLocalGraphicsEnvironment()
                 .getMaximumWindowBounds();
-        // todo reduce title height
-        System.out.println("screen width: " + screenSize.getWidth());
-        System.out.println("screen height: " + screenSize.getHeight());
+
+        // Height of the task bar.
+        int taskbarSize = screenSize.height - screenMax.height;
+
         float ratio = (float) gc.getHeight() / (float) gc.getWidth();
+
         if (screenMax.getWidth() < gc.getWidth() ||
-                screenMax.getHeight() < gc.getHeight()) {
-            System.out.println("ratio: " + ratio);
-            gc.setHeight((int) (Math.floor(screenMax.getHeight())));
+                screenMax.getHeight() - taskbarSize < gc.getHeight()) {
+            gc.setHeight((int) (Math.floor(screenMax.getHeight()))
+                    - taskbarSize);
             gc.setWidth((int) Math.floor(screenMax.getHeight() / ratio));
-            System.out.println("juttu: " + gc.getWidth());
         }
 
         // TODO
@@ -57,6 +58,32 @@ public class Panel extends JPanel {
                 (), Transparency.TRANSLUCENT);*/
 
         setBackground(Color.black);
+    }
+
+    public void fitToMaxSize() {
+        // Resize game to fit screens that are smaller than specified width
+        // and height.
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+
+        Rectangle screenMax = GraphicsEnvironment.getLocalGraphicsEnvironment()
+                .getMaximumWindowBounds();
+
+        Insets scnMax = Toolkit.getDefaultToolkit().getScreenInsets
+                (getGraphicsConfiguration());
+        // Height of the task bar.
+        int taskbarSize = scnMax.bottom;
+        // todo reduce title height
+        System.out.println("screen width: " + screenSize.getWidth());
+        System.out.println("screen height: " + screenSize.getHeight());
+        float ratio = (float) gc.getHeight() / (float) gc.getWidth();
+        if (screenMax.getWidth() < gc.getWidth() ||
+                screenMax.getHeight() - taskbarSize < gc.getHeight()) {
+            System.out.println("ratio: " + ratio);
+            gc.setHeight((int) (Math.floor(screenMax.getHeight()))
+                    - taskbarSize);
+            gc.setWidth((int) Math.floor(screenMax.getHeight() / ratio));
+            System.out.println("juttu: " + gc.getWidth());
+        }
     }
 
     /**

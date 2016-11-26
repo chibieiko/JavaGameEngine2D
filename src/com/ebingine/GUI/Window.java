@@ -23,6 +23,7 @@ public class Window extends JFrame {
         setResizable(false);
         this.cont = cont;
         panel = new Panel(cont);
+      //  panel.fitToMaxSize();
         setLayout(new BorderLayout());
         add(panel, BorderLayout.CENTER);
 
