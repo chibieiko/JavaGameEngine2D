@@ -19,38 +19,40 @@ public class GameScreen extends Game {
     Player player;
     Player player2;
 
-    public GameScreen() {}
+    public GameScreen() {
+    }
 
     @Override
     public void create(GameContainer gc) {
         Utils utils = new Utils();
         background = new Img(AssetManager.background, 0, 0, gc.getWidth(), gc
                 .getHeight());
-        player = new Player(gc.getWidth()/2,
-                gc.getHeight()/2, 100, 100);
-        player2 = new Player(gc.getWidth()/2 - 50,
-                gc.getHeight()/2 - 50, 100, 100);
+        player = new Player(gc.getWidth() / 2,
+                gc.getHeight() / 2, 100, 100);
+        player2 = new Player(0, 0, 100, 100);
     }
 
     @Override
     public void update(GameContainer gc, double deltaTime) {
-
         if (player.collidesWith(player2.getEllipse())) {
             System.out.println("COLLISION");
-          /*for (int i = 1; i < 5; i++) {
-                player.setX(player.getX() + (float) (i * deltaTime));
-                player2.setX(player2.getX() - (float) (i * deltaTime));
-            }*/
-        } //else {*/
+            player.setCanMove(false);
+        } else {
+            player.setCanMove(true);
+        }
+
+        if (player.canMove())
             player.move(deltaTime);
+
+        if (player2.canMove())
             player2.moveP2(deltaTime);
-        //}
+
     }
 
     @Override
     public void render(GameContainer gc, Render renderer) {
         // todo
-      //  gc.getCamera().update((int) player.getX(), (int) player.getY());
+        //  gc.getCamera().update((int) player.getX(), (int) player.getY());
 
     /*    if (Input.mouseDragged()) {
             System.out.println("MOUSE DRAGGED");

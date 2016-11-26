@@ -29,6 +29,8 @@ public abstract class Sprite extends GameObject {
      */
     private boolean alive;
 
+    boolean canMove;
+
     /**
      * Constructor sets sprite's variable values.
      *
@@ -45,9 +47,10 @@ public abstract class Sprite extends GameObject {
         speedX = 10;
         speedY = 10;
         alive = true;
+        canMove = true;
     }
 
-   // public abstract void move();
+    public abstract void move(double delta);
 
     /**
      * Gets speed for coordinate level x.
@@ -101,5 +104,13 @@ public abstract class Sprite extends GameObject {
      */
     public void setAlive(boolean alive) {
         this.alive = alive;
+    }
+
+    public boolean canMove() {
+        return canMove;
+    }
+
+    public void setCanMove(boolean canMove) {
+        this.canMove = canMove;
     }
 }

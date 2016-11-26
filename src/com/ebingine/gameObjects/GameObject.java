@@ -141,7 +141,7 @@ public abstract class GameObject implements Drawable {
 
     public void updateEllipse(float x, float y) {
         if (ellipse != null) {
-            ellipse.setFrameFromCenter(x / 2, y / 2, x, y);
+            ellipse.setFrame(x, y, ellipse.getWidth(), ellipse.getHeight());
         }
     }
 
@@ -156,9 +156,9 @@ public abstract class GameObject implements Drawable {
         return collision;
     }
 
-    public boolean collidesWith(Rectangle2D rect, boolean rectangl) {
+    public boolean collidesWith(Rectangle2D rect, boolean myRectangle) {
         boolean collision = false;
-        if (rectangl) {
+        if (myRectangle) {
             if (rectangle != null && rectangle.intersects(rect))
                 collision = true;
         } else {
@@ -169,30 +169,39 @@ public abstract class GameObject implements Drawable {
         return collision;
     }
 
+    // Checks collisions between two ellipses, meant for two circles.
     public boolean collidesWith(Ellipse2D circle) {
         boolean collision = false;
 
         if (rectangle != null && circle.intersects(rectangle))
             collision = true;
 
-        int coordX = (int) ellipse.getX() / 2;
-        int coordY = (int) ellipse.getY() / 2;
-        int radius = width / 2;
+        if (ellipse != null) {
+            int coordX = (int) ellipse.getX() + width/2;
+            int coordY = (int) ellipse.getY() + height/2;
+            int radius = width / 2;
 
-        int coordX2 = (int) circle.getX() / 2;
-        int coordY2 = (int) circle.getY() / 2;
-        int radius2 = (int) circle.getWidth() / 2;
+            int coordX2 = (int) (circle.getX() + circle.getWidth() / 2);
+            int coordY2 = (int) (circle.getY() + circle.getHeight() / 2);
+            int radius2 = (int) circle.getWidth() / 2;
 
-        int distanceX = Math.abs(coordX - coordX2);
-        int distanceY = Math.abs(coordY - coordY2);
+            int distanceX = Math.abs(coordX - coordX2);
+            int distanceY = Math.abs(coordY - coordY2);
 
-        int distance = (int) Math.sqrt(distanceX * distanceX + distanceY *
-                distanceY);
+            int distance = (int) Math.sqrt(distanceX * distanceX + distanceY *
+                    distanceY);
 
-        int collisionDistance = radius + radius2;
+            int collisionDistance = radius + radius2;
 
-        if (distance < collisionDistance)
-            collision = true;
+            if (distance < collisionDistance)
+                collision = true;
+        }
+
+        /*
+        System.out.println("My x: " + ellipse.getX());
+        System.out.println("My y: " + ellipse.getY());
+        System.out.println("x: " + circle.getX());
+        System.out.println("y: " + circle.getY());*/
 
         return collision;
     }
