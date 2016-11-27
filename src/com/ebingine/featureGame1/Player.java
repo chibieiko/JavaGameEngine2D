@@ -29,8 +29,8 @@ public class Player extends Sprite {
     public Player(int coordinateX, int coordinateY, int width, int height) {
         super(coordinateX, coordinateY, width, height);
         setImg(AssetManager.player);
-        setSpeedY(100);
-        setSpeedX(100);
+        setSpeedY(200);
+        setSpeedX(200);
         setEllipse((int) getX(), (int) getY(), getWidth(),
                 getHeight());
     }

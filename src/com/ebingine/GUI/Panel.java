@@ -46,10 +46,22 @@ public class Panel extends JPanel {
         }
 
         // TODO
+        /*
         GraphicsEnvironment env = GraphicsEnvironment
                 .getLocalGraphicsEnvironment();
+        Rectangle bounds = env.getMaximumWindowBounds();
+
         GraphicsDevice device = env.getDefaultScreenDevice();
         GraphicsConfiguration config = device.getDefaultConfiguration();
+
+        float ratio = (float) gc.getHeight() / (float) gc.getWidth();
+        if (config.getBounds().getWidth() < gc.getWidth() ||
+                config.getBounds().getHeight() - taskbarSize < gc.getHeight()) {
+            gc.setHeight((int) (Math.floor(config.getBounds().getHeight())) -
+                    taskbarSize);
+            gc.setWidth((int) Math.floor(config.getBounds().getHeight() / ratio));
+        }
+        */
 
         image = new BufferedImage(gc.getWidth(), gc.getHeight(),
                 BufferedImage.TYPE_4BYTE_ABGR);
