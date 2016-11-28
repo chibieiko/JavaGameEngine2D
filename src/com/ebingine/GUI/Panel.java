@@ -1,6 +1,7 @@
 package com.ebingine.GUI;
 
 import com.ebingine.GameContainer;
+import com.ebingine.gameObjects.GameObject;
 import com.ebingine.utils.Drawable;
 import com.ebingine.utils.Utils;
 
@@ -93,8 +94,8 @@ public class Panel extends JPanel {
      */
     @Override
     public Dimension getPreferredSize() {
-        Dimension test = new Dimension(gc.getWidth(),
-                gc.getHeight());
+        Dimension test = new Dimension(gc.getCamera().getViewportSizeX(),
+                gc.getCamera().getViewportSizeY());
         System.out.println("dac: " + test.getWidth());
         System.out.println("dac: " + test.getHeight());
         return test;
@@ -110,7 +111,8 @@ public class Panel extends JPanel {
         // Clears the screen.
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
-        //    g2d.translate(-gc.getCamera().getCamX(), -gc.getCamera().getCamY());
+        // Updates panel view to match camera view.
+        g2d.translate(-gc.getCamera().getCamX(), -gc.getCamera().getCamY());
         //  g2d.setFont(util.getFont
         //        ("src/com/ebingine/featureGame1/assets/font_1_honokamin
         // .ttf"));

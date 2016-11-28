@@ -29,6 +29,7 @@ public class GameScreen extends Game {
                 .getHeight());
         player = new Player(gc.getWidth() / 2,
                 gc.getHeight() / 2, 100, 100);
+        gc.getCamera().update((int)player.getX(), (int)player.getY());
         player2 = new Player(gc.getWidth() / 2 + player.getWidth(),
                 gc.getHeight() / 2 + player.getHeight(), 100, 100);
     }
@@ -42,8 +43,10 @@ public class GameScreen extends Game {
             player.setCanMove(true);
         }
 
-        if (player.canMove())
+        if (player.canMove()) {
             player.move(deltaTime);
+            gc.getCamera().update((int)player.getX(), (int)player.getY());
+        }
 
         if (player2.canMove())
             player2.moveP2(deltaTime);

@@ -19,19 +19,17 @@ import com.ebingine.utils.Input;
 public class FeatureGame1 {
 
     GameScreen gameScreen;
-    public static int height;
-    public static int width;
+    Camera camera;
+    public int height;
+    public int width;
 
     public FeatureGame1() {
         gameScreen = new GameScreen();
         GameContainer gc = new GameContainer(gameScreen);
         gc.getCamera().setViewportSizeX(800);
-        gc.getCamera().setViewportSizeY(400);
+        gc.getCamera().setViewportSizeY(600);
         gc.start();
         height = gc.getHeight();
         width = gc.getWidth();
-
     }
-
-
 }

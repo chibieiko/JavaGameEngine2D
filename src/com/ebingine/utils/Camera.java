@@ -1,6 +1,9 @@
 package com.ebingine.utils;
 
+import com.ebingine.Game;
 import com.ebingine.GameContainer;
+
+import java.awt.geom.Rectangle2D;
 
 /**
  * TODO Short Description
@@ -13,7 +16,7 @@ import com.ebingine.GameContainer;
  */
 public class Camera {
 
-    // ---- Camera settings --------
+    // Camera settings.
     private int viewportSizeX;
     private int viewportSizeY;
     private int offsetMaxX;
@@ -22,35 +25,43 @@ public class Camera {
     private int offsetMinY;
     private int camX;
     private int camY;
-    // ------------------------------
+
+    // Used to check whether it is necessary to draw a game object or not.
+    private Rectangle2D.Float rectangle;
 
     public Camera(GameContainer gc) {
-        viewportSizeX = gc.getWidth();
-        viewportSizeY = gc.getHeight();
+        viewportSizeX = 800;
+        viewportSizeY = 600;
         offsetMaxX = gc.getWidth() - viewportSizeX;
         offsetMaxY = gc.getHeight() - viewportSizeY;
         offsetMinX = 0;
         offsetMinY = 0;
         camX = 0;
         camY = 0;
+        rectangle = new Rectangle2D.Float(camX, camY, viewportSizeX, viewportSizeY);
     }
 
     public void update(int x, int y) {
-        if (camX > offsetMaxX) {
+        /*if (camX > offsetMaxX) {
             camX = offsetMaxX;
         } else if (camX < offsetMinX) {
             camX = offsetMinX;
-        } else {
-            camX = x -viewportSizeX /2;
-        }
+        } else {*/
+            camX = x - viewportSizeX /2;
+        //}
 
-        if (camY > offsetMaxY) {
+        /*if (camY > offsetMaxY) {
             camY = offsetMaxY;
         } else if (camY < offsetMinY) {
             camY = offsetMinY;
-        } else {
-            camY = y -viewportSizeY /2;
-        }
+        } else {*/
+            camY = y - viewportSizeY /2;
+       // }
+    }
+
+    public void updateOffSets(int width, int height) {
+        setOffsetMaxX(width - viewportSizeX);
+        setOffsetMaxY(height - viewportSizeY);
     }
 
     public int getViewportSizeX() {
@@ -115,5 +126,13 @@ public class Camera {
 
     public void setCamY(int camY) {
         this.camY = camY;
+    }
+
+    public Rectangle2D.Float getRectangle() {
+        return rectangle;
+    }
+
+    public void setRectangle(Rectangle2D.Float rectangle) {
+        this.rectangle = rectangle;
     }
 }
