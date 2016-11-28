@@ -2,7 +2,6 @@ package com.ebingine.featureGame1.screens;
 
 import com.ebingine.Game;
 import com.ebingine.GameContainer;
-import com.ebingine.Render;
 
 /**
  * TODO Short Description
@@ -22,11 +21,6 @@ public class OtherScreen extends Game {
     @Override
     public void update(GameContainer gc, double deltaTime) {
         System.out.println("in other screen update");
-    }
-
-    @Override
-    public void render(GameContainer gc, Render renderer) {
-        System.out.println("in other screen render");
     }
 
     @Override

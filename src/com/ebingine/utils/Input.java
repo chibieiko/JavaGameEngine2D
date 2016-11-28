@@ -283,7 +283,6 @@ public class Input implements ActionListener, MouseListener,
 
     public static boolean keyReleased(String key) {
         boolean isReleased = false;
-   //     System.out.println("RELEASE");
 
         if (keyDown) {
             synchronized (pressedKeys) {

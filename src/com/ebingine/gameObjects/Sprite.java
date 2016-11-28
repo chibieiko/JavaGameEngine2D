@@ -1,7 +1,5 @@
 package com.ebingine.gameObjects;
 
-import java.awt.*;
-
 /**
  * Handles variables for all objects extending Sprite.
  * <p>

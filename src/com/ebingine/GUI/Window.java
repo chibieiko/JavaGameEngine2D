@@ -17,13 +17,12 @@ import java.awt.*;
 public class Window extends JFrame {
 
     private Panel panel;
-    private GameContainer cont;
+    private GameContainer gc;
 
-    public Window(GameContainer cont) {
+    public Window(GameContainer gc) {
         setResizable(false);
-        this.cont = cont;
-        panel = new Panel(cont);
-      //  panel.fitToMaxSize();
+        this.gc = gc;
+        panel = new Panel(gc);
         setLayout(new BorderLayout());
         add(panel, BorderLayout.CENTER);
 
@@ -31,13 +30,10 @@ public class Window extends JFrame {
         setContentPane(panel);
         pack();
 
-        System.out.println("window width: " + getSize().getWidth());
-        System.out.println("window height: " + getSize().getHeight());
-
         // Basic configurations for JFrame window.
         setLocationRelativeTo(null);
         setVisible(true);
-        setTitle(cont.getTitle());
+        setTitle(gc.getTitle());
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 

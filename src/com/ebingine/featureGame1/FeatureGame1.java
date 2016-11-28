@@ -1,11 +1,7 @@
 package com.ebingine.featureGame1;
 
 import com.ebingine.GameContainer;
-import com.ebingine.Game;
-import com.ebingine.Render;
 import com.ebingine.featureGame1.screens.GameScreen;
-import com.ebingine.utils.Camera;
-import com.ebingine.utils.Input;
 
 /**
  * TODO Short Description
@@ -19,15 +15,16 @@ import com.ebingine.utils.Input;
 public class FeatureGame1 {
 
     GameScreen gameScreen;
-    Camera camera;
     public int height;
     public int width;
 
     public FeatureGame1() {
         gameScreen = new GameScreen();
         GameContainer gc = new GameContainer(gameScreen);
-        gc.getCamera().setViewportSizeX(800);
-        gc.getCamera().setViewportSizeY(600);
+        gc.getCamera().setViewportSizeX(gc.getWidth());
+        gc.getCamera().setViewportSizeY(gc.getHeight());
+        // Scales down the game window if game size cannot fit to device screen.
+        gc.getCamera().tieToScreenMaxBounds();
         gc.start();
         height = gc.getHeight();
         width = gc.getWidth();

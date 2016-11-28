@@ -45,30 +45,13 @@ public class GameScreen extends Game {
 
         if (player.canMove()) {
             player.move(deltaTime);
-            gc.getCamera().update((int)player.getX(), (int)player.getY());
+            gc.getCamera().update((int)player.getX() + player.getWidth()/2,
+                    (int)player.getY() +  player.getHeight()/2);
         }
 
         if (player2.canMove())
             player2.moveP2(deltaTime);
 
-    }
-
-    @Override
-    public void render(GameContainer gc, Render renderer) {
-        // todo
-        //  gc.getCamera().update((int) player.getX(), (int) player.getY());
-
-    /*    if (Input.mouseDragged()) {
-            System.out.println("MOUSE DRAGGED");
-        }
-
-        if (Input.mouseClicked()) {
-            System.out.println("MOUSE CLICKED");
-        }
-
-        if (Input.mouseMoved()) {
-            System.out.println("MOUSE MOVED");
-        }*/
     }
 
     @Override

@@ -1,8 +1,8 @@
 package com.ebingine.utils;
 
-import com.ebingine.Game;
 import com.ebingine.GameContainer;
 
+import java.awt.*;
 import java.awt.geom.Rectangle2D;
 
 /**
@@ -32,6 +32,9 @@ public class Camera {
     public Camera(GameContainer gc) {
         viewportSizeX = 800;
         viewportSizeY = 600;
+
+        tieToScreenMaxBounds();
+
         offsetMaxX = gc.getWidth() - viewportSizeX;
         offsetMaxY = gc.getHeight() - viewportSizeY;
         offsetMinX = 0;
@@ -39,6 +42,27 @@ public class Camera {
         camX = 0;
         camY = 0;
         rectangle = new Rectangle2D.Float(camX, camY, viewportSizeX, viewportSizeY);
+    }
+
+    public void tieToScreenMaxBounds() {
+        // Resize game to fit screens that are smaller than the specified width
+        // and height in the game container.
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+
+        Rectangle screenMax = GraphicsEnvironment.getLocalGraphicsEnvironment()
+                .getMaximumWindowBounds();
+
+        // Height of the task bar.
+        int taskbarSize = screenSize.height - screenMax.height;
+
+        float ratio = (float) viewportSizeY / (float) viewportSizeX;
+
+        if (screenMax.getWidth() < viewportSizeX ||
+                screenMax.getHeight() - taskbarSize < viewportSizeY) {
+            setViewportSizeY((int) (Math.floor(screenMax.getHeight()))
+                    - taskbarSize);
+            setViewportSizeX((int) Math.floor(screenMax.getHeight() / ratio));
+        }
     }
 
     public void update(int x, int y) {

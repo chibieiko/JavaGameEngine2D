@@ -16,10 +16,5 @@ public abstract class Game {
     // To update game state.
     public abstract void update(GameContainer gc, double deltaTime);
 
-    // To render screen, to draw.
-    public abstract void render(GameContainer gc, Render
-            renderer);
-
     public abstract void clear(GameContainer gc);
-
 }
