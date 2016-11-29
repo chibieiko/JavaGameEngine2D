@@ -1,7 +1,5 @@
 package com.ebingine.featureGame1;
 
-import com.ebingine.Game;
-import com.ebingine.GameContainer;
 import com.ebingine.gameObjects.Sprite;
 import com.ebingine.utils.Input;
 
@@ -29,8 +27,8 @@ public class Player extends Sprite {
     public Player(int coordinateX, int coordinateY, int width, int height) {
         super(coordinateX, coordinateY, width, height);
         setImg(AssetManager.player);
-        setSpeedY(200);
-        setSpeedX(200);
+        setSpeedY(300);
+        setSpeedX(300);
         setEllipse((int) getX(), (int) getY(), getWidth(),
                 getHeight());
     }

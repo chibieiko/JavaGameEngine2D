@@ -26,7 +26,6 @@ public class GameContainer implements Runnable {
     private Game game;
     private Window window;
     private Input input;
-    private Render renderer;
     public static ArrayList<Drawable> drawables = new ArrayList<>();
     private Camera camera;
     // Indicates whether the game loop is running or not.
@@ -50,8 +49,6 @@ public class GameContainer implements Runnable {
         input = new Input(this, 0);
         game.create(this);
 
-        renderer = new Render(this);
-
         // GameContainer implements Runnable so it can be passed to Thread.
         thread = new Thread(this);
         // Starts the game loop thread.
@@ -59,6 +56,7 @@ public class GameContainer implements Runnable {
     }
 
     // Runnable's run method;
+    @Override
     public void run() {
         running = true;
         // Divider converts the time to seconds.
@@ -107,11 +105,8 @@ public class GameContainer implements Runnable {
             }
 
             if (render) {
-                // Calls the render method of game.
-                getGame().render(this, getRenderer());
                 // Repaints the screen.
                 window.update();
-
                 frames++;
             } else {
                 // When there is nothing to render, puts thread to sleep.
@@ -179,15 +174,11 @@ public class GameContainer implements Runnable {
 
     // Stops one of game's screens, changes to another screen and renders that
     // screen.
-    // todo when returning to the previous screen, does it look the same?
+    // todo multiple screens
     public void setGame(Game game) {
         stop();
         this.game = game;
         run();
-    }
-
-    public Render getRenderer() {
-        return renderer;
     }
 
     public Camera getCamera() {

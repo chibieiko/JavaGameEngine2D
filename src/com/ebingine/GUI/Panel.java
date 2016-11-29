@@ -26,6 +26,7 @@ public class Panel extends JPanel {
     public Panel(GameContainer gc) {
         this.gc = gc;
 
+        /* IMPLEMENTED IN CAMERA
         // Resize game to fit screens that are smaller than the specified width
         // and height in the game container.
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -72,32 +73,6 @@ public class Panel extends JPanel {
         setBackground(Color.black);
     }
 
-    public void fitToMaxSize() {
-        // Resize game to fit screens that are smaller than specified width
-        // and height.
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-
-        Rectangle screenMax = GraphicsEnvironment.getLocalGraphicsEnvironment()
-                .getMaximumWindowBounds();
-
-        Insets scnMax = Toolkit.getDefaultToolkit().getScreenInsets
-                (getGraphicsConfiguration());
-        // Height of the task bar.
-        int taskbarSize = scnMax.bottom;
-        // todo reduce title height
-        System.out.println("screen width: " + screenSize.getWidth());
-        System.out.println("screen height: " + screenSize.getHeight());
-        float ratio = (float) gc.getHeight() / (float) gc.getWidth();
-        if (screenMax.getWidth() < gc.getWidth() ||
-                screenMax.getHeight() - taskbarSize < gc.getHeight()) {
-            System.out.println("ratio: " + ratio);
-            gc.setHeight((int) (Math.floor(screenMax.getHeight()))
-                    - taskbarSize);
-            gc.setWidth((int) Math.floor(screenMax.getHeight() / ratio));
-            System.out.println("juttu: " + gc.getWidth());
-        }
-    }
-
     /**
      * Sets the preferred size for the drawing area component.
      *
@@ -105,8 +80,8 @@ public class Panel extends JPanel {
      */
     @Override
     public Dimension getPreferredSize() {
-        Dimension test = new Dimension(gc.getWidth(),
-                gc.getHeight());
+        Dimension test = new Dimension(gc.getCamera().getViewportSizeX(),
+                gc.getCamera().getViewportSizeY());
         System.out.println("dac: " + test.getWidth());
         System.out.println("dac: " + test.getHeight());
         return test;
@@ -122,7 +97,8 @@ public class Panel extends JPanel {
         // Clears the screen.
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
-        //    g2d.translate(-gc.getCamera().getCamX(), -gc.getCamera().getCamY());
+        // Updates panel view to match camera view.
+        g2d.translate(-gc.getCamera().getCamX(), -gc.getCamera().getCamY());
         //  g2d.setFont(util.getFont
         //        ("src/com/ebingine/featureGame1/assets/font_1_honokamin
         // .ttf"));

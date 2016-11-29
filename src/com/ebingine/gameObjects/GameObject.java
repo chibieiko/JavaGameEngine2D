@@ -197,12 +197,6 @@ public abstract class GameObject implements Drawable {
                 collision = true;
         }
 
-        /*
-        System.out.println("My x: " + ellipse.getX());
-        System.out.println("My y: " + ellipse.getY());
-        System.out.println("x: " + circle.getX());
-        System.out.println("y: " + circle.getY());*/
-
         return collision;
     }
 
