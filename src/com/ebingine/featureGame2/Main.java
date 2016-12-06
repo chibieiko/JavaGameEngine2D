@@ -1,6 +1,6 @@
 package com.ebingine.featureGame2;
 
-import com.ebingine.TiledMap;
+import com.ebingine.tiled.TiledMap;
 import com.ebingine.featureGame1.AssetManager;
 
 /**
@@ -17,6 +17,6 @@ public class Main {
         AssetManager assets = new AssetManager();
         TiledMap tiledMap = new TiledMap
                 ("src/com/ebingine/featureGame2/assets/testMap.tmx");
-        tiledMap.drawLayers();
+
     }
 }
