@@ -21,8 +21,8 @@ public class FeatureGame1 {
     public FeatureGame1() {
         gameScreen = new GameScreen();
         GameContainer gc = new GameContainer(gameScreen);
-        gc.getCamera().setViewportSizeX(gc.getWidth());
-        gc.getCamera().setViewportSizeY(gc.getHeight());
+        gc.getCamera().setViewportSizeX(3000);
+        gc.getCamera().setViewportSizeY(2000);
         // Scales down the game window if game size cannot fit to device screen.
         gc.getCamera().tieToScreenMaxBounds();
         gc.start();

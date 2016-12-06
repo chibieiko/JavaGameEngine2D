@@ -46,7 +46,6 @@ public class AssetManager {
                     ("src/com/ebingine/featureGame1/assets/enemy.png"));
             background = ImageIO.read(new File
                     ("src/com/ebingine/featureGame1/assets/Background.png"));
-            System.out.println(background);
             bullet = ImageIO.read(new File
                     ("src/com/ebingine/featureGame1/assets/bullet.png"));
         } catch (Exception e) {
