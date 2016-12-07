@@ -31,6 +31,6 @@ public class Layer implements Drawable {
 
     @Override
     public void draw(Graphics2D g2d) {
-
+        // todo implement draw
     }
 }

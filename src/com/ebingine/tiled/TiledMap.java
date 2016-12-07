@@ -77,29 +77,25 @@ public class TiledMap {
     private void createLayers() {
         HashMap<Integer, Integer> layerData = new HashMap<>();
         int mapIndex = 0;
-        //  for (int i = 0; i < layerNodes.getLength(); i++) {
-        //    if (layerNodes.item(i).getNodeType() == Node.ELEMENT_NODE) {
-        Element e = (Element) layerNodes.item(0);
-        Element data = (Element) e.getElementsByTagName("data").item(0);
-        String[] values = data.getTextContent().split("(,[\\s\\r]+)|([\\s\\r]+)|(,)");
-        String[] temp = new String[mapWidth * tileWidth + mapHeight *
-                tileHeight];
-        //    int count = 0;
-        for (int i = 0; i < temp.length; i++) {
-            temp[i] = values[i + 1];
-            //     System.out.print(temp[i] + " ");
-            layerData.put(Integer.parseInt(values[i + 1]), mapIndex);
-            mapIndex++;
+        for (int i = 0; i < layerNodes.getLength(); i++) {
+            if (layerNodes.item(i).getNodeType() == Node.ELEMENT_NODE) {
+                Element e = (Element) layerNodes.item(0);
+                Element data = (Element) e.getElementsByTagName("data").item(0);
+                String[] values = data.getTextContent().split("(,[\\s\\r]+)|([\\s\\r]+)|(,)");
+                //    int count = 0;
+                for (int j = 0; j < values.length - 1; j++) {
+                    layerData.put(Integer.parseInt(values[j + 1]), mapIndex);
+                    mapIndex++;
+                }
 
-            // todo Create Layer object
-
-         /*   count++;
-            if (count == 100) {
-                System.out.println("");
-                count = 0;
-            }*/
+                layers.add(new Layer(e.getAttribute("name"),
+                        Integer.parseInt(e.getAttribute("width")),
+                        Integer.parseInt(e.getAttribute("height")),
+                        layerData));
+            }
         }
-    //}
+
+        System.out.println(layers.size());
     }
 
     private void createTilesets() {
