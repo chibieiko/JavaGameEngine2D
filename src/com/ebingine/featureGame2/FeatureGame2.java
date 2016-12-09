@@ -21,7 +21,7 @@ public class FeatureGame2 {
     public FeatureGame2() {
         gameScreen = new GameScreen();
         TiledMap tiledMap = new TiledMap
-                ("src/com/ebingine/featureGame2/assets/testMap.tmx");
+                ("src/com/ebingine/featureGame2/assets/testMap2.tmx");
         GameContainer gc = new GameContainer(gameScreen);
         gc.setWidth(tiledMap.getMapWidth() * tiledMap.getTileWidth());
         gc.setHeight(tiledMap.getMapHeight() * tiledMap.getTileHeight());

@@ -16,7 +16,6 @@ public class Layer {
     String name;
     int width;
     int height;
-    // First int for pic num and second for which location on map
     ArrayList<Tile> tiles = new ArrayList<>();
 
     public Layer(String name, int width, int height,

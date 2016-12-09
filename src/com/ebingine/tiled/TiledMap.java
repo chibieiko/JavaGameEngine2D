@@ -79,24 +79,32 @@ public class TiledMap implements Drawable {
     }
 
     private void createLayers() {
-        ArrayList<Tile> layerData = new ArrayList<>();
-
         System.out.println("layerNodes.length " + layerNodes.getLength());
         for (int i = 0; i < layerNodes.getLength(); i++) {
             int coordinateY = 0;
             int coordinateX = 0;
             int mapIndex = 0;
+            ArrayList<Tile> layerData = new ArrayList<>();
 
             if (layerNodes.item(i).getNodeType() == Node.ELEMENT_NODE) {
                 Element e = (Element) layerNodes.item(i);
                 Element data = (Element) e.getElementsByTagName("tiles").item(0);
+                if (e.getElementsByTagName("tiles").item(0) == null) {
+                    System.out.println("Changing to data");
+                    data = (Element) e.getElementsByTagName("data").item(0);
+                }
+
                 String[] values = data.getTextContent().split("(,[\\s\\r]+)|([\\s\\r]+)|(,)");
 
 
                 for (int j = 0; j < values.length - 1; j++) {
-                    layerData.add(new Tile(Integer.parseInt(values[j + 1]) - 1,
-                            coordinateX, coordinateY));
+                    // Saves only tiles with an image.
+                    if (!values[j+1].equals("0")) {
+                        layerData.add(new Tile(Integer.parseInt(values[j + 1]) - 1,
+                                coordinateX, coordinateY));
+                    }
 
+                    mapIndex++;
                     if (mapIndex < mapWidth) {
                         coordinateX = coordinateX + tileWidth;
                     } else {
@@ -104,19 +112,14 @@ public class TiledMap implements Drawable {
                         coordinateX = 0;
                         mapIndex = 0;
                     }
-
-                    mapIndex++;
                 }
 
-                System.out.println(e.getAttribute("name"));
                 layers.add(new Layer(e.getAttribute("name"),
                         Integer.parseInt(e.getAttribute("width")),
                         Integer.parseInt(e.getAttribute("height")),
                         layerData));
             }
         }
-
-        System.out.println(layers.size());
     }
 
     private void createTilesets() {
@@ -155,24 +158,6 @@ public class TiledMap implements Drawable {
 
         for (int i = 0; i < layers.size(); i++) {
             for (int j = 0; j < layers.get(i).getTiles().size(); j++) {
-           //     System.out.println("layers size: " + layers.size());
-             //   System.out.println("layerName: " + layers.get(i).getName());
-            /*    System.out.println("imageCoord: " + layers.get(i).getTiles()
-                        .get(j)
-                        .getImageCoordinate());
-                System.out.println("x: " + layers.get(i).getTiles().get(j)
-                        .getX());
-                System.out.println("y: " + layers.get(i).getTiles().get(j)
-                        .getY());*/
-
-           /*     System.out.println(layers.get(i).getName());
-                System.out.println("imageCoord: " +
-                        layers.get(i).getTiles().get(j).getImageCoordinate());*/
-
-                /*System.out.println("toka " + layers.get(i).getTiles().get(j)
-                        .getImageCoordinate());
-                        */
-
                 g2d.drawImage(images.get(layers.get(i).getTiles().get(j)
                                 .getImageCoordinate()),
                         layers.get(i).getTiles().get(j).getX(),
@@ -180,17 +165,8 @@ public class TiledMap implements Drawable {
                         tileWidth,
                         tileHeight,
                         null);
-
-        /*       g2d.drawImage(images.get(21), layers.get(i).getTiles().get(j)
-                                .getX(),
-                        layers.get(i).getTiles().get(j).getY(),
-                        tileWidth,
-                        tileHeight,
-                        null);*/
             }
         }
-
-   //  g2d.drawImage(images.get(1), 0, 0, tileWidth, tileHeight, null);
     }
 
     public int getMapHeight() {
