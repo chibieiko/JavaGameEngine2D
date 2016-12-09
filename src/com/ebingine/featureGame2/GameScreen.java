@@ -14,13 +14,16 @@ import com.ebingine.GameContainer;
  */
 public class GameScreen extends Game {
 
+    Player player;
+
     public GameScreen() {
 
     }
 
     @Override
     public void create(GameContainer gc) {
-
+       /* player = new Player(0,
+                0, 100, 100);*/
     }
 
     @Override

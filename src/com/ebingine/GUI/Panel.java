@@ -104,15 +104,13 @@ public class Panel extends JPanel {
         // .ttf"));
 
         // Smoothes the borders of drawables.
-        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints
-                .VALUE_ANTIALIAS_ON);
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+                RenderingHints.VALUE_ANTIALIAS_ON);
 
         for (Drawable d : GameContainer.drawables) {
             d.draw(g2d);
          //   g2d.drawString("こんにちは", gc.getWidth()/2, gc.getHeight()/2);
         }
-
-
     }
 
     /**

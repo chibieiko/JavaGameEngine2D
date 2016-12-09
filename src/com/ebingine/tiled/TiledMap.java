@@ -1,5 +1,7 @@
 package com.ebingine.tiled;
 
+import com.ebingine.GameContainer;
+import com.ebingine.utils.Drawable;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -9,11 +11,11 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.soap.Node;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * TODO Short Description
@@ -24,22 +26,22 @@ import java.util.HashMap;
  * @version 2016.1204
  * @since 1.8
  */
-public class TiledMap {
+public class TiledMap implements Drawable {
 
-    File tiledMap;
-    DocumentBuilderFactory dbFactory;
-    DocumentBuilder dBuilder;
-    Document doc;
-    NodeList layerNodes;
-    NodeList objects;
-    NodeList tilesetNodes;
-    int mapHeight;
-    int mapWidth;
-    int tileHeight;
-    int tileWidth;
-    ArrayList<BufferedImage> images = new ArrayList<>();
-    ArrayList<Tileset> tilesets = new ArrayList<>();
-    ArrayList<Layer> layers = new ArrayList<>();
+    private File tiledMap;
+    private DocumentBuilderFactory dbFactory;
+    private DocumentBuilder dBuilder;
+    private Document doc;
+    private NodeList layerNodes;
+    private NodeList objects;
+    private NodeList tilesetNodes;
+    private int mapHeight;
+    private int mapWidth;
+    private int tileHeight;
+    private int tileWidth;
+    private ArrayList<BufferedImage> images = new ArrayList<>();
+    private ArrayList<Tileset> tilesets = new ArrayList<>();
+    private ArrayList<Layer> layers = new ArrayList<>();
 
     public TiledMap(String path) {
         tiledMap = new File(path);
@@ -60,7 +62,7 @@ public class TiledMap {
         System.out.println("Root Element: " + doc.getDocumentElement()
                 .getNodeName());
 
-        Element map = (Element) doc.getDocumentElement();
+        Element map = doc.getDocumentElement();
         mapWidth = Integer.parseInt(map.getAttribute("width"));
         mapHeight = Integer.parseInt(map.getAttribute("height"));
         tileWidth = Integer.parseInt(map.getAttribute("tilewidth"));
@@ -72,22 +74,41 @@ public class TiledMap {
         createTilesets();
         createTilesetImage();
         createLayers();
+
+        GameContainer.drawables.add(this);
     }
 
     private void createLayers() {
-        HashMap<Integer, Integer> layerData = new HashMap<>();
-        int mapIndex = 0;
+        ArrayList<Tile> layerData = new ArrayList<>();
+
+        System.out.println("layerNodes.length " + layerNodes.getLength());
         for (int i = 0; i < layerNodes.getLength(); i++) {
+            int coordinateY = 0;
+            int coordinateX = 0;
+            int mapIndex = 0;
+
             if (layerNodes.item(i).getNodeType() == Node.ELEMENT_NODE) {
-                Element e = (Element) layerNodes.item(0);
-                Element data = (Element) e.getElementsByTagName("data").item(0);
+                Element e = (Element) layerNodes.item(i);
+                Element data = (Element) e.getElementsByTagName("tiles").item(0);
                 String[] values = data.getTextContent().split("(,[\\s\\r]+)|([\\s\\r]+)|(,)");
-                //    int count = 0;
+
+
                 for (int j = 0; j < values.length - 1; j++) {
-                    layerData.put(Integer.parseInt(values[j + 1]), mapIndex);
+                    layerData.add(new Tile(Integer.parseInt(values[j + 1]) - 1,
+                            coordinateX, coordinateY));
+
+                    if (mapIndex < mapWidth) {
+                        coordinateX = coordinateX + tileWidth;
+                    } else {
+                        coordinateY = coordinateY + tileHeight;
+                        coordinateX = 0;
+                        mapIndex = 0;
+                    }
+
                     mapIndex++;
                 }
 
+                System.out.println(e.getAttribute("name"));
                 layers.add(new Layer(e.getAttribute("name"),
                         Integer.parseInt(e.getAttribute("width")),
                         Integer.parseInt(e.getAttribute("height")),
@@ -127,5 +148,64 @@ public class TiledMap {
     // Returns object rectangle.
     public void getObjectRectangle(String object) {
 
+    }
+
+    @Override
+    public void draw(Graphics2D g2d) {
+
+        for (int i = 0; i < layers.size(); i++) {
+            for (int j = 0; j < layers.get(i).getTiles().size(); j++) {
+           //     System.out.println("layers size: " + layers.size());
+             //   System.out.println("layerName: " + layers.get(i).getName());
+            /*    System.out.println("imageCoord: " + layers.get(i).getTiles()
+                        .get(j)
+                        .getImageCoordinate());
+                System.out.println("x: " + layers.get(i).getTiles().get(j)
+                        .getX());
+                System.out.println("y: " + layers.get(i).getTiles().get(j)
+                        .getY());*/
+
+           /*     System.out.println(layers.get(i).getName());
+                System.out.println("imageCoord: " +
+                        layers.get(i).getTiles().get(j).getImageCoordinate());*/
+
+                /*System.out.println("toka " + layers.get(i).getTiles().get(j)
+                        .getImageCoordinate());
+                        */
+
+                g2d.drawImage(images.get(layers.get(i).getTiles().get(j)
+                                .getImageCoordinate()),
+                        layers.get(i).getTiles().get(j).getX(),
+                        layers.get(i).getTiles().get(j).getY(),
+                        tileWidth,
+                        tileHeight,
+                        null);
+
+        /*       g2d.drawImage(images.get(21), layers.get(i).getTiles().get(j)
+                                .getX(),
+                        layers.get(i).getTiles().get(j).getY(),
+                        tileWidth,
+                        tileHeight,
+                        null);*/
+            }
+        }
+
+   //  g2d.drawImage(images.get(1), 0, 0, tileWidth, tileHeight, null);
+    }
+
+    public int getMapHeight() {
+        return mapHeight;
+    }
+
+    public int getMapWidth() {
+        return mapWidth;
+    }
+
+    public int getTileHeight() {
+        return tileHeight;
+    }
+
+    public int getTileWidth() {
+        return tileWidth;
     }
 }

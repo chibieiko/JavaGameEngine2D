@@ -45,7 +45,6 @@ public class Tileset {
 
     private void loadImages() {
         try {
-
             File file = new File("src/com/ebingine/featureGame2/assets/"
                     + source);
             FileInputStream fis = new FileInputStream(file);
@@ -55,16 +54,17 @@ public class Tileset {
         }
 
         if (sourceImage != null) {
-            int rows = (int) Math.floor(imageHeight / tileHeight);
-            int cols = (int) Math.floor(imageWidth / tileWidth);
+            int rows = (int) Math.floor(sourceImage.getHeight() / tileHeight);
+            int cols = (int) Math.floor(sourceImage.getWidth() / tileWidth);
             // Determines the image chunk's width and height.
             int chunkWidth = sourceImage.getWidth() / cols;
             int chunkHeight = sourceImage.getHeight() / rows;
-
             for (int i = 0; i < rows; i++) {
                 for (int j = 0; j < cols; j++) {
-                    tileImages.add(new BufferedImage(chunkWidth, chunkHeight,
-                            sourceImage.getType()));
+                    tileImages.add(sourceImage.getSubimage(chunkWidth * j,
+                            chunkHeight * i, chunkWidth, chunkHeight));
+                   /* tileImages.add(new BufferedImage(chunkWidth, chunkHeight,
+                            sourceImage.getType())); */
                 }
             }
         }
@@ -72,6 +72,10 @@ public class Tileset {
 
     public ArrayList<BufferedImage> getTileImages() {
         return tileImages;
+    }
+
+    public BufferedImage getSourceImage() {
+        return sourceImage;
     }
 
     public int getFirstGid() {

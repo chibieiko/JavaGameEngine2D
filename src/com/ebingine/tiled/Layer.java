@@ -1,9 +1,6 @@
 package com.ebingine.tiled;
 
-import com.ebingine.utils.Drawable;
-
-import java.awt.*;
-import java.util.HashMap;
+import java.util.ArrayList;
 
 /**
  * TODO Short Description
@@ -14,23 +11,35 @@ import java.util.HashMap;
  * @version 2016.1206
  * @since 1.7
  */
-public class Layer implements Drawable {
+public class Layer {
 
     String name;
     int width;
     int height;
-    HashMap<Integer, Integer> data = new HashMap<>();
+    // First int for pic num and second for which location on map
+    ArrayList<Tile> tiles = new ArrayList<>();
 
-    public Layer(String name, int width, int height, HashMap<Integer,
-            Integer> data) {
+    public Layer(String name, int width, int height,
+                 ArrayList<Tile> tiles) {
         this.name = name;
         this.width = width;
         this.height = height;
-        this.data = data;
+        this.tiles = tiles;
     }
 
-    @Override
-    public void draw(Graphics2D g2d) {
-        // todo implement draw
+    public String getName() {
+        return name;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public ArrayList<Tile> getTiles() {
+        return tiles;
     }
 }
