@@ -18,16 +18,16 @@ import java.util.ArrayList;
  */
 public class Tileset {
 
-    int firstGid;
-    int lastGid;
-    String name;
-    int tileWidth;
-    int tileHeight;
-    String source;
-    int imageWidth;
-    int imageHeight;
-    BufferedImage sourceImage;
-    ArrayList<BufferedImage> tileImages = new ArrayList<>();
+    private int firstGid;
+    private int lastGid;
+    private String name;
+    private int tileWidth;
+    private int tileHeight;
+    private String source;
+    private int imageWidth;
+    private int imageHeight;
+    private BufferedImage sourceImage;
+    private ArrayList<BufferedImage> tileImages = new ArrayList<>();
 
     public Tileset(int firstGid, String name, int tileWidth, int tileHeight,
                    String source, int imageWidth, int imageHeight) {

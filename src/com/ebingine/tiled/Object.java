@@ -1,33 +1,45 @@
 package com.ebingine.tiled;
 
-import java.util.ArrayList;
-
 /**
  * TODO Short Description
  * <p>
  * TODO description and @since
  *
  * @author Erika Sankari
- * @version 2016.1206
+ * @version 2016.1209
  * @since 1.7
  */
-public class Layer {
-
+public class Object {
+    private int id;
     private String name;
+    private int x;
+    private int y;
     private int width;
     private int height;
-    private ArrayList<Tile> tiles = new ArrayList<>();
 
-    public Layer(String name, int width, int height,
-                 ArrayList<Tile> tiles) {
+    public Object(int id, String name, int x, int y, int width, int height) {
+        this.id = id;
         this.name = name;
+        this.x = x;
+        this.y = y;
         this.width = width;
         this.height = height;
-        this.tiles = tiles;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getName() {
         return name;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
     }
 
     public int getWidth() {
@@ -36,9 +48,5 @@ public class Layer {
 
     public int getHeight() {
         return height;
-    }
-
-    public ArrayList<Tile> getTiles() {
-        return tiles;
     }
 }

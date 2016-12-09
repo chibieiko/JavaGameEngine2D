@@ -20,7 +20,9 @@ import java.util.ArrayList;
 /**
  * TODO Short Description
  * <p>
- * TODO description and @since
+ * Supports Tiled maps where tile layer format is CSV and tile render order
+ * is Right Down.
+ * TODO @since
  *
  * @author Erika Sankari
  * @version 2016.1204
@@ -33,7 +35,7 @@ public class TiledMap implements Drawable {
     private DocumentBuilder dBuilder;
     private Document doc;
     private NodeList layerNodes;
-    private NodeList objects;
+    private NodeList objectNodes;
     private NodeList tilesetNodes;
     private int mapHeight;
     private int mapWidth;
@@ -42,6 +44,7 @@ public class TiledMap implements Drawable {
     private ArrayList<BufferedImage> images = new ArrayList<>();
     private ArrayList<Tileset> tilesets = new ArrayList<>();
     private ArrayList<Layer> layers = new ArrayList<>();
+    private ArrayList<ObjectLayer> objectLayers = new ArrayList<>();
 
     public TiledMap(String path) {
         tiledMap = new File(path);
@@ -69,17 +72,18 @@ public class TiledMap implements Drawable {
         tileHeight = Integer.parseInt(map.getAttribute("tileheight"));
 
         layerNodes = doc.getElementsByTagName("layer");
-        objects = doc.getElementsByTagName("objectgroup");
+        objectNodes = doc.getElementsByTagName("objectgroup");
         tilesetNodes = doc.getElementsByTagName("tileset");
         createTilesets();
         createTilesetImage();
         createLayers();
+        createObjectLayers();
 
         GameContainer.drawables.add(this);
     }
 
     private void createLayers() {
-        System.out.println("layerNodes.length " + layerNodes.getLength());
+
         for (int i = 0; i < layerNodes.getLength(); i++) {
             int coordinateY = 0;
             int coordinateX = 0;
@@ -90,7 +94,6 @@ public class TiledMap implements Drawable {
                 Element e = (Element) layerNodes.item(i);
                 Element data = (Element) e.getElementsByTagName("tiles").item(0);
                 if (e.getElementsByTagName("tiles").item(0) == null) {
-                    System.out.println("Changing to data");
                     data = (Element) e.getElementsByTagName("data").item(0);
                 }
 
@@ -148,9 +151,45 @@ public class TiledMap implements Drawable {
         }
     }
 
-    // Returns object rectangle.
-    public void getObjectRectangle(String object) {
+    public void createObjectLayers() {
+        for (int i = 0; i < objectNodes.getLength(); i++) {
+            ArrayList<Object> objects = new ArrayList<>();
 
+            if (objectNodes.item(i).getNodeType() == Node.ELEMENT_NODE) {
+                Element e = (Element) objectNodes.item(i);
+                NodeList objectNodes = e.getElementsByTagName("object");
+
+                for (int j = 0; j < objectNodes.getLength(); j++) {
+                    Element object = (Element) objectNodes.item(j);
+                    objects.add(new Object(
+                            Integer.parseInt(object.getAttribute("id")),
+                            object.getAttribute("name"),
+                            Integer.parseInt(object.getAttribute("x")),
+                            Integer.parseInt(object.getAttribute("y")),
+                            Integer.parseInt(object.getAttribute("width")),
+                            Integer.parseInt(object.getAttribute("height"))
+                            ));
+                }
+
+                objectLayers.add(new ObjectLayer(e.getAttribute("name"),
+                        objects));
+            }
+        }
+    }
+
+    // Returns an Object specified in Tiled map.
+    public Object getObject(String object) {
+        Object toReturn = null;
+        for (int i = 0; i < objectLayers.size(); i++) {
+            for (int j = 0; j < objectLayers.get(i).getObjects().size(); j++) {
+                if (objectLayers.get(i).getObjects().get(j).getName().
+                        equals(object)) {
+                    toReturn = objectLayers.get(i).getObjects().get(j);
+                }
+            }
+        }
+
+        return toReturn;
     }
 
     @Override
@@ -183,5 +222,13 @@ public class TiledMap implements Drawable {
 
     public int getTileWidth() {
         return tileWidth;
+    }
+
+    public ArrayList<ObjectLayer> getObjectLayers() {
+        return objectLayers;
+    }
+
+    public ArrayList<Layer> getLayers() {
+        return layers;
     }
 }
