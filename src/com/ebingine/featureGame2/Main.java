@@ -1,7 +1,5 @@
 package com.ebingine.featureGame2;
 
-import com.ebingine.featureGame1.AssetManager;
-
 /**
  * TODO Short Description
  * <p>

@@ -239,7 +239,6 @@ public class Input implements ActionListener, MouseListener,
 
         if (keyDown) {
             boolean alreadyTyped = false;
-            System.out.println("Typed: " + key);
 
             synchronized (typedKeys) {
                 for (String typedKey : typedKeys) {

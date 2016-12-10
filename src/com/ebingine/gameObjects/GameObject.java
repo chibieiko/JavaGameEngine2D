@@ -199,6 +199,4 @@ public abstract class GameObject implements Drawable {
 
         return collision;
     }
-
-
 }

@@ -2,6 +2,7 @@ package com.ebingine.featureGame2;
 
 import com.ebingine.GameContainer;
 import com.ebingine.tiled.TiledMap;
+import com.ebingine.utils.Input;
 
 /**
  * TODO Short Description
@@ -19,9 +20,9 @@ public class FeatureGame2 {
     public int width;
 
     public FeatureGame2() {
-        gameScreen = new GameScreen();
         TiledMap tiledMap = new TiledMap
                 ("src/com/ebingine/featureGame2/assets/testMap2.tmx");
+        gameScreen = new GameScreen(tiledMap);
         GameContainer gc = new GameContainer(gameScreen);
         gc.setWidth(tiledMap.getMapWidth() * tiledMap.getTileWidth());
         gc.setHeight(tiledMap.getMapHeight() * tiledMap.getTileHeight());
@@ -32,5 +33,9 @@ public class FeatureGame2 {
         gc.start();
         height = gc.getHeight();
         width = gc.getWidth();
+
+        String[] keyArray = {"SPACE", "W", "A", "S", "D", "RIGHT", "LEFT",
+                "UP", "DOWN", "control E", "R"};
+        Input.addInputKey(keyArray);
     }
 }

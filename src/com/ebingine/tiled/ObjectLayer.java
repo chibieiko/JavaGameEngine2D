@@ -1,6 +1,5 @@
 package com.ebingine.tiled;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -15,18 +14,18 @@ import java.util.ArrayList;
 public class ObjectLayer {
 
     private String name;
-    private ArrayList<Object> objects = new ArrayList<>();
+    private ArrayList<TiledObject> tiledObjects = new ArrayList<>();
 
-    public ObjectLayer(String name, ArrayList<Object> objects) {
+    public ObjectLayer(String name, ArrayList<TiledObject> tiledObjects) {
         this.name = name;
-        this.objects = objects;
+        this.tiledObjects = tiledObjects;
     }
 
     public String getName() {
         return name;
     }
 
-    public ArrayList<Object> getObjects() {
-        return objects;
+    public ArrayList<TiledObject> getTiledObjects() {
+        return tiledObjects;
     }
 }
