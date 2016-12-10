@@ -25,7 +25,7 @@ public class GameContainer implements Runnable {
     private Thread thread;
     private Game game;
     private Window window;
-    private Input input;
+    public static Input input;
     public static ArrayList<Drawable> drawables = new ArrayList<>();
     private Camera camera;
     // Indicates whether the game loop is running or not.

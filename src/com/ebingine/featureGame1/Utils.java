@@ -1,6 +1,6 @@
 package com.ebingine.featureGame1;
 
-import com.ebingine.utils.Input;
+import com.ebingine.GameContainer;
 
 /**
  * TODO Short Description
@@ -16,7 +16,6 @@ public class Utils {
     public Utils() {
         String[] keyArray = {"SPACE", "W", "A", "S", "D", "RIGHT", "LEFT",
                 "UP", "DOWN", "control E", "R"};
-        Input.addInputKey(keyArray);
+        GameContainer.input.addInputKey(keyArray);
     }
-
 }

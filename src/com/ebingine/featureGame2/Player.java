@@ -1,5 +1,6 @@
 package com.ebingine.featureGame2;
 
+import com.ebingine.GameContainer;
 import com.ebingine.gameObjects.Sprite;
 import com.ebingine.tiled.ObjectLayer;
 import com.ebingine.tiled.TiledMap;
@@ -64,16 +65,20 @@ public class Player extends Sprite {
             }
         }
 
-        if (Input.keyPressed("A") && !collidesWith(leftBorder.getRectangle())) {
+        if (GameContainer.input.keyPressed("A") && !collidesWith(leftBorder.getRectangle())) {
             setX(getX() - (getSpeedX() * (float) delta));
         }
 
-        if (Input.keyPressed("D") && !collidesWith(rightBorder.getRectangle())) {
+        if (GameContainer.input.keyPressed("D") && !collidesWith(rightBorder.getRectangle())) {
             setX(getX() + (getSpeedX() * (float) delta));
         }
 
-        if (Input.keyTyped("SPACE")) {
+        if (GameContainer.input.keyTyped("SPACE")) {
             jumped = true;
+        }
+
+        if (GameContainer.input.keyTyped("control S")) {
+            System.out.println("SAVE");
         }
     }
 

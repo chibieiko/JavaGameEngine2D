@@ -1,5 +1,6 @@
 package com.ebingine.featureGame1;
 
+import com.ebingine.GameContainer;
 import com.ebingine.gameObjects.Sprite;
 import com.ebingine.utils.Input;
 
@@ -35,37 +36,37 @@ public class Player extends Sprite {
 
     @Override
     public void move(double delta) {
-        if (Input.keyPressed("W")) {
+        if (GameContainer.input.keyPressed("W")) {
             setY(getY() - (getSpeedY() * (float) delta));
         }
 
-        if (Input.keyPressed("S")) {
+        if (GameContainer.input.keyPressed("S")) {
             setY(getY() + (getSpeedY() * (float) delta));
         }
 
-        if (Input.keyPressed("A")) {
+        if (GameContainer.input.keyPressed("A")) {
             setX(getX() - (getSpeedX() * (float) delta));
         }
 
-        if (Input.keyPressed("D")) {
+        if (GameContainer.input.keyPressed("D")) {
             setX(getX() + (getSpeedX() * (float) delta));
         }
     }
 
     public void moveP2(double delta) {
-        if (Input.keyPressed("UP")) {
+        if (GameContainer.input.keyPressed("UP")) {
             setY(getY() - (getSpeedY() * (float) delta));
         }
 
-        if (Input.keyPressed("DOWN")) {
+        if (GameContainer.input.keyPressed("DOWN")) {
             setY(getY() + (getSpeedY() * (float) delta));
         }
 
-        if (Input.keyPressed("LEFT")) {
+        if (GameContainer.input.keyPressed("LEFT")) {
             setX(getX() - (getSpeedX() * (float) delta));
         }
 
-        if (Input.keyPressed("RIGHT")) {
+        if (GameContainer.input.keyPressed("RIGHT")) {
             setX(getX() + (getSpeedX() * (float) delta));
         }
     }

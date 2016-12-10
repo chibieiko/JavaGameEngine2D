@@ -34,8 +34,7 @@ public class FeatureGame2 {
         height = gc.getHeight();
         width = gc.getWidth();
 
-        String[] keyArray = {"SPACE", "W", "A", "S", "D", "RIGHT", "LEFT",
-                "UP", "DOWN", "control E", "R"};
-        Input.addInputKey(keyArray);
+        String[] keyArray = {"SPACE", "A", "D", "control S"};
+        GameContainer.input.addInputKey(keyArray);
     }
 }

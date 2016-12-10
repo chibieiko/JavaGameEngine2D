@@ -21,34 +21,34 @@ public class Input implements ActionListener, MouseListener,
         MouseMotionListener {
 
     private GameContainer gameContainer;
-    private static final String PRESSED = "pressed ";
-    private static final String RELEASED = "released ";
-    static String key1 = "";
-    static boolean pressed1 = false;
+    private  final String PRESSED = "pressed ";
+    private  final String RELEASED = "released ";
+     String key1 = "";
+     boolean pressed1 = false;
     // Makes sure key events are only queried when at least one key is down.
-    static boolean keyDown = false;
+     boolean keyDown = false;
 
     /**
      * Input map for key bindings.
      */
-    private static InputMap inputMap;
+    private  InputMap inputMap;
 
     /**
      * Action map for key bindings.
      */
-    private static ActionMap actionMap;
+    private  ActionMap actionMap;
 
-    public static Timer timer;
-    public static Map<String, Boolean> pressedKeys = new HashMap<>();
-    public static ArrayList<String> typedKeys = new ArrayList<>();
+    public Timer timer;
+    public  Map<String, Boolean> pressedKeys = new HashMap<>();
+    public  ArrayList<String> typedKeys = new ArrayList<>();
 
-    private static boolean mouseClicked = false;
-    private static boolean mousePressed = false;
-    private static boolean mouseReleased = false;
-    private static boolean mouseEntered = false;
-    private static boolean mouseExited = false;
-    private static boolean mouseDragged = false;
-    private static boolean mouseMoved = false;
+    private  boolean mouseClicked = false;
+    private  boolean mousePressed = false;
+    private  boolean mouseReleased = false;
+    private  boolean mouseEntered = false;
+    private  boolean mouseExited = false;
+    private boolean mouseDragged = false;
+    private boolean mouseMoved = false;
 
     public String[] keyCodes;
 
@@ -66,7 +66,7 @@ public class Input implements ActionListener, MouseListener,
         timer.setInitialDelay(0);
     }
 
-    public static boolean mouseClicked() {
+    public boolean mouseClicked() {
         boolean temp = mouseClicked;
         mouseClicked = false;
         return temp;
@@ -77,7 +77,7 @@ public class Input implements ActionListener, MouseListener,
         mouseClicked = true;
     }
 
-    public static boolean mousePressed() {
+    public boolean mousePressed() {
         boolean temp = mousePressed;
         mousePressed = false;
         return temp;
@@ -88,7 +88,7 @@ public class Input implements ActionListener, MouseListener,
         mousePressed = true;
     }
 
-    public static boolean mouseReleased() {
+    public boolean mouseReleased() {
         boolean temp = mouseReleased;
         mouseReleased = false;
         return temp;
@@ -99,7 +99,7 @@ public class Input implements ActionListener, MouseListener,
         mouseReleased = true;
     }
 
-    public static boolean mouseEntered() {
+    public boolean mouseEntered() {
         boolean temp = mouseEntered;
         mouseEntered = false;
         return temp;
@@ -110,7 +110,7 @@ public class Input implements ActionListener, MouseListener,
         mouseEntered = true;
     }
 
-    public static boolean mouseExited() {
+    public boolean mouseExited() {
         boolean temp = mouseExited;
         mouseExited = false;
         return temp;
@@ -121,7 +121,7 @@ public class Input implements ActionListener, MouseListener,
         mouseExited = true;
     }
 
-    public static boolean mouseDragged() {
+    public boolean mouseDragged() {
         boolean temp = mouseDragged;
         mouseDragged = false;
         return temp;
@@ -132,7 +132,7 @@ public class Input implements ActionListener, MouseListener,
         mouseDragged = true;
     }
 
-    public static boolean mouseMoved() {
+    public boolean mouseMoved() {
         boolean temp = mouseMoved;
         mouseMoved = false;
         return temp;
@@ -146,7 +146,7 @@ public class Input implements ActionListener, MouseListener,
     /**
      * Configures which keys can be used in the game.
      */
-    public static void addInputKey(String[] keyCodes) {
+    public void addInputKey(String[] keyCodes) {
         String keyCode;
 
         for (int i = 0; i < keyCodes.length; i++) {
@@ -179,7 +179,7 @@ public class Input implements ActionListener, MouseListener,
     }
 
     // Invoked whenever a key is pressed or released.
-    private static void handleKeyEvent(String key, boolean pressed) {
+    private void handleKeyEvent(String key, boolean pressed) {
         //  Keeps track of which keys are pressed.
         // if (!pressed) {
         //     pressedKeys.remove(key);
@@ -234,7 +234,7 @@ public class Input implements ActionListener, MouseListener,
 
     }
 
-    public static boolean keyTyped(String key) {
+    public boolean keyTyped(String key) {
         boolean typed = false;
 
         if (keyDown) {
@@ -265,7 +265,7 @@ public class Input implements ActionListener, MouseListener,
         return typed;
     }
 
-    public static boolean keyPressed(String key) {
+    public boolean keyPressed(String key) {
         boolean isPressed = false;
 
         if (keyDown) {
@@ -280,7 +280,7 @@ public class Input implements ActionListener, MouseListener,
         return isPressed;
     }
 
-    public static boolean keyReleased(String key) {
+    public boolean keyReleased(String key) {
         boolean isReleased = false;
 
         if (keyDown) {
@@ -310,7 +310,7 @@ public class Input implements ActionListener, MouseListener,
      * @version 2016.1114
      * @since 1.7
      */
-    public static class KeyAction extends AbstractAction implements
+    public class KeyAction extends AbstractAction implements
             ActionListener {
 
         private boolean pressed;
