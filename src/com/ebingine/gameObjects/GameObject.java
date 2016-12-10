@@ -7,6 +7,7 @@ import com.ebingine.utils.Drawable;
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Rectangle2D;
+import java.io.Serializable;
 
 /**
  * TODO Short Description
@@ -17,7 +18,7 @@ import java.awt.geom.Rectangle2D;
  * @version 2016.1114
  * @since 1.7
  */
-public abstract class GameObject implements Drawable {
+public abstract class GameObject implements Drawable, Serializable {
 
     /**
      * Contains height value.
@@ -32,7 +33,7 @@ public abstract class GameObject implements Drawable {
     /**
      * Contains the image of the sprite.
      */
-    private Image img;
+    private transient Image img;
     private float x;
     private float y;
 
@@ -41,7 +42,9 @@ public abstract class GameObject implements Drawable {
     private Ellipse2D.Float ellipse;
 
     public GameObject() {
-        GameContainer.drawables.add(this);
+        synchronized (GameContainer.drawables) {
+            GameContainer.drawables.add(this);
+        }
     }
 
     public Ellipse2D getEllipse() {

@@ -107,9 +107,11 @@ public class Panel extends JPanel {
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
                 RenderingHints.VALUE_ANTIALIAS_ON);
 
-        for (Drawable d : GameContainer.drawables) {
-            d.draw(g2d);
-         //   g2d.drawString("こんにちは", gc.getWidth()/2, gc.getHeight()/2);
+        synchronized (GameContainer.drawables) {
+            for (Drawable d : GameContainer.drawables) {
+                d.draw(g2d);
+                //   g2d.drawString("こんにちは", gc.getWidth()/2, gc.getHeight()/2);
+            }
         }
     }
 

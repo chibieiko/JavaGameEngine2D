@@ -1,5 +1,7 @@
 package com.ebingine.gameObjects;
 
+import java.io.Serializable;
+
 /**
  * Handles variables for all objects extending Sprite.
  * <p>
@@ -10,7 +12,7 @@ package com.ebingine.gameObjects;
  * @version 2016.1114
  * @since 1.7
  */
-public abstract class Sprite extends GameObject {
+public abstract class Sprite extends GameObject implements Serializable {
 
     /**
      * Informs how much to advance on the x coordinate level when Player moves.

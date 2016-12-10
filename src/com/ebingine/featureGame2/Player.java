@@ -20,16 +20,16 @@ import java.awt.*;
  */
 public class Player extends Sprite {
 
-    private TiledMap tiled;
+    private transient TiledMap tiled;
     private float gravity = 0.1f;
     private float velocity = 5f;
     private float currentVelocity = velocity;
     private float fallDown = 0;
     private boolean jumped = false;
-    TiledObject ground;
-    TiledObject leftBorder;
-    TiledObject rightBorder;
-    ObjectLayer platforms;
+    private transient TiledObject ground;
+    private transient TiledObject leftBorder;
+    private transient TiledObject rightBorder;
+    private transient ObjectLayer platforms;
 
     /**
      * Constructor sets sprite's variable values.
