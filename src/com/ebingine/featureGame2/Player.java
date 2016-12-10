@@ -76,10 +76,6 @@ public class Player extends Sprite {
         if (GameContainer.input.keyTyped("SPACE")) {
             jumped = true;
         }
-
-        if (GameContainer.input.keyTyped("control S")) {
-            System.out.println("SAVE");
-        }
     }
 
     public void jump() {

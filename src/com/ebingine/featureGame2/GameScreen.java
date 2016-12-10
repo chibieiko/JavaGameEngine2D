@@ -2,14 +2,7 @@ package com.ebingine.featureGame2;
 
 import com.ebingine.Game;
 import com.ebingine.GameContainer;
-import com.ebingine.featureGame1.*;
-import com.ebingine.gameObjects.GameObject;
-import com.ebingine.tiled.Layer;
 import com.ebingine.tiled.TiledMap;
-
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.util.ArrayList;
 
 /**
  * TODO Short Description
@@ -76,6 +69,10 @@ public class GameScreen extends Game {
             String[] values = {"playerX:" + Float.toString(player.getX()),
                     "playerY:" + Float.toString(player.getY())};
             saveInfo(values, "src/com/ebingine/featureGame2/assets/saves/text");
+        }
+
+        if (GameContainer.input.keyTyped("control S")) {
+            System.out.println("Yeeey!");
         }
     }
 
