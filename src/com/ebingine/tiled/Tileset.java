@@ -45,6 +45,7 @@ public class Tileset {
 
     private void loadImages() {
         try {
+            // todo osote tulee käyttäjältä
             File file = new File("src/com/ebingine/featureGame2/assets/"
                     + source);
             FileInputStream fis = new FileInputStream(file);

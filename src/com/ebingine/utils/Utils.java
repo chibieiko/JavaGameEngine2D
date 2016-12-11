@@ -1,6 +1,7 @@
 package com.ebingine.utils;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
@@ -33,5 +34,21 @@ public class Utils {
         }
 
         return null;
+    }
+
+    // Helper method splits image to chunks.
+    public BufferedImage[] splitImage(BufferedImage image, int cols, int rows) {
+        // Determines the image chunk's width and height.
+        int chunkWidth = image.getWidth() / cols;
+        int chunkHeight = image.getHeight() / rows;
+        BufferedImage[] images = new BufferedImage[cols * rows];
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                images[j + i] = image.getSubimage(chunkWidth * j,
+                        chunkHeight * i, chunkWidth, chunkHeight);
+            }
+        }
+
+        return images;
     }
 }

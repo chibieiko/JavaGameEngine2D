@@ -2,6 +2,7 @@ package com.ebingine.featureGame1;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
 
 /**
@@ -18,22 +19,22 @@ public class AssetManager {
     /**
      * Holds image for Player.
      */
-    public static Image player;
+    public static BufferedImage player;
 
     /**
      * Holds image for monster.
      */
-    public static Image monster;
+    public static BufferedImage monster;
 
     /**
      * Holds image for Img.
      */
-    public static Image background;
+    public static BufferedImage background;
 
     /**
      * Holds image for bullet.
      */
-    public static Image bullet;
+    public static BufferedImage bullet;
 
     /**
      * Constructor loads the images from assets file.

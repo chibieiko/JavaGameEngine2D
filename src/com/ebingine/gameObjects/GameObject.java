@@ -7,6 +7,7 @@ import com.ebingine.utils.Drawable;
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Rectangle2D;
+import java.awt.image.BufferedImage;
 import java.io.Serializable;
 
 /**
@@ -33,7 +34,7 @@ public abstract class GameObject implements Drawable, Serializable {
     /**
      * Contains the image of the sprite.
      */
-    private transient Image img;
+    private transient BufferedImage img;
     private float x;
     private float y;
 
@@ -55,11 +56,11 @@ public abstract class GameObject implements Drawable, Serializable {
         this.ellipse = new Ellipse2D.Float(x, y, width, height);
     }
 
-    public Image getImg() {
+    public BufferedImage getImg() {
         return img;
     }
 
-    public void setImg(Image img) {
+    public void setImg(BufferedImage img) {
         this.img = img;
     }
 

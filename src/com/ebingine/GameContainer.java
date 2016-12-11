@@ -4,6 +4,7 @@ import com.ebingine.GUI.Window;
 import com.ebingine.utils.Camera;
 import com.ebingine.utils.Drawable;
 import com.ebingine.utils.Input;
+import com.ebingine.utils.Utils;
 
 import java.util.ArrayList;
 
@@ -26,6 +27,7 @@ public class GameContainer implements Runnable {
     private Game game;
     private Window window;
     public static Input input;
+    public static Utils utils;
     public static ArrayList<Drawable> drawables = new ArrayList<>();
     private Camera camera;
     // Indicates whether the game loop is running or not.
@@ -47,7 +49,9 @@ public class GameContainer implements Runnable {
 
         window = new Window(this);
         input = new Input(this, 0);
+        utils = new Utils();
         game.create(this);
+
 
         // GameContainer implements Runnable so it can be passed to Thread.
         thread = new Thread(this);

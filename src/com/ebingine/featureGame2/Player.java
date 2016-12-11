@@ -1,13 +1,16 @@
 package com.ebingine.featureGame2;
 
 import com.ebingine.GameContainer;
+import com.ebingine.gameObjects.Animation;
 import com.ebingine.gameObjects.Sprite;
 import com.ebingine.tiled.ObjectLayer;
 import com.ebingine.tiled.TiledMap;
 import com.ebingine.tiled.TiledObject;
 import com.ebingine.utils.Input;
+import com.ebingine.utils.Utils;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 /**
  * TODO Short Description
@@ -30,6 +33,10 @@ public class Player extends Sprite {
     private transient TiledObject leftBorder;
     private transient TiledObject rightBorder;
     private transient ObjectLayer platforms;
+    private transient Animation walk;
+    private transient double statetime = 0;
+    private transient BufferedImage currentFrame;
+    private boolean walking = false;
 
     /**
      * Constructor sets sprite's variable values.
@@ -45,11 +52,13 @@ public class Player extends Sprite {
         setRectangle(coordinateX, coordinateY, width, height);
         setSpeedX(75);
         setSpeedY(5);
+        currentFrame = getImg();
+        createWalkAnimation();
     }
 
     @Override
     public void draw(Graphics2D g2d) {
-        g2d.drawImage(getImg(), (int) getX(), (int) getY(), getWidth(),
+        g2d.drawImage(currentFrame, (int) getX(), (int) getY(), getWidth(),
                 getHeight(), null);
     }
 
@@ -67,15 +76,40 @@ public class Player extends Sprite {
 
         if (GameContainer.input.keyPressed("A") && !collidesWith(leftBorder.getRectangle())) {
             setX(getX() - (getSpeedX() * (float) delta));
+            walking = true;
+        } else {
+            walking = false;
         }
 
         if (GameContainer.input.keyPressed("D") && !collidesWith(rightBorder.getRectangle())) {
             setX(getX() + (getSpeedX() * (float) delta));
+            walking = true;
+        } else {
+            walking = false;
         }
 
         if (GameContainer.input.keyTyped("SPACE")) {
             jumped = true;
         }
+
+        updateAnimations(delta);
+      /*  if (walking) {
+            updateAnimations();
+        } else {
+            currentFrame = getImg();
+        }*/
+    }
+
+    public void createWalkAnimation() {
+        BufferedImage[] images = GameContainer.utils.splitImage(AssetManager
+                .rosetteWalk, 4, 1);
+        walk = new Animation(30d / 60d, images);
+        walk.start();
+    }
+
+    public void updateAnimations(double delta) {
+        walk.update(delta);
+        currentFrame = walk.getKeyFrame();
     }
 
     public void jump() {

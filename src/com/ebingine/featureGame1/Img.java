@@ -4,6 +4,7 @@ import com.ebingine.gameObjects.GameObject;
 import com.ebingine.utils.Drawable;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 /**
  * TODO Short Description
@@ -16,7 +17,7 @@ import java.awt.*;
  */
 public class Img extends GameObject implements Drawable {
 
-    public Img(Image image, int x, int y, int width,
+    public Img(BufferedImage image, int x, int y, int width,
                int height) {
         super.setImg(image);
         super.setX(x);
