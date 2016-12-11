@@ -58,18 +58,12 @@ public class TiledMap implements Drawable {
             dbFactory = DocumentBuilderFactory.newInstance();
             dBuilder = dbFactory.newDocumentBuilder();
             doc = dBuilder.parse(tiledMap);
-
-            //optional, but recommended
-            //read this - http://stackoverflow.com/questions/13786607/normalization-in-dom-parsing-with-java-how-does-it-work
             doc.getDocumentElement().normalize();
-
         } catch (SAXException | IOException | ParserConfigurationException e) {
             e.printStackTrace();
         }
 
-        System.out.println("Root Element: " + doc.getDocumentElement()
-                .getNodeName());
-
+        // Gets basic information about the map.
         Element map = doc.getDocumentElement();
         mapWidth = Integer.parseInt(map.getAttribute("width"));
         mapHeight = Integer.parseInt(map.getAttribute("height"));
@@ -78,6 +72,7 @@ public class TiledMap implements Drawable {
         pixelWidth = mapWidth * tileWidth;
         pixelHeight = mapHeight * tileHeight;
 
+        // Gets different tags and creates objects accordingly.
         layerNodes = doc.getElementsByTagName("layer");
         objectNodes = doc.getElementsByTagName("objectgroup");
         tilesetNodes = doc.getElementsByTagName("tileset");

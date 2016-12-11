@@ -10,16 +10,14 @@ import com.ebingine.tiled.TiledMap;
  * TODO description and @since
  *
  * @author Erika Sankari
- * @version 2016.1204
+ * @version 2016.1211
  * @since 1.7
  */
-public class GameScreen extends Game {
-
+public class GameScreen2 extends Game {
     private Player player;
     private TiledMap tiled;
-    private GameScreen2 gameScreen2;
 
-    public GameScreen(TiledMap tiled) {
+    public GameScreen2(TiledMap tiled) {
         this.tiled = tiled;
     }
 
@@ -39,13 +37,14 @@ public class GameScreen extends Game {
                     AssetManager.rosette.getHeight(null));
         }
 
+        System.out.println("player: " + player);
         player.setTiled(tiled);
         new Trees(tiled);
-        gameScreen2 = new GameScreen2(tiled);
     }
 
     @Override
     public void update(GameContainer gc, double deltaTime) {
+        System.out.println("deltaTime: " + deltaTime);
         player.move(deltaTime);
         player.jump();
 
@@ -68,11 +67,6 @@ public class GameScreen extends Game {
             System.out.println("Saving");
             saveGame("src/com/ebingine/featureGame2/assets/player",
                     player);
-        }
-
-        if (player.collidesWith(tiled.getObject("door").getRectangle())) {
-            gameScreen2.create(gc);
-            gc.setGame(gameScreen2);
         }
     }
 

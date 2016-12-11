@@ -16,6 +16,7 @@ import com.ebingine.utils.Input;
 public class FeatureGame2 {
 
     GameScreen gameScreen;
+    GameScreen2 gameScreen2;
     public int height;
     public int width;
 
