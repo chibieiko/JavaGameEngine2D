@@ -25,7 +25,7 @@ public class GameScreen extends Game {
     @Override
     public void create(GameContainer gc) {
         Object object
-                = loadSave("src/com/ebingine/featureGame2/assets/saves/player");
+                = loadSave("src/com/ebingine/featureGame2/assets/player");
         System.out.println("saveObject: " + object);
         if (object != null) {
             player = new Player((int) ((Player) object).getX(),
@@ -50,12 +50,6 @@ public class GameScreen extends Game {
         player.move(deltaTime);
         player.jump();
 
-        if (GameContainer.input.keyTyped("B")) {
-            System.out.println("Saving");
-            saveGame("src/com/ebingine/featureGame2/assets/saves/player",
-                    player);
-        }
-
         if (GameContainer.input.keyTyped("G")) {
             String[] array = loadInfo
                     ("src/com/ebingine/featureGame2/assets/saves/text");
@@ -68,11 +62,13 @@ public class GameScreen extends Game {
             System.out.println("SavingText");
             String[] values = {"playerX:" + Float.toString(player.getX()),
                     "playerY:" + Float.toString(player.getY())};
-            saveInfo(values, "src/com/ebingine/featureGame2/assets/saves/text");
+            saveInfo(values, "src/com/ebingine/featureGame2/assets/text");
         }
 
         if (GameContainer.input.keyTyped("control S")) {
-            System.out.println("Yeeey!");
+            System.out.println("Saving");
+            saveGame("src/com/ebingine/featureGame2/assets/player",
+                    player);
         }
     }
 

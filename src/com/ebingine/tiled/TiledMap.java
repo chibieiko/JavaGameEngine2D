@@ -48,9 +48,11 @@ public class TiledMap implements Drawable {
     private ArrayList<Tileset> tilesets = new ArrayList<>();
     private ArrayList<Layer> layers = new ArrayList<>();
     private ArrayList<ObjectLayer> objectLayers = new ArrayList<>();
+    private String pathToTilesets;
 
-    public TiledMap(String path) {
-        tiledMap = new File(path);
+    public TiledMap(String pathToMap, String pathToTilesets) {
+        this.pathToTilesets = pathToTilesets;
+        tiledMap = new File(pathToMap);
 
         try {
             dbFactory = DocumentBuilderFactory.newInstance();
@@ -143,7 +145,8 @@ public class TiledMap implements Drawable {
                         Integer.parseInt(e.getAttribute("tileheight")),
                         image.getAttribute("source"),
                         Integer.parseInt(image.getAttribute("width")),
-                        Integer.parseInt(image.getAttribute("height"))));
+                        Integer.parseInt(image.getAttribute("height")),
+                        pathToTilesets));
             }
         }
     }

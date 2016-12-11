@@ -56,17 +56,14 @@ public class Animation {
         if (!stopped) {
             frameCount += stateTime;
             if (frameCount > time) {
-                System.out.println("frameCount: " + frameCount);
-                System.out.println("time: " + time);
-                System.out.println("currentIndex: " + currentFrame);
                 if (currentFrame < frames.length - 1) {
-                    System.out.println("viel iffissä");
                     currentFrame++;
-                    timeLimiter += stateTime;
-                    frameCount = 0;
                 } else {
                     currentFrame = 0;
                 }
+
+                timeLimiter += stateTime;
+                frameCount = 0;
             }
         }
     }

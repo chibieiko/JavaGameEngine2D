@@ -37,6 +37,7 @@ public class Player extends Sprite {
     private transient double statetime = 0;
     private transient BufferedImage currentFrame;
     private boolean walking = false;
+    private boolean flip = false;
 
     /**
      * Constructor sets sprite's variable values.
@@ -58,8 +59,15 @@ public class Player extends Sprite {
 
     @Override
     public void draw(Graphics2D g2d) {
-        g2d.drawImage(currentFrame, (int) getX(), (int) getY(), getWidth(),
-                getHeight(), null);
+        if (flip) {
+            g2d.drawImage(currentFrame, (int) getX() + getWidth(), (int) getY(),
+                    -getWidth(),
+                    getHeight(), null);
+        } else {
+            g2d.drawImage(currentFrame, (int) getX(), (int) getY(),
+                    getWidth(),
+                    getHeight(), null);
+        }
     }
 
     @Override
@@ -74,36 +82,37 @@ public class Player extends Sprite {
             }
         }
 
-        if (GameContainer.input.keyPressed("A") && !collidesWith(leftBorder.getRectangle())) {
+        walking = false;
+
+        if (GameContainer.input.keyPressed("A") &&
+                !collidesWith(leftBorder.getRectangle())) {
             setX(getX() - (getSpeedX() * (float) delta));
             walking = true;
-        } else {
-            walking = false;
+            flip = true;
         }
 
-        if (GameContainer.input.keyPressed("D") && !collidesWith(rightBorder.getRectangle())) {
+        if (GameContainer.input.keyPressed("D") &&
+                !collidesWith(rightBorder.getRectangle())) {
             setX(getX() + (getSpeedX() * (float) delta));
             walking = true;
-        } else {
-            walking = false;
+            flip = false;
         }
 
         if (GameContainer.input.keyTyped("SPACE")) {
             jumped = true;
         }
 
-        updateAnimations(delta);
-      /*  if (walking) {
-            updateAnimations();
+        if (walking) {
+            updateAnimations(delta);
         } else {
             currentFrame = getImg();
-        }*/
+        }
     }
 
     public void createWalkAnimation() {
         BufferedImage[] images = GameContainer.utils.splitImage(AssetManager
                 .rosetteWalk, 4, 1);
-        walk = new Animation(30d / 60d, images);
+        walk = new Animation(10d / 60d, images);
         walk.start();
     }
 

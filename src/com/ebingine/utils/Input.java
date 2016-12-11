@@ -149,18 +149,15 @@ public class Input implements ActionListener, MouseListener,
 
         for (int i = 0; i < keyCodes.length; i++) {
             keyCode = keyCodes[i];
-            System.out.println(keyCode);
 
             //  Separates the key identifier from the modifiers of the KeyStroke.
             int offset = keyCode.lastIndexOf(" ");
             String key = offset == -1 ? keyCode : keyCode.substring(offset + 1);
             String modifiers = keyCode.replace(key, "");
-            System.out.println("modifiers: " + modifiers);
 
             //  Creates Action and adds binding for the pressed key.
             Action pressedAction = new KeyAction(key, true);
             String pressedKey = modifiers + PRESSED + key;
-            System.out.println("pressedKey: " + pressedKey);
             KeyStroke pressedKeyStroke = KeyStroke.getKeyStroke(pressedKey);
             inputMap.put(pressedKeyStroke, pressedKey);
             actionMap.put(pressedKey, pressedAction);
@@ -168,7 +165,6 @@ public class Input implements ActionListener, MouseListener,
             //  Creates Action and adds binding for the released key.
             Action releasedAction = new KeyAction(key, false);
             String releasedKey = modifiers + RELEASED + key;
-            System.out.println("releasedKey: " + releasedKey);
             KeyStroke releasedKeyStroke = KeyStroke.getKeyStroke(releasedKey);
             inputMap.put(releasedKeyStroke, releasedKey);
             actionMap.put(releasedKey, releasedAction);

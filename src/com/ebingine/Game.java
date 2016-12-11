@@ -43,7 +43,7 @@ public abstract class Game {
         try {
             FileInputStream fis = new FileInputStream(file);
             ObjectInputStream ois = new ObjectInputStream(fis);
-            toReturn = (Object) ois.readObject();
+            toReturn = ois.readObject();
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
             return null;

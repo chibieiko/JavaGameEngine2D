@@ -30,7 +30,8 @@ public class Tileset {
     private ArrayList<BufferedImage> tileImages = new ArrayList<>();
 
     public Tileset(int firstGid, String name, int tileWidth, int tileHeight,
-                   String source, int imageWidth, int imageHeight) {
+                   String source, int imageWidth, int imageHeight,
+                   String path) {
         this.firstGid = firstGid;
         this.name = name;
         this.tileWidth = tileWidth;
@@ -40,14 +41,12 @@ public class Tileset {
         this.imageHeight = imageHeight;
         lastGid = (int) (Math.floor(imageWidth/tileWidth) * Math.floor
                 (imageHeight/tileHeight) + firstGid - 1);
-        loadImages();
+        loadImages(path);
     }
 
-    private void loadImages() {
+    private void loadImages(String path) {
         try {
-            // todo osote tulee käyttäjältä
-            File file = new File("src/com/ebingine/featureGame2/assets/"
-                    + source);
+            File file = new File(path + source);
             FileInputStream fis = new FileInputStream(file);
             sourceImage = ImageIO.read(fis);
         } catch (IOException e) {
