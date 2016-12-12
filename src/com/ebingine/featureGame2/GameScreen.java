@@ -4,6 +4,8 @@ import com.ebingine.Game;
 import com.ebingine.GameContainer;
 import com.ebingine.tiled.TiledMap;
 
+import java.io.FileNotFoundException;
+
 /**
  * TODO Short Description
  * <p>
@@ -16,32 +18,44 @@ import com.ebingine.tiled.TiledMap;
 public class GameScreen extends Game {
 
     private Player player;
-    private TiledMap tiled;
-    private GameScreen2 gameScreen2;
+    public TiledMap tiled;
 
     public GameScreen(TiledMap tiled) {
         this.tiled = tiled;
     }
 
+    public GameScreen() {
+        tiled = new TiledMap
+                ("src/com/ebingine/featureGame2/assets/testMap2.tmx",
+                        "src/com/ebingine/featureGame2/assets/");
+    }
+
     @Override
     public void create(GameContainer gc) {
-        Object object
-                = loadSave("src/com/ebingine/featureGame2/assets/player");
-        if (object != null) {
+        Object object = null;
+        boolean exists = true;
+        try {
+             object = loadSave("src/com/ebingine/featureGame2/assets/player");
+        } catch (FileNotFoundException e) {
+            exists = false;
+            System.out.println("save not found");
+        }
+
+        if (object != null && exists) {
             player = new Player((int) ((Player) object).getX(),
                     (int) ((Player) object).getY(),
                     ((Player) object).getWidth(),
                     ((Player) object).getHeight());
         } else {
             player = new Player(tiled.getTileWidth(),
-                    tiled.getPixelHeight() - tiled.getTileHeight() * 3,
+                    tiled.getMapHeight() * tiled.getTileHeight() -
+                    tiled.getTileHeight() * 3,
                     AssetManager.rosette.getWidth(null),
                     AssetManager.rosette.getHeight(null));
         }
 
         player.setTiled(tiled);
         new Trees(tiled);
-        gameScreen2 = new GameScreen2(tiled);
     }
 
     @Override
@@ -71,6 +85,8 @@ public class GameScreen extends Game {
         }
 
         if (player.collidesWith(tiled.getObject("door").getRectangle())) {
+            gc.clearRender();
+            GameScreen2 gameScreen2 = new GameScreen2();
             gameScreen2.create(gc);
             gc.setGame(gameScreen2);
         }

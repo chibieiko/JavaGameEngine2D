@@ -37,7 +37,7 @@ public abstract class Game {
     }
 
     // Loads binary data into an object.
-    public Object loadSave(String path) {
+    public Object loadSave(String path) throws FileNotFoundException {
         File file = new File(path + ".dat");
         Object toReturn;
         try {

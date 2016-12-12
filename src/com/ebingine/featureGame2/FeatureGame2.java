@@ -16,18 +16,16 @@ import com.ebingine.utils.Input;
 public class FeatureGame2 {
 
     GameScreen gameScreen;
-    GameScreen2 gameScreen2;
     public int height;
     public int width;
 
     public FeatureGame2() {
-        TiledMap tiledMap = new TiledMap
-                ("src/com/ebingine/featureGame2/assets/testMap2.tmx",
-                        "src/com/ebingine/featureGame2/assets/");
-        gameScreen = new GameScreen(tiledMap);
+        gameScreen = new GameScreen();
         GameContainer gc = new GameContainer(gameScreen);
-        gc.setWidth(tiledMap.getMapWidth() * tiledMap.getTileWidth());
-        gc.setHeight(tiledMap.getMapHeight() * tiledMap.getTileHeight());
+        gc.setWidth(gameScreen.tiled.getMapWidth()
+                * gameScreen.tiled.getTileWidth());
+        gc.setHeight(gameScreen.tiled.getMapHeight()
+                * gameScreen.tiled.getTileHeight());
         gc.getCamera().setViewportSizeX(gc.getWidth());
         gc.getCamera().setViewportSizeY(gc.getHeight());
         // Scales down the game window if game size cannot fit to device screen.

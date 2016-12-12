@@ -192,4 +192,8 @@ public class GameContainer implements Runnable {
     public void setCamera(Camera camera) {
         this.camera = camera;
     }
+
+    public void clearRender() {
+        drawables.clear();
+    }
 }

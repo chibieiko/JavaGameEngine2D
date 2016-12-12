@@ -21,52 +21,36 @@ public class GameScreen2 extends Game {
         this.tiled = tiled;
     }
 
+    public GameScreen2() {
+        tiled = new TiledMap
+                ("src/com/ebingine/featureGame2/assets/testMap3.tmx",
+                        "src/com/ebingine/featureGame2/assets/");
+    }
+
     @Override
     public void create(GameContainer gc) {
-        Object object
-                = loadSave("src/com/ebingine/featureGame2/assets/player");
-        if (object != null) {
-            player = new Player((int) ((Player) object).getX(),
-                    (int) ((Player) object).getY(),
-                    ((Player) object).getWidth(),
-                    ((Player) object).getHeight());
-        } else {
-            player = new Player(tiled.getTileWidth(),
-                    tiled.getPixelHeight() - tiled.getTileHeight() * 3,
+        player = new Player(tiled.getObject("door-closed").getX(),
+                    tiled.getObject("door-closed").getY(),
                     AssetManager.rosette.getWidth(null),
                     AssetManager.rosette.getHeight(null));
-        }
-
-        System.out.println("player: " + player);
         player.setTiled(tiled);
         new Trees(tiled);
     }
 
     @Override
     public void update(GameContainer gc, double deltaTime) {
-        System.out.println("deltaTime: " + deltaTime);
         player.move(deltaTime);
         player.jump();
 
-        if (GameContainer.input.keyTyped("G")) {
-            String[] array = loadInfo
-                    ("src/com/ebingine/featureGame2/assets/saves/text");
-            for (int i = 0; i < array.length; i++) {
-                System.out.println(array[i]);
-            }
+        if (GameContainer.input.mouseClicked()) {
+            System.out.println("SHOOOOT!");
         }
 
-        if (GameContainer.input.keyTyped("T")) {
-            System.out.println("SavingText");
-            String[] values = {"playerX:" + Float.toString(player.getX()),
-                    "playerY:" + Float.toString(player.getY())};
-            saveInfo(values, "src/com/ebingine/featureGame2/assets/text");
-        }
-
-        if (GameContainer.input.keyTyped("control S")) {
-            System.out.println("Saving");
-            saveGame("src/com/ebingine/featureGame2/assets/player",
-                    player);
+        if (player.collidesWith(tiled.getObject("door").getRectangle())) {
+            gc.clearRender();
+            GameScreen gs = new GameScreen();
+            gs.create(gc);
+            gc.setGame(gs);
         }
     }
 

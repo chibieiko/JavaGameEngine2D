@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE map SYSTEM "http://mapeditor.org/dtd/1.0/map.dtd">
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="25" height="19" tilewidth="32" tileheight="32" nextobjectid="12">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="25" height="19" tilewidth="32" tileheight="32" nextobjectid="13">
  <tileset firstgid="1" name="LandTiles_32_32" tilewidth="32" tileheight="32" tilecount="300" columns="15">
   <image source="LandTiles_32_32.png" width="480" height="640"/>
  </tileset>
@@ -118,7 +118,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,357,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
@@ -137,5 +137,6 @@
  </objectgroup>
  <objectgroup name="door-obj">
   <object id="11" name="door" x="582" y="355" width="18" height="28"/>
+  <object id="12" name="door-closed" x="36" y="546" width="21" height="30"/>
  </objectgroup>
 </map>
