@@ -99,9 +99,12 @@ public class Panel extends JPanel {
         Graphics2D g2d = (Graphics2D) g;
         // Updates panel view to match camera view.
         g2d.translate(-gc.getCamera().getCamX(), -gc.getCamera().getCamY());
-        //  g2d.setFont(util.getFont
-        //        ("src/com/ebingine/featureGame1/assets/font_1_honokamin
-        // .ttf"));
+
+        // todo siirrä jonneki järkevään paikkaan ja lisää fontti drawables
+        Font font = GameContainer.utils.createFont(
+        ("src/com/ebingine/featureGame1/assets" +
+                "/font_1_honokamin.ttf"));
+        g2d.setFont(font);
 
         // Smoothes the borders of drawables.
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
@@ -110,8 +113,9 @@ public class Panel extends JPanel {
         synchronized (GameContainer.drawables) {
             for (Drawable d : GameContainer.drawables) {
                 d.draw(g2d);
-                //   g2d.drawString("こんにちは", gc.getWidth()/2, gc.getHeight()/2);
             }
+
+            g2d.drawString("私の名前はエリカです", gc.getWidth()/2, gc.getHeight()/2);
         }
     }
 

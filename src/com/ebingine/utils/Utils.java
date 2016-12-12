@@ -19,21 +19,20 @@ public class Utils {
 
     }
 
-    public Font getFont(String filePath) {
+    public Font createFont(String filePath) {
+        Font readyFont = null;
         try {
             GraphicsEnvironment ge = GraphicsEnvironment
             .getLocalGraphicsEnvironment();
             Font font = Font.createFont(Font.TRUETYPE_FONT, new File
                     (filePath));
-
-            ge.registerFont(font);
-            return font;
-
+            readyFont = font.deriveFont(30.5f);
+            ge.registerFont(readyFont);
         } catch (IOException | FontFormatException e) {
             e.printStackTrace();
         }
 
-        return null;
+        return readyFont;
     }
 
     // Helper method splits image to chunks.
