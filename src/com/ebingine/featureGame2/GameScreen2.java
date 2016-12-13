@@ -2,7 +2,10 @@ package com.ebingine.featureGame2;
 
 import com.ebingine.Game;
 import com.ebingine.GameContainer;
+import com.ebingine.gameObjects.Text;
 import com.ebingine.tiled.TiledMap;
+
+import java.awt.*;
 
 /**
  * TODO Short Description
@@ -16,6 +19,7 @@ import com.ebingine.tiled.TiledMap;
 public class GameScreen2 extends Game {
     private Player player;
     private TiledMap tiled;
+    private Text text;
 
     public GameScreen2(TiledMap tiled) {
         this.tiled = tiled;
@@ -29,6 +33,13 @@ public class GameScreen2 extends Game {
 
     @Override
     public void create(GameContainer gc) {
+        // ようこそこのゲームへ
+        text = new Text("気おつけて帰ってください", gc.getWidth()/2,
+                gc.getHeight()/2);
+        text.setColor(Color.RED, gc);
+        text.setTTFFont("src/com/ebingine/featureGame1/assets" +
+                "/font_1_honokamin.ttf");
+
         player = new Player(tiled.getObject("door-closed").getX(),
                     tiled.getObject("door-closed").getY(),
                     AssetManager.rosette.getWidth(null),

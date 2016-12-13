@@ -15,18 +15,15 @@ import java.io.IOException;
  * @since 1.7
  */
 public class Utils {
-    public Utils() {
-
-    }
+    public Utils() {}
 
     public Font createFont(String filePath) {
         Font readyFont = null;
         try {
             GraphicsEnvironment ge = GraphicsEnvironment
             .getLocalGraphicsEnvironment();
-            Font font = Font.createFont(Font.TRUETYPE_FONT, new File
+            readyFont = Font.createFont(Font.TRUETYPE_FONT, new File
                     (filePath));
-            readyFont = font.deriveFont(30.5f);
             ge.registerFont(readyFont);
         } catch (IOException | FontFormatException e) {
             e.printStackTrace();

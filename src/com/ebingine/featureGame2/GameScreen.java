@@ -2,8 +2,11 @@ package com.ebingine.featureGame2;
 
 import com.ebingine.Game;
 import com.ebingine.GameContainer;
+import com.ebingine.gameObjects.Text;
 import com.ebingine.tiled.TiledMap;
+import com.ebingine.utils.Audio;
 
+import java.awt.*;
 import java.io.FileNotFoundException;
 
 /**
@@ -19,6 +22,8 @@ public class GameScreen extends Game {
 
     private Player player;
     public TiledMap tiled;
+    private Text text;
+    Audio backgroundMusic;
 
     public GameScreen(TiledMap tiled) {
         this.tiled = tiled;
@@ -41,6 +46,12 @@ public class GameScreen extends Game {
             System.out.println("save not found");
         }
 
+        text = new Text("ようこそこのゲームへ", gc.getWidth()/2,
+                gc.getHeight()/2);
+        text.setColor(Color.WHITE, gc);
+        text.setTTFFont("src/com/ebingine/featureGame1/assets" +
+                "/font_1_honokamin.ttf");
+
         if (object != null && exists) {
             player = new Player((int) ((Player) object).getX(),
                     (int) ((Player) object).getY(),
@@ -56,6 +67,10 @@ public class GameScreen extends Game {
 
         player.setTiled(tiled);
         new Trees(tiled);
+
+        backgroundMusic = new Audio(
+                "src/com/ebingine/featureGame2/assets/Pinecones.wav");
+        backgroundMusic.playIndefinitely();
     }
 
     @Override

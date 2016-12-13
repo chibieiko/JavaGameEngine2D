@@ -52,7 +52,6 @@ public class GameContainer implements Runnable {
         utils = new Utils();
         game.create(this);
 
-
         // GameContainer implements Runnable so it can be passed to Thread.
         thread = new Thread(this);
         // Starts the game loop thread.

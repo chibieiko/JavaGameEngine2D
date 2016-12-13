@@ -101,10 +101,10 @@ public class Panel extends JPanel {
         g2d.translate(-gc.getCamera().getCamX(), -gc.getCamera().getCamY());
 
         // todo siirrä jonneki järkevään paikkaan ja lisää fontti drawables
-        Font font = GameContainer.utils.createFont(
-        ("src/com/ebingine/featureGame1/assets" +
-                "/font_1_honokamin.ttf"));
-        g2d.setFont(font);
+     //   Font font = GameContainer.utils.createFont(
+     //   ("src/com/ebingine/featureGame1/assets" +
+       //         "/font_1_honokamin.ttf"));
+       // g2d.setFont(font);
 
         // Smoothes the borders of drawables.
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
@@ -115,7 +115,7 @@ public class Panel extends JPanel {
                 d.draw(g2d);
             }
 
-            g2d.drawString("私の名前はエリカです", gc.getWidth()/2, gc.getHeight()/2);
+        //    g2d.drawString("私の名前はエリカです", gc.getWidth()/2, gc.getHeight()/2);
         }
     }
 
