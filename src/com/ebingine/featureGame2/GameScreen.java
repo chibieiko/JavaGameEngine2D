@@ -109,6 +109,6 @@ public class GameScreen extends Game {
 
     @Override
     public void clear(GameContainer gc) {
-
+        backgroundMusic.stop();
     }
 }

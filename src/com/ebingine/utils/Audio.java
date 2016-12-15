@@ -16,6 +16,7 @@ import java.io.IOException;
 public class Audio {
 
     Clip clip;
+    private boolean playing;
 
     public Audio(String pathToWavFile) {
         try {
@@ -23,6 +24,7 @@ public class Audio {
                     new File(pathToWavFile).getAbsoluteFile());
             clip = AudioSystem.getClip();
             clip.open(audioIn);
+            playing = false;
         } catch (UnsupportedAudioFileException | IOException
                 | LineUnavailableException e) {
             e.printStackTrace();
@@ -31,10 +33,12 @@ public class Audio {
 
     public void play() {
         clip.start();
+        playing = true;
     }
 
     public void playIndefinitely() {
         clip.loop(clip.LOOP_CONTINUOUSLY);
+        playing = true;
     }
 
     public void playWithLoopCount(int loopcount) {
@@ -42,6 +46,11 @@ public class Audio {
     }
 
     public void stop() {
+        playing = false;
         clip.stop();
+    }
+
+    public boolean isPlaying() {
+        return playing;
     }
 }
