@@ -98,7 +98,7 @@ public class Panel extends JPanel {
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
         // Updates panel view to match camera view.
-        g2d.translate(-gc.getCamera().getCamX(), -gc.getCamera().getCamY());
+        g2d.translate(-gc.getCamera().getX(), -gc.getCamera().getY());
 
         // todo siirrä jonneki järkevään paikkaan ja lisää fontti drawables
      //   Font font = GameContainer.utils.createFont(

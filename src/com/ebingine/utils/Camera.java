@@ -19,29 +19,19 @@ public class Camera {
     // Camera settings.
     private int viewportSizeX;
     private int viewportSizeY;
-    private int offsetMaxX;
-    private int offsetMaxY;
-    private int offsetMinX;
-    private int offsetMinY;
-    private int camX;
-    private int camY;
-
+    private int x;
+    private int y;
     // Used to check whether it is necessary to draw a game object or not.
     private Rectangle2D.Float rectangle;
 
     public Camera(GameContainer gc) {
         viewportSizeX = 800;
         viewportSizeY = 600;
-
         tieToScreenMaxBounds();
-
-        offsetMaxX = gc.getWidth() - viewportSizeX;
-        offsetMaxY = gc.getHeight() - viewportSizeY;
-        offsetMinX = 0;
-        offsetMinY = 0;
-        camX = 0;
-        camY = 0;
-        rectangle = new Rectangle2D.Float(camX, camY, viewportSizeX, viewportSizeY);
+        x = viewportSizeX / 2;
+        y = viewportSizeY / 2;
+        rectangle = new Rectangle2D.Float(x, y, viewportSizeX,
+                viewportSizeY);
     }
 
     public void tieToScreenMaxBounds() {
@@ -65,27 +55,10 @@ public class Camera {
         }
     }
 
-    public void update(int x, int y) {
-        /*if (camX > offsetMaxX) {
-            camX = offsetMaxX;
-        } else if (camX < offsetMinX) {
-            camX = offsetMinX;
-        } else {*/
-            camX = x - viewportSizeX /2;
-        //}
-
-        /*if (camY > offsetMaxY) {
-            camY = offsetMaxY;
-        } else if (camY < offsetMinY) {
-            camY = offsetMinY;
-        } else {*/
-            camY = y - viewportSizeY /2;
-       // }
-    }
-
-    public void updateOffSets(int width, int height) {
-        setOffsetMaxX(width - viewportSizeX);
-        setOffsetMaxY(height - viewportSizeY);
+    public void setPosition(int x, int y) {
+        setX(x);
+        setY(y);
+        rectangle.setRect(x, y, rectangle.getWidth(), rectangle.getHeight());
     }
 
     public int getViewportSizeX() {
@@ -104,52 +77,22 @@ public class Camera {
         this.viewportSizeY = viewportSizeY;
     }
 
-    public int getOffsetMaxX() {
-        return offsetMaxX;
+    public int getX() {
+        return x;
     }
 
-    public void setOffsetMaxX(int offsetMaxX) {
-        this.offsetMaxX = offsetMaxX;
+    public int getY() {
+        return y;
     }
 
-    public int getOffsetMaxY() {
-        return offsetMaxY;
+    public void setX(int x) {
+        this.x = x;
+        rectangle.setRect(x, y, rectangle.getWidth(), rectangle.getHeight());
     }
 
-    public void setOffsetMaxY(int offsetMaxY) {
-        this.offsetMaxY = offsetMaxY;
-    }
-
-    public int getOffsetMinX() {
-        return offsetMinX;
-    }
-
-    public void setOffsetMinX(int offsetMinX) {
-        this.offsetMinX = offsetMinX;
-    }
-
-    public int getOffsetMinY() {
-        return offsetMinY;
-    }
-
-    public void setOffsetMinY(int offsetMinY) {
-        this.offsetMinY = offsetMinY;
-    }
-
-    public int getCamX() {
-        return camX;
-    }
-
-    public void setCamX(int camX) {
-        this.camX = camX;
-    }
-
-    public int getCamY() {
-        return camY;
-    }
-
-    public void setCamY(int camY) {
-        this.camY = camY;
+    public void setY(int y) {
+        this.y = y;
+        rectangle.setRect(x, y, rectangle.getWidth(), rectangle.getHeight());
     }
 
     public Rectangle2D.Float getRectangle() {
