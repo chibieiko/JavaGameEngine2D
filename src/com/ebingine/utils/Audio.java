@@ -32,22 +32,32 @@ public class Audio {
     }
 
     public void play() {
-        clip.start();
+        if (!playing) {
+            clip.start();
+        }
+
         playing = true;
     }
 
     public void playIndefinitely() {
-        clip.loop(clip.LOOP_CONTINUOUSLY);
+        if (!playing) {
+            clip.loop(clip.LOOP_CONTINUOUSLY);
+        }
+
         playing = true;
     }
 
     public void playWithLoopCount(int loopcount) {
-        clip.loop(loopcount);
+        if (!playing) {
+            clip.loop(loopcount);
+        }
     }
 
     public void stop() {
-        playing = false;
-        clip.stop();
+        if (playing) {
+            playing = false;
+            clip.stop();
+        }
     }
 
     public boolean isPlaying() {

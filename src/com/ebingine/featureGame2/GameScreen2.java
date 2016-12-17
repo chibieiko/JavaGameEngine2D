@@ -33,9 +33,9 @@ public class GameScreen2 extends Game {
 
     @Override
     public void create(GameContainer gc) {
-        // ようこそこのゲームへ
-        text = new Text("気おつけて帰ってください", gc.getWidth()/2,
-                gc.getHeight()/2);
+        text = new Text("気おつけて帰ってください",
+                gc.getWidth()/2 - tiled.getTileWidth() * 4,
+                gc.getHeight()/3);
         text.setColor(Color.RED, gc);
         text.setTTFFont("src/com/ebingine/featureGame1/assets" +
                 "/font_1_honokamin.ttf");

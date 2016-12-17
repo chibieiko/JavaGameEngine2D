@@ -177,9 +177,9 @@ public class GameContainer implements Runnable {
 
     // Stops one of game's screens, changes to another screen and renders that
     // screen.
-    // todo multiple screens
     public void setGame(Game game) {
         stop();
+        this.game.clear(this);
         this.game = game;
         run();
     }

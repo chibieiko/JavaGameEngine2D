@@ -23,7 +23,7 @@ public class GameScreen extends Game {
     private Player player;
     public TiledMap tiled;
     private Text text;
-    Audio backgroundMusic;
+    private Audio backgroundMusic;
 
     public GameScreen(TiledMap tiled) {
         this.tiled = tiled;
@@ -46,11 +46,12 @@ public class GameScreen extends Game {
             System.out.println("save not found");
         }
 
-        text = new Text("ようこそこのゲームへ", gc.getWidth()/2,
-                gc.getHeight()/2);
+        text = new Text("ようこそこのゲームへ",
+                gc.getWidth()/2 - tiled.getTileWidth() * 4,
+                gc.getHeight()/3);
         text.setColor(Color.WHITE, gc);
-        text.setTTFFont("src/com/ebingine/featureGame1/assets" +
-                "/font_1_honokamin.ttf");
+        text.setTTFFont("src/com/ebingine/featureGame1/assets"
+                + "/font_1_honokamin.ttf");
 
         if (object != null && exists) {
             player = new Player((int) ((Player) object).getX(),
@@ -59,8 +60,8 @@ public class GameScreen extends Game {
                     ((Player) object).getHeight());
         } else {
             player = new Player(tiled.getTileWidth(),
-                    tiled.getMapHeight() * tiled.getTileHeight() -
-                    tiled.getTileHeight() * 3,
+                    tiled.getMapHeight() * tiled.getTileHeight()
+                            - tiled.getTileHeight() * 3,
                     AssetManager.rosette.getWidth(null),
                     AssetManager.rosette.getHeight(null));
         }
@@ -109,6 +110,6 @@ public class GameScreen extends Game {
 
     @Override
     public void clear(GameContainer gc) {
-        backgroundMusic.stop();
+
     }
 }
