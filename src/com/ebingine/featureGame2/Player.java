@@ -38,6 +38,8 @@ public class Player extends Sprite {
     private transient BufferedImage currentFrame;
     private boolean walking = false;
     private boolean flip = false;
+    private float boostSpeed;
+    private boolean boost;
 
     /**
      * Constructor sets sprite's variable values.
@@ -52,6 +54,8 @@ public class Player extends Sprite {
         setImg(AssetManager.rosette);
         setRectangle(coordinateX, coordinateY, width, height);
         setSpeedX(75);
+        boostSpeed = getSpeedX() * 2;
+        boost = false;
         setSpeedY(5);
         currentFrame = getImg();
         createWalkAnimation();
@@ -82,30 +86,50 @@ public class Player extends Sprite {
             }
         }
 
-        walking = false;
+        if (isAlive()) {
 
-        if (GameContainer.input.keyPressed("A") &&
-                !collidesWith(leftBorder.getRectangle())) {
-            setX(getX() - (getSpeedX() * (float) delta));
-            walking = true;
-            flip = true;
-        }
+            if (GameContainer.input.keyPressed("W")) {
+                boost = true;
+            } else {
+                boost = false;
+            }
 
-        if (GameContainer.input.keyPressed("D") &&
-                !collidesWith(rightBorder.getRectangle())) {
-            setX(getX() + (getSpeedX() * (float) delta));
-            walking = true;
-            flip = false;
-        }
+            walking = false;
+            if (GameContainer.input.keyPressed("A") &&
+                    !collidesWith(leftBorder.getRectangle())) {
+                if (boost) {
+                    setX(getX() - (boostSpeed * (float) delta));
+                } else {
+                    setX(getX() - (getSpeedX() * (float) delta));
+                }
 
-        if (GameContainer.input.keyTyped("SPACE")) {
-            jumped = true;
-        }
+                walking = true;
+                flip = true;
+            }
 
-        if (walking) {
-            updateAnimations(delta);
+            if (GameContainer.input.keyPressed("D") &&
+                    !collidesWith(rightBorder.getRectangle())) {
+                if (boost) {
+                    setX(getX() + (boostSpeed * (float) delta));
+                } else {
+                    setX(getX() + (getSpeedX() * (float) delta));
+                }
+
+                walking = true;
+                flip = false;
+            }
+
+            if (GameContainer.input.keyTyped("SPACE")) {
+                jumped = true;
+            }
+
+            if (walking) {
+                updateAnimations(delta);
+            } else {
+                currentFrame = getImg();
+            }
         } else {
-            currentFrame = getImg();
+            currentFrame = AssetManager.rosetteDead;
         }
     }
 

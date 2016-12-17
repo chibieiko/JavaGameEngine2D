@@ -15,9 +15,14 @@ import java.io.IOException;
  */
 public class Audio {
 
-    Clip clip;
+    private Clip clip;
     private boolean playing;
 
+    /**
+     * Supports only .wav file types.
+     *
+     * @param pathToWavFile
+     */
     public Audio(String pathToWavFile) {
         try {
             AudioInputStream audioIn = AudioSystem.getAudioInputStream(

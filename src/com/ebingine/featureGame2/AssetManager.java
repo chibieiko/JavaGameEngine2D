@@ -22,9 +22,23 @@ public class AssetManager {
     public static BufferedImage rosette;
 
     /**
-     * Holds image for bullet.
+     * Holds walking frames for player.
      */
     public static BufferedImage rosetteWalk;
+
+    /**
+     *
+     */
+    public static BufferedImage rosetteDead;
+
+    /**
+     *
+     */
+    public static BufferedImage monster;
+
+    public static BufferedImage explosion;
+
+    public static BufferedImage bullet;
 
     /**
      * Loads the images from assets file.
@@ -32,11 +46,23 @@ public class AssetManager {
     public AssetManager() {
         try {
             rosette = ImageIO.read(new File
-                    ("src/com/ebingine/featureGame2/assets/Rosette_Stand_R"
-                            + ".png"));
+                    ("src/com/ebingine/featureGame2/assets/"
+                            + "Rosette_Stand_R.png"));
             rosetteWalk = ImageIO.read(new File
-                    ("src/com/ebingine/featureGame2/assets/RosetteWalkAnim"
+                    ("src/com/ebingine/featureGame2/assets/"
+                            + "RosetteWalkAnim.png"));
+            rosetteDead = ImageIO.read(new File
+                    ("src/com/ebingine/featureGame2/assets/"
+                            + "RosetteDead.png"));
+            monster = ImageIO.read(new File
+                    ("src/com/ebingine/featureGame2/assets/whiteWalkR"
                             + ".png"));
+            explosion = ImageIO.read(new File
+                    ("src/com/ebingine/featureGame2/assets/"
+                            + "explosionFull.png"));
+            explosion = ImageIO.read(new File
+                    ("src/com/ebingine/featureGame2/assets/"
+                            + "bullet.png"));
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -18,6 +18,7 @@ import java.awt.*;
  */
 public class GameScreen2 extends Game {
     private Player player;
+    private Monster monster;
     private TiledMap tiled;
     private Text text;
 
@@ -45,16 +46,28 @@ public class GameScreen2 extends Game {
                     AssetManager.rosette.getWidth(null),
                     AssetManager.rosette.getHeight(null));
         player.setTiled(tiled);
-        new Trees(tiled);
+
+        monster = new Monster(tiled.getObject("monster").getX(),
+                tiled.getObject("monster").getY(),
+                AssetManager.monster.getWidth() / 4,
+                AssetManager.monster.getHeight());
+        monster.setTiled(tiled);
     }
 
     @Override
     public void update(GameContainer gc, double deltaTime) {
+        monster.move(deltaTime);
         player.move(deltaTime);
         player.jump();
 
         if (GameContainer.input.mouseClicked()) {
             System.out.println("SHOOOOT!");
+        }
+
+        if (player.collidesWith(monster.getRectangle())) {
+            player.setAlive(false);
+        } else {
+            player.setAlive(true);
         }
 
         if (player.collidesWith(tiled.getObject("door").getRectangle())) {
