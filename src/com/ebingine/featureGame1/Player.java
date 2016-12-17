@@ -36,20 +36,32 @@ public class Player extends Sprite {
 
     @Override
     public void move(double delta) {
-        if (GameContainer.input.keyPressed("W")) {
+
+        if (GameContainer.input.keyPressed("W") &&
+                getY() > 0) {
             setY(getY() - (getSpeedY() * (float) delta));
+            System.out.println("X: " + getX());
+            System.out.println("y: " + getY());
         }
 
-        if (GameContainer.input.keyPressed("S")) {
+        if (GameContainer.input.keyPressed("S") &&
+                getY() < GameContainer.height - getHeight()) {
             setY(getY() + (getSpeedY() * (float) delta));
+            System.out.println("X: " + getX());
+            System.out.println("y: " + getY());
         }
 
-        if (GameContainer.input.keyPressed("A")) {
+        if (GameContainer.input.keyPressed("A") && getX() > 0) {
             setX(getX() - (getSpeedX() * (float) delta));
+            System.out.println("X: " + getX());
+            System.out.println("y: " + getY());
         }
 
-        if (GameContainer.input.keyPressed("D")) {
+        if (GameContainer.input.keyPressed("D") &&
+                getX() < GameContainer.width - getWidth()) {
             setX(getX() + (getSpeedX() * (float) delta));
+            System.out.println("X: " + getX());
+            System.out.println("y: " + getY());
         }
     }
 

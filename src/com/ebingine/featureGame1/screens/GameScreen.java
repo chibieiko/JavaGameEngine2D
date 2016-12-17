@@ -81,13 +81,13 @@ public class GameScreen extends Game {
         }
 
         // LEFT
-        if (gc.getCamera().getX() < gc.getCamera().getViewportSizeX() / 2) {
-            gc.getCamera().setX(gc.getCamera().getViewportSizeX() / 2);
+        if (gc.getCamera().getX() < 0) {
+            gc.getCamera().setX(0);
         }
 
         // UP
-        if (gc.getCamera().getY() < gc.getCamera().getViewportSizeY() / 2) {
-            gc.getCamera().setY(gc.getCamera().getViewportSizeY() / 2);
+        if (gc.getCamera().getY() < 0) {
+            gc.getCamera().setY(0);
         }
     }
 }
