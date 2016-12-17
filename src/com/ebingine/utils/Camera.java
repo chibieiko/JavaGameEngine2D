@@ -58,7 +58,6 @@ public class Camera {
     public void setPosition(int x, int y) {
         setX(x);
         setY(y);
-        rectangle.setRect(x, y, rectangle.getWidth(), rectangle.getHeight());
     }
 
     public int getViewportSizeX() {
@@ -87,19 +86,22 @@ public class Camera {
 
     public void setX(int x) {
         this.x = x;
-        rectangle.setRect(x, y, rectangle.getWidth(), rectangle.getHeight());
+
+        rectangle.setRect(x - viewportSizeX / 4,
+                y - viewportSizeY / 4,
+                rectangle.getWidth() + viewportSizeX / 2,
+                rectangle.getHeight
+                        ());
     }
 
     public void setY(int y) {
         this.y = y;
-        rectangle.setRect(x, y, rectangle.getWidth(), rectangle.getHeight());
+        rectangle.setRect(x -viewportSizeX / 4, y - viewportSizeY / 4,
+                rectangle.getWidth(),
+                rectangle.getHeight() + viewportSizeY / 2);
     }
 
     public Rectangle2D.Float getRectangle() {
         return rectangle;
-    }
-
-    public void setRectangle(Rectangle2D.Float rectangle) {
-        this.rectangle = rectangle;
     }
 }

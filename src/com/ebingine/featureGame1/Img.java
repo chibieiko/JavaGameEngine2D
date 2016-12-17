@@ -1,5 +1,6 @@
 package com.ebingine.featureGame1;
 
+import com.ebingine.GameContainer;
 import com.ebingine.gameObjects.GameObject;
 import com.ebingine.utils.Drawable;
 
@@ -15,25 +16,26 @@ import java.awt.image.BufferedImage;
  * @version 2016.1122
  * @since 1.7
  */
-public class Img extends GameObject implements Drawable {
+public class Img implements Drawable {
+
+    private int x;
+    private int y;
+    private int width;
+    private int height;
+    private BufferedImage image;
 
     public Img(BufferedImage image, int x, int y, int width,
                int height) {
-        super.setImg(image);
-        super.setX(x);
-        super.setY(y);
-        super.setWidth(width);
-        super.setHeight(height);
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
+        this.image = image;
+        GameContainer.drawables.add(this);
     }
 
     @Override
     public void draw(Graphics2D g2d) {
-        g2d.drawImage(getImg(), (int) getX(), (int) getY(), getWidth(),
-                getHeight(), null);
-    }
-
-    @Override
-    public void move(double delta) {
-
+        g2d.drawImage(image, x, y, width, height, null);
     }
 }

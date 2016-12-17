@@ -1,6 +1,7 @@
 package com.ebingine.GUI;
 
 import com.ebingine.GameContainer;
+import com.ebingine.gameObjects.GameObject;
 import com.ebingine.utils.Drawable;
 import com.ebingine.utils.Utils;
 
@@ -99,23 +100,24 @@ public class Panel extends JPanel {
         Graphics2D g2d = (Graphics2D) g;
         // Updates panel view to match camera view.
         g2d.translate(-gc.getCamera().getX(), -gc.getCamera().getY());
-
-        // todo siirrä jonneki järkevään paikkaan ja lisää fontti drawables
-     //   Font font = GameContainer.utils.createFont(
-     //   ("src/com/ebingine/featureGame1/assets" +
-       //         "/font_1_honokamin.ttf"));
-       // g2d.setFont(font);
-
         // Smoothes the borders of drawables.
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
                 RenderingHints.VALUE_ANTIALIAS_ON);
 
         synchronized (GameContainer.drawables) {
             for (Drawable d : GameContainer.drawables) {
-                d.draw(g2d);
+                if (d instanceof GameObject) {
+                    // Draws only those game objects that are on camera. They
+                    // are on camera if their x and y are inside the camera
+                    // rectangle.
+                    if (gc.getCamera().getRectangle().contains(
+                            ((GameObject) d).getX(), ((GameObject) d).getY())) {
+                        d.draw(g2d);
+                    }
+                } else {
+                    d.draw(g2d);
+                }
             }
-
-        //    g2d.drawString("私の名前はエリカです", gc.getWidth()/2, gc.getHeight()/2);
         }
     }
 
