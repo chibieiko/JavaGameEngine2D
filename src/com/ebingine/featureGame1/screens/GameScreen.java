@@ -52,9 +52,9 @@ public class GameScreen extends Game {
                             - gc.getCamera().getViewportSizeY() / 2);
         }
 
-        if (player2.canMove())
+        if (player2.canMove()) {
             player2.moveP2(deltaTime);
-
+        }
     }
 
     @Override

@@ -40,45 +40,40 @@ public class Player extends Sprite {
         if (GameContainer.input.keyPressed("W") &&
                 getY() > 0) {
             setY(getY() - (getSpeedY() * (float) delta));
-            System.out.println("X: " + getX());
-            System.out.println("y: " + getY());
         }
 
         if (GameContainer.input.keyPressed("S") &&
                 getY() < GameContainer.height - getHeight()) {
             setY(getY() + (getSpeedY() * (float) delta));
-            System.out.println("X: " + getX());
-            System.out.println("y: " + getY());
         }
 
         if (GameContainer.input.keyPressed("A") && getX() > 0) {
             setX(getX() - (getSpeedX() * (float) delta));
-            System.out.println("X: " + getX());
-            System.out.println("y: " + getY());
         }
 
         if (GameContainer.input.keyPressed("D") &&
                 getX() < GameContainer.width - getWidth()) {
             setX(getX() + (getSpeedX() * (float) delta));
-            System.out.println("X: " + getX());
-            System.out.println("y: " + getY());
         }
     }
 
     public void moveP2(double delta) {
-        if (GameContainer.input.keyPressed("UP")) {
+        if (GameContainer.input.keyPressed("UP") &&
+                getY() > 0) {
             setY(getY() - (getSpeedY() * (float) delta));
         }
 
-        if (GameContainer.input.keyPressed("DOWN")) {
+        if (GameContainer.input.keyPressed("DOWN") &&
+                getY() < GameContainer.height - getHeight()) {
             setY(getY() + (getSpeedY() * (float) delta));
         }
 
-        if (GameContainer.input.keyPressed("LEFT")) {
+        if (GameContainer.input.keyPressed("LEFT") && getX() > 0) {
             setX(getX() - (getSpeedX() * (float) delta));
         }
 
-        if (GameContainer.input.keyPressed("RIGHT")) {
+        if (GameContainer.input.keyPressed("RIGHT") &&
+                getX() < GameContainer.width - getWidth()) {
             setX(getX() + (getSpeedX() * (float) delta));
         }
     }

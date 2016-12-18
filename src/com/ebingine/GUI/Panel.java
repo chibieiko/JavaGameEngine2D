@@ -7,6 +7,7 @@ import com.ebingine.utils.Utils;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 
 /**
@@ -88,6 +89,13 @@ public class Panel extends JPanel {
         return test;
     }
 
+    private int x;
+    private int y;
+    private int width;
+    private int height;
+    private GameObject o;
+    private Rectangle2D.Float cam;
+
     /**
      * Paints images to drawing area and updates it.
      *
@@ -107,11 +115,19 @@ public class Panel extends JPanel {
         synchronized (GameContainer.drawables) {
             for (Drawable d : GameContainer.drawables) {
                 if (d instanceof GameObject) {
+                    o = (GameObject) d;
+                    x = (int) o.getX();
+                    y = (int) o.getY();
+                    width = o.getWidth();
+                    height = o.getHeight();
+                    cam = gc.getCamera().getRectangle();
+
                     // Draws only those game objects that are on camera. They
-                    // are on camera if their x and y are inside the camera
-                    // rectangle.
-                    if (gc.getCamera().getRectangle().contains(
-                            ((GameObject) d).getX(), ((GameObject) d).getY())) {
+                    // are on camera if any of their corners are inside the
+                    // camera rectangle.
+                    if (cam.contains(x, y) || cam.contains(x + width, y) ||
+                            cam.contains(x, y + height) ||
+                            cam.contains(x + width, y + height)) {
                         d.draw(g2d);
                     }
                 } else {
