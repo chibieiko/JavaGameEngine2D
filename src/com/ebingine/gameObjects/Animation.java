@@ -13,13 +13,12 @@ import java.awt.image.BufferedImage;
  */
 public class Animation {
 
-    BufferedImage keyFrame;
-    BufferedImage[] frames;
-    double time;
-    double timeLimiter = 0;
-    double frameCount = 0;
-    int currentFrame = 0;
-    boolean stopped;
+    private BufferedImage[] frames;
+    private double time;
+    private double timeLimiter = 0;
+    private double frameCount = 0;
+    private int currentFrame = 0;
+    private boolean stopped;
 
     public Animation(double time, BufferedImage[] frames) {
         if (time <= 0) {
@@ -32,8 +31,9 @@ public class Animation {
     }
 
     public void start() {
-        if (!stopped)
+        if (!stopped) {
             return;
+        }
 
         stopped = false;
     }

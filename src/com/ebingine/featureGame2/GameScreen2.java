@@ -80,6 +80,6 @@ public class GameScreen2 extends Game {
 
     @Override
     public void clear(GameContainer gc) {
-
+        AssetManager.dispose();
     }
 }

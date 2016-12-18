@@ -150,6 +150,7 @@ public class TiledMap implements Drawable {
         for (int i = 0; i < tilesets.size(); i++) {
             for (int j = 0; j < tilesets.get(i).getTileImages().size(); j++) {
                 images.add(tilesets.get(i).getTileImages().get(j));
+                tilesets.get(i).getTileImages().get(j).flush();
             }
         }
     }
@@ -212,7 +213,8 @@ public class TiledMap implements Drawable {
     public TiledObject getObject(String name) {
         TiledObject toReturn = null;
         for (int i = 0; i < objectLayers.size(); i++) {
-            for (int j = 0; j < objectLayers.get(i).getTiledObjects().size(); j++) {
+            for (int j = 0; j < objectLayers.get(i).getTiledObjects().size();
+                 j++) {
                 if (objectLayers.get(i).getTiledObjects().get(j).getName().
                         equals(name)) {
                     toReturn = objectLayers.get(i).getTiledObjects().get(j);

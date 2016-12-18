@@ -2,7 +2,6 @@ package com.ebingine.featureGame1.screens;
 
 import com.ebingine.Game;
 import com.ebingine.GameContainer;
-import com.ebingine.Render;
 import com.ebingine.featureGame1.*;
 
 /**

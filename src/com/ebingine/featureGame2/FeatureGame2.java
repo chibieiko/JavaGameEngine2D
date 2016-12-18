@@ -16,8 +16,6 @@ import com.ebingine.utils.Input;
 public class FeatureGame2 {
 
     GameScreen gameScreen;
-    public int height;
-    public int width;
 
     public FeatureGame2() {
         gameScreen = new GameScreen();
@@ -31,8 +29,6 @@ public class FeatureGame2 {
         // Scales down the game window if game size cannot fit to device screen.
         gc.getCamera().tieToScreenMaxBounds();
         gc.start();
-        height = gc.getHeight();
-        width = gc.getWidth();
 
         String[] keyArray = {"SPACE", "A", "D", "control S", "T", "G", "B",
                 "W"};

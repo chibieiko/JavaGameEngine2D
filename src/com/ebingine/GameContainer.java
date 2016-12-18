@@ -179,7 +179,6 @@ public class GameContainer implements Runnable {
     // screen.
     public void setGame(Game game) {
         stop();
-        this.game.clear(this);
         this.game = game;
         run();
     }

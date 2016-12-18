@@ -28,8 +28,8 @@ public class Camera {
         viewportSizeX = 800;
         viewportSizeY = 600;
         tieToScreenMaxBounds();
-        x = viewportSizeX / 2;
-        y = viewportSizeY / 2;
+        x = 0;
+        y = 0;
         rectangle = new Rectangle2D.Float(x, y, viewportSizeX,
                 viewportSizeY);
     }

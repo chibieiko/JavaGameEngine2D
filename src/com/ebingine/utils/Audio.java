@@ -24,9 +24,8 @@ public class Audio {
      * @param pathToWavFile
      */
     public Audio(String pathToWavFile) {
-        try {
-            AudioInputStream audioIn = AudioSystem.getAudioInputStream(
-                    new File(pathToWavFile).getAbsoluteFile());
+        try (AudioInputStream audioIn = AudioSystem.getAudioInputStream(
+                new File(pathToWavFile).getAbsoluteFile())) {
             clip = AudioSystem.getClip();
             clip.open(audioIn);
             playing = false;
@@ -67,5 +66,9 @@ public class Audio {
 
     public boolean isPlaying() {
         return playing;
+    }
+
+    public void dispose() {
+        clip.flush();
     }
 }

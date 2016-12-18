@@ -45,9 +45,8 @@ public class Tileset {
     }
 
     private void loadImages(String path) {
-        try {
-            File file = new File(path + source);
-            FileInputStream fis = new FileInputStream(file);
+        File file = new File(path + source);
+        try (FileInputStream fis = new FileInputStream(file)){
             sourceImage = ImageIO.read(fis);
         } catch (IOException e) {
             e.printStackTrace();
@@ -63,19 +62,16 @@ public class Tileset {
                 for (int j = 0; j < cols; j++) {
                     tileImages.add(sourceImage.getSubimage(chunkWidth * j,
                             chunkHeight * i, chunkWidth, chunkHeight));
-                   /* tileImages.add(new BufferedImage(chunkWidth, chunkHeight,
-                            sourceImage.getType())); */
                 }
             }
+
+            // No need to keep the source image in memory anymore.
+            sourceImage.flush();
         }
     }
 
-    public ArrayList<BufferedImage> getTileImages() {
+    ArrayList<BufferedImage> getTileImages() {
         return tileImages;
-    }
-
-    public BufferedImage getSourceImage() {
-        return sourceImage;
     }
 
     public int getFirstGid() {

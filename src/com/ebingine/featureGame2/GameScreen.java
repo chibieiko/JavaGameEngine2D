@@ -23,7 +23,6 @@ public class GameScreen extends Game {
     private Player player;
     public TiledMap tiled;
     private Text text;
-    private Audio backgroundMusic;
 
     public GameScreen(TiledMap tiled) {
         this.tiled = tiled;
@@ -40,15 +39,15 @@ public class GameScreen extends Game {
         Object object = null;
         boolean exists = true;
         try {
-             object = loadSave("src/com/ebingine/featureGame2/assets/player");
+            object = loadSave("src/com/ebingine/featureGame2/assets/player");
         } catch (FileNotFoundException e) {
             exists = false;
             System.out.println("save not found");
         }
 
         text = new Text("ようこそこのゲームへ",
-                gc.getWidth()/2 - tiled.getTileWidth() * 4,
-                gc.getHeight()/3);
+                gc.getWidth() / 2 - tiled.getTileWidth() * 4,
+                gc.getHeight() / 3);
         text.setColor(Color.WHITE, gc);
         text.setTTFFont("src/com/ebingine/featureGame1/assets"
                 + "/font_1_honokamin.ttf");
@@ -69,9 +68,7 @@ public class GameScreen extends Game {
         player.setTiled(tiled);
         new Trees(tiled);
 
-        backgroundMusic = new Audio(
-                "src/com/ebingine/featureGame2/assets/Pinecones.wav");
-        backgroundMusic.playIndefinitely();
+        AssetManager.backgroundMusic.playIndefinitely();
     }
 
     @Override
@@ -110,6 +107,6 @@ public class GameScreen extends Game {
 
     @Override
     public void clear(GameContainer gc) {
-
+        AssetManager.dispose();
     }
 }

@@ -21,7 +21,6 @@ import java.util.Map;
 public class Input implements ActionListener, MouseListener,
         MouseMotionListener {
 
-    private GameContainer gameContainer;
     private final String PRESSED = "pressed ";
     private final String RELEASED = "released ";
     boolean pressed1 = false;
@@ -51,8 +50,6 @@ public class Input implements ActionListener, MouseListener,
     private boolean mouseMoved = false;
 
     public Input(GameContainer gameContainer, int delay) {
-        this.gameContainer = gameContainer;
-
         inputMap = gameContainer.getWindow().getPanel().
                 getInputMap(JPanel.WHEN_IN_FOCUSED_WINDOW);
         actionMap = gameContainer.getWindow().getPanel().getActionMap();

@@ -1,9 +1,12 @@
 package com.ebingine.featureGame2;
 
+import com.ebingine.utils.Audio;
+
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 
 /**
  * TODO Short Description
@@ -40,6 +43,8 @@ public class AssetManager {
 
     public static BufferedImage bullet;
 
+    public static Audio backgroundMusic;
+
     /**
      * Loads the images from assets file.
      */
@@ -60,11 +65,23 @@ public class AssetManager {
             explosion = ImageIO.read(new File
                     ("src/com/ebingine/featureGame2/assets/"
                             + "explosionFull.png"));
-            explosion = ImageIO.read(new File
+            bullet = ImageIO.read(new File
                     ("src/com/ebingine/featureGame2/assets/"
                             + "bullet.png"));
-        } catch (Exception e) {
+            backgroundMusic = new Audio(
+                    "src/com/ebingine/featureGame2/assets/Pinecones.wav");
+        } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void dispose() {
+        rosette.flush();
+        rosetteWalk.flush();
+        rosetteDead.flush();
+        monster.flush();
+        explosion.flush();
+        bullet.flush();
+        backgroundMusic.dispose();
     }
 }
