@@ -6,6 +6,7 @@ import com.ebingine.gameObjects.Sprite;
 import com.ebingine.tiled.ObjectLayer;
 import com.ebingine.tiled.TiledMap;
 import com.ebingine.tiled.TiledObject;
+import com.ebingine.utils.Texture;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -29,7 +30,7 @@ public class Monster extends Sprite {
     private transient TiledObject rightBorder;
     private transient ObjectLayer platforms;
     private transient Animation walk;
-    private transient BufferedImage currentFrame;
+    private transient Texture currentFrame;
     private boolean flip = true;
 
     /**
@@ -51,11 +52,12 @@ public class Monster extends Sprite {
     @Override
     public void draw(Graphics2D g2d) {
         if (flip) {
-            g2d.drawImage(currentFrame, (int) getX() + getWidth(), (int) getY(),
+            g2d.drawImage(currentFrame.getImage(), (int) getX() + getWidth(),
+                    (int) getY(),
                     -getWidth(),
                     getHeight(), null);
         } else {
-            g2d.drawImage(currentFrame, (int) getX(), (int) getY(),
+            g2d.drawImage(currentFrame.getImage(), (int) getX(), (int) getY(),
                     getWidth(),
                     getHeight(), null);
         }
@@ -84,8 +86,8 @@ public class Monster extends Sprite {
     }
 
     public void createWalkAnimation() {
-        BufferedImage[] images = GameContainer.utils.splitImage(AssetManager
-                .monster, 4, 1);
+        Texture[] images = GameContainer.utils.splitImage(
+                AssetManager.monster.getImage(), 4, 1);
         walk = new Animation(10d / 60d, images);
         walk.start();
         currentFrame = walk.getKeyFrame();

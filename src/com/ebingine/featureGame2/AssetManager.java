@@ -1,6 +1,7 @@
 package com.ebingine.featureGame2;
 
 import com.ebingine.utils.Audio;
+import com.ebingine.utils.Texture;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -22,26 +23,26 @@ public class AssetManager {
     /**
      * Holds image for Player.
      */
-    public static BufferedImage rosette;
+    public static Texture rosette;
 
     /**
      * Holds walking frames for player.
      */
-    public static BufferedImage rosetteWalk;
+    public static Texture rosetteWalk;
 
     /**
      *
      */
-    public static BufferedImage rosetteDead;
+    public static Texture rosetteDead;
 
     /**
      *
      */
-    public static BufferedImage monster;
+    public static Texture monster;
 
-    public static BufferedImage explosion;
+    public static Texture explosion;
 
-    public static BufferedImage bullet;
+    public static Texture bullet;
 
     public static Audio backgroundMusic;
 
@@ -49,39 +50,29 @@ public class AssetManager {
      * Loads the images from assets file.
      */
     public AssetManager() {
-        try {
-            rosette = ImageIO.read(new File
-                    ("src/com/ebingine/featureGame2/assets/"
-                            + "Rosette_Stand_R.png"));
-            rosetteWalk = ImageIO.read(new File
-                    ("src/com/ebingine/featureGame2/assets/"
-                            + "RosetteWalkAnim.png"));
-            rosetteDead = ImageIO.read(new File
-                    ("src/com/ebingine/featureGame2/assets/"
-                            + "RosetteDead.png"));
-            monster = ImageIO.read(new File
-                    ("src/com/ebingine/featureGame2/assets/whiteWalkR"
-                            + ".png"));
-            explosion = ImageIO.read(new File
-                    ("src/com/ebingine/featureGame2/assets/"
-                            + "explosionFull.png"));
-            bullet = ImageIO.read(new File
-                    ("src/com/ebingine/featureGame2/assets/"
-                            + "bullet.png"));
-            backgroundMusic = new Audio(
-                    "src/com/ebingine/featureGame2/assets/Pinecones.wav");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        rosette = new Texture("src/com/ebingine/featureGame2/assets/"
+                + "Rosette_Stand_R.png");
+        rosetteWalk = new Texture("src/com/ebingine/featureGame2/assets/"
+                + "RosetteWalkAnim.png");
+        rosetteDead = new Texture("src/com/ebingine/featureGame2/assets/"
+                + "RosetteDead.png");
+        monster = new Texture("src/com/ebingine/featureGame2/assets/whiteWalkR"
+                + ".png");
+        explosion = new Texture("src/com/ebingine/featureGame2/assets/"
+                + "explosionFull.png");
+        bullet = new Texture("src/com/ebingine/featureGame2/assets/"
+                + "bullet.png");
+        backgroundMusic = new Audio(
+                "src/com/ebingine/featureGame2/assets/Pinecones.wav");
     }
 
     public static void dispose() {
-        rosette.flush();
-        rosetteWalk.flush();
-        rosetteDead.flush();
-        monster.flush();
-        explosion.flush();
-        bullet.flush();
+        rosette.dispose();
+        rosetteWalk.dispose();
+        rosetteDead.dispose();
+        monster.dispose();
+        explosion.dispose();
+        bullet.dispose();
         backgroundMusic.dispose();
     }
 }

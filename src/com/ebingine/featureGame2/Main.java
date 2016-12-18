@@ -11,7 +11,7 @@ package com.ebingine.featureGame2;
  */
 public class Main {
     public static void main(String[] args) {
-        AssetManager assets = new AssetManager();
-        FeatureGame2 game = new FeatureGame2();
+        new AssetManager();
+        new FeatureGame2();
     }
 }

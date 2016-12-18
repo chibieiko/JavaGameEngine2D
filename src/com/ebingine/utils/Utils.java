@@ -15,7 +15,6 @@ import java.io.IOException;
  * @since 1.7
  */
 public class Utils {
-    public Utils() {}
 
     public Font createFont(String filePath) {
         Font readyFont = null;
@@ -33,15 +32,15 @@ public class Utils {
     }
 
     // Helper method splits image to chunks.
-    public BufferedImage[] splitImage(BufferedImage image, int cols, int rows) {
+    public Texture[] splitImage(BufferedImage image, int cols, int rows) {
         // Determines the image chunk's width and height.
         int chunkWidth = image.getWidth() / cols;
         int chunkHeight = image.getHeight() / rows;
-        BufferedImage[] images = new BufferedImage[cols * rows];
+        Texture[] images = new Texture[cols * rows];
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
-                images[j + i] = image.getSubimage(chunkWidth * j,
-                        chunkHeight * i, chunkWidth, chunkHeight);
+                images[j + i] = new Texture(image.getSubimage(chunkWidth * j,
+                        chunkHeight * i, chunkWidth, chunkHeight));
             }
         }
 

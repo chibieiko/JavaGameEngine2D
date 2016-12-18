@@ -3,8 +3,8 @@ package com.ebingine.gameObjects;
 
 import com.ebingine.GameContainer;
 import com.ebingine.utils.Drawable;
+import com.ebingine.utils.Texture;
 
-import java.awt.*;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
@@ -34,7 +34,7 @@ public abstract class GameObject implements Drawable, Serializable {
     /**
      * Contains the image of the sprite.
      */
-    private transient BufferedImage img;
+    private transient Texture texture;
     private float x;
     private float y;
 
@@ -56,12 +56,12 @@ public abstract class GameObject implements Drawable, Serializable {
         this.ellipse = new Ellipse2D.Float(x, y, width, height);
     }
 
-    public BufferedImage getImg() {
-        return img;
+    public Texture getTexture() {
+        return texture;
     }
 
-    public void setImg(BufferedImage img) {
-        this.img = img;
+    public void setTexture(Texture texture) {
+        this.texture = texture;
     }
 
     public Rectangle2D.Float getRectangle() {

@@ -2,7 +2,6 @@ package com.ebingine.featureGame1;
 
 import com.ebingine.GameContainer;
 import com.ebingine.gameObjects.Sprite;
-import com.ebingine.utils.Input;
 
 import java.awt.*;
 
@@ -27,7 +26,7 @@ public class Player extends Sprite {
      */
     public Player(int coordinateX, int coordinateY, int width, int height) {
         super(coordinateX, coordinateY, width, height);
-        setImg(AssetManager.player);
+        setTexture(AssetManager.player);
         setSpeedY(300);
         setSpeedX(300);
         setEllipse((int) getX(), (int) getY(), getWidth(),
@@ -80,7 +79,7 @@ public class Player extends Sprite {
 
     @Override
     public void draw(Graphics2D g2d) {
-        g2d.drawImage(getImg(), (int) getX(), (int) getY(), getWidth(),
-                getHeight(), null);
+        g2d.drawImage(getTexture().getImage(), (int) getX(), (int) getY(),
+                getWidth(), getHeight(), null);
     }
 }

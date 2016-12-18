@@ -43,8 +43,8 @@ public class GameScreen2 extends Game {
 
         player = new Player(tiled.getObject("door-closed").getX(),
                     tiled.getObject("door-closed").getY(),
-                    AssetManager.rosette.getWidth(null),
-                    AssetManager.rosette.getHeight(null));
+                    AssetManager.rosette.getWidth(),
+                    AssetManager.rosette.getHeight());
         player.setTiled(tiled);
 
         monster = new Monster(tiled.getObject("monster").getX(),

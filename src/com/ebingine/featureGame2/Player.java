@@ -6,8 +6,7 @@ import com.ebingine.gameObjects.Sprite;
 import com.ebingine.tiled.ObjectLayer;
 import com.ebingine.tiled.TiledMap;
 import com.ebingine.tiled.TiledObject;
-import com.ebingine.utils.Input;
-import com.ebingine.utils.Utils;
+import com.ebingine.utils.Texture;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -35,7 +34,7 @@ public class Player extends Sprite {
     private transient ObjectLayer platforms;
     private transient Animation walk;
     private transient double statetime = 0;
-    private transient BufferedImage currentFrame;
+    private transient Texture currentFrame;
     private boolean walking = false;
     private boolean flip = false;
     private float boostSpeed;
@@ -51,24 +50,25 @@ public class Player extends Sprite {
      */
     public Player(int coordinateX, int coordinateY, int width, int height) {
         super(coordinateX, coordinateY, width, height);
-        setImg(AssetManager.rosette);
+        setTexture(AssetManager.rosette);
         setRectangle(coordinateX, coordinateY, width, height);
         setSpeedX(75);
         boostSpeed = getSpeedX() * 2;
         boost = false;
         setSpeedY(5);
-        currentFrame = getImg();
+        currentFrame = getTexture();
         createWalkAnimation();
     }
 
     @Override
     public void draw(Graphics2D g2d) {
         if (flip) {
-            g2d.drawImage(currentFrame, (int) getX() + getWidth(), (int) getY(),
+            g2d.drawImage(currentFrame.getImage(), (int) getX() + getWidth(),
+                    (int) getY(),
                     -getWidth(),
                     getHeight(), null);
         } else {
-            g2d.drawImage(currentFrame, (int) getX(), (int) getY(),
+            g2d.drawImage(currentFrame.getImage(), (int) getX(), (int) getY(),
                     getWidth(),
                     getHeight(), null);
         }
@@ -126,7 +126,7 @@ public class Player extends Sprite {
             if (walking) {
                 updateAnimations(delta);
             } else {
-                currentFrame = getImg();
+                currentFrame = getTexture();
             }
         } else {
             currentFrame = AssetManager.rosetteDead;
@@ -134,15 +134,15 @@ public class Player extends Sprite {
     }
 
     public void createWalkAnimation() {
-        BufferedImage[] images = GameContainer.utils.splitImage(AssetManager
-                .rosetteWalk, 4, 1);
+        Texture[] images = GameContainer.utils.splitImage(
+                AssetManager.rosetteWalk.getImage(), 4, 1);
         walk = new Animation(10d / 60d, images);
         walk.start();
     }
 
     public void updateAnimations(double delta) {
         walk.update(delta);
-        currentFrame = walk.getKeyFrame();
+        currentFrame.setImage(walk.getKeyFrame().getImage());
     }
 
     public void jump() {

@@ -1,8 +1,7 @@
-package com.ebingine.featureGame1.screens;
+package com.ebingine.featureGame1;
 
 import com.ebingine.Game;
 import com.ebingine.GameContainer;
-import com.ebingine.featureGame1.*;
 
 /**
  * TODO Short Description
@@ -14,24 +13,24 @@ import com.ebingine.featureGame1.*;
  * @since 1.7
  */
 public class GameScreen extends Game {
-    Img background;
-    Player player;
-    Player player2;
-    GameContainer gc;
+    private Player player;
+    private Player player2;
+    private GameContainer gc;
 
-    public GameScreen() {
-    }
+    public GameScreen() {}
 
     @Override
     public void create(GameContainer gc) {
         this.gc = gc;
-        Utils utils = new Utils();
-        background = new Img(AssetManager.background, 0, 0, gc.getWidth(), gc
-                .getHeight());
+        addKeys();
+
+        AssetManager.background.setSize(gc.getWidth(), gc.getHeight());
+        AssetManager.background.addToRender();
+
         player = new Player(gc.getWidth() / 2,
                 gc.getHeight() / 2, 100, 100);
-        updateCamera((int) player.getX(), (int) player.getY
-                ());
+        updateCamera((int) player.getX(), (int) player.getY());
+
         player2 = new Player(gc.getWidth() / 2 + player.getWidth(),
                 gc.getHeight() / 2 + player.getHeight(), 100, 100);
     }
@@ -59,7 +58,7 @@ public class GameScreen extends Game {
 
     @Override
     public void clear(GameContainer gc) {
-
+        AssetManager.dispose();
     }
 
     public void updateCamera(int x, int y) {
@@ -88,5 +87,11 @@ public class GameScreen extends Game {
         if (gc.getCamera().getY() < 0) {
             gc.getCamera().setY(0);
         }
+    }
+
+    public void addKeys() {
+        String[] keyArray = {"SPACE", "W", "A", "S", "D", "RIGHT", "LEFT",
+                "UP", "DOWN", "control E", "R"};
+        GameContainer.input.addInputKey(keyArray);
     }
 }

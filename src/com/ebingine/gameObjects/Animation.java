@@ -1,6 +1,6 @@
 package com.ebingine.gameObjects;
 
-import java.awt.image.BufferedImage;
+import com.ebingine.utils.Texture;
 
 /**
  * TODO Short Description
@@ -13,14 +13,14 @@ import java.awt.image.BufferedImage;
  */
 public class Animation {
 
-    private BufferedImage[] frames;
+    private Texture[] frames;
     private double time;
     private double timeLimiter = 0;
     private double frameCount = 0;
     private int currentFrame = 0;
     private boolean stopped;
 
-    public Animation(double time, BufferedImage[] frames) {
+    public Animation(double time, Texture[] frames) {
         if (time <= 0) {
             throw new RuntimeException("Invalid time: " + time);
         }
@@ -48,7 +48,7 @@ public class Animation {
         currentFrame = 0;
     }
 
-    public BufferedImage getKeyFrame() {
+    public Texture getKeyFrame() {
         return frames[currentFrame];
     }
 

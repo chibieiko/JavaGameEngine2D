@@ -1,5 +1,7 @@
 package com.ebingine.featureGame1;
 
+import com.ebingine.utils.Texture;
+
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -19,38 +21,41 @@ public class AssetManager {
     /**
      * Holds image for Player.
      */
-    public static BufferedImage player;
+    public static Texture player;
 
     /**
      * Holds image for monster.
      */
-    public static BufferedImage monster;
+    public static Texture monster;
 
     /**
-     * Holds image for Img.
+     * Holds image for background.
      */
-    public static BufferedImage background;
+    public static Texture background;
 
     /**
      * Holds image for bullet.
      */
-    public static BufferedImage bullet;
+    public static Texture bullet;
 
     /**
      * Constructor loads the images from assets file.
      */
     public AssetManager() {
-        try {
-            player = ImageIO.read(new File
-                    ("src/com/ebingine/featureGame1/assets/mog.png"));
-            monster = ImageIO.read(new File
-                    ("src/com/ebingine/featureGame1/assets/enemy.png"));
-            background = ImageIO.read(new File
-                    ("src/com/ebingine/featureGame1/assets/Background.png"));
-            bullet = ImageIO.read(new File
-                    ("src/com/ebingine/featureGame1/assets/bullet.png"));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        player = new Texture
+                ("src/com/ebingine/featureGame1/assets/mog.png");
+        monster = new Texture
+                ("src/com/ebingine/featureGame1/assets/enemy.png");
+        background = new Texture
+                ("src/com/ebingine/featureGame1/assets/Background.png");
+        bullet = new Texture
+                ("src/com/ebingine/featureGame1/assets/bullet.png");
+    }
+
+    public static void dispose() {
+        player.dispose();
+        monster.dispose();
+        background.dispose();
+        bullet.dispose();
     }
 }

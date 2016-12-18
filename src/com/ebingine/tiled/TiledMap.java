@@ -94,19 +94,21 @@ public class TiledMap implements Drawable {
 
             if (layerNodes.item(i).getNodeType() == Node.ELEMENT_NODE) {
                 Element e = (Element) layerNodes.item(i);
-                Element data = (Element) e.getElementsByTagName("tiles").item(0);
+                Element data = (Element) e.getElementsByTagName("tiles").
+                        item(0);
                 if (e.getElementsByTagName("tiles").item(0) == null) {
                     data = (Element) e.getElementsByTagName("data").item(0);
                 }
 
-                String[] values = data.getTextContent().split("(,[\\s\\r]+)|([\\s\\r]+)|(,)");
+                String[] values = data.getTextContent().split
+                        ("(,[\\s\\r]+)|([\\s\\r]+)|(,)");
 
 
                 for (int j = 0; j < values.length - 1; j++) {
                     // Saves only tiles with an image.
                     if (!values[j+1].equals("0")) {
-                        layerData.add(new Tile(Integer.parseInt(values[j + 1]) - 1,
-                                coordinateX, coordinateY));
+                        layerData.add(new Tile(Integer.parseInt(values[j + 1])
+                                - 1, coordinateX, coordinateY));
                     }
 
                     mapIndex++;

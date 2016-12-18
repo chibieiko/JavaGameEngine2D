@@ -89,13 +89,6 @@ public class Panel extends JPanel {
         return test;
     }
 
-    private int x;
-    private int y;
-    private int width;
-    private int height;
-    private GameObject o;
-    private Rectangle2D.Float cam;
-
     /**
      * Paints images to drawing area and updates it.
      *
@@ -115,12 +108,12 @@ public class Panel extends JPanel {
         synchronized (GameContainer.drawables) {
             for (Drawable d : GameContainer.drawables) {
                 if (d instanceof GameObject) {
-                    o = (GameObject) d;
-                    x = (int) o.getX();
-                    y = (int) o.getY();
-                    width = o.getWidth();
-                    height = o.getHeight();
-                    cam = gc.getCamera().getRectangle();
+                    GameObject o = (GameObject) d;
+                    int x = (int) o.getX();
+                    int y = (int) o.getY();
+                    int width = o.getWidth();
+                    int height = o.getHeight();
+                    Rectangle2D.Float cam = gc.getCamera().getRectangle();
 
                     // Draws only those game objects that are on camera. They
                     // are on camera if any of their corners are inside the

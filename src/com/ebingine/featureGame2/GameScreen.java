@@ -4,7 +4,6 @@ import com.ebingine.Game;
 import com.ebingine.GameContainer;
 import com.ebingine.gameObjects.Text;
 import com.ebingine.tiled.TiledMap;
-import com.ebingine.utils.Audio;
 
 import java.awt.*;
 import java.io.FileNotFoundException;
@@ -61,8 +60,8 @@ public class GameScreen extends Game {
             player = new Player(tiled.getTileWidth(),
                     tiled.getMapHeight() * tiled.getTileHeight()
                             - tiled.getTileHeight() * 3,
-                    AssetManager.rosette.getWidth(null),
-                    AssetManager.rosette.getHeight(null));
+                    AssetManager.rosette.getWidth(),
+                    AssetManager.rosette.getHeight());
         }
 
         player.setTiled(tiled);
