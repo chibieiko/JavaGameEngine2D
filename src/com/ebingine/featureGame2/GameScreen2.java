@@ -1,8 +1,8 @@
 package com.ebingine.featureGame2;
 
-import com.ebingine.Game;
+import com.ebingine.Screen;
 import com.ebingine.GameContainer;
-import com.ebingine.gameObjects.Text;
+import com.ebingine.resources.Text;
 import com.ebingine.tiled.TiledMap;
 
 import java.awt.*;
@@ -16,7 +16,7 @@ import java.awt.*;
  * @version 2016.1211
  * @since 1.7
  */
-public class GameScreen2 extends Game {
+public class GameScreen2 extends Screen {
     private Player player;
     private Monster monster;
     private TiledMap tiled;
@@ -74,7 +74,7 @@ public class GameScreen2 extends Game {
             gc.clearRender();
             GameScreen gs = new GameScreen();
             gs.create(gc);
-            gc.setGame(gs);
+            gc.setScreen(gs);
         }
     }
 

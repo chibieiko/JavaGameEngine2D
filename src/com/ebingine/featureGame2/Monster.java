@@ -1,15 +1,14 @@
 package com.ebingine.featureGame2;
 
 import com.ebingine.GameContainer;
-import com.ebingine.gameObjects.Animation;
+import com.ebingine.resources.Animation;
 import com.ebingine.gameObjects.Sprite;
 import com.ebingine.tiled.ObjectLayer;
 import com.ebingine.tiled.TiledMap;
 import com.ebingine.tiled.TiledObject;
-import com.ebingine.utils.Texture;
+import com.ebingine.resources.Texture;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
 
 /**
  * TODO Short Description

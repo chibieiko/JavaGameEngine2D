@@ -1,4 +1,4 @@
-package com.ebingine.gameObjects;
+package com.ebingine.resources;
 
 import com.ebingine.GameContainer;
 import com.ebingine.utils.Drawable;

@@ -1,6 +1,5 @@
 package com.ebingine;
 
-import javax.swing.*;
 import java.io.*;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
@@ -14,7 +13,7 @@ import java.nio.file.Files;
  * @version 2016.1030
  * @since 1.7
  */
-public abstract class Game {
+public abstract class Screen {
 
     public abstract void create(GameContainer gc);
 

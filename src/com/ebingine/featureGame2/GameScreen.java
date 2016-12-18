@@ -1,8 +1,8 @@
 package com.ebingine.featureGame2;
 
-import com.ebingine.Game;
+import com.ebingine.Screen;
 import com.ebingine.GameContainer;
-import com.ebingine.gameObjects.Text;
+import com.ebingine.resources.Text;
 import com.ebingine.tiled.TiledMap;
 
 import java.awt.*;
@@ -17,7 +17,7 @@ import java.io.FileNotFoundException;
  * @version 2016.1204
  * @since 1.7
  */
-public class GameScreen extends Game {
+public class GameScreen extends Screen {
 
     private Player player;
     public TiledMap tiled;
@@ -100,7 +100,7 @@ public class GameScreen extends Game {
             gc.clearRender();
             GameScreen2 gameScreen2 = new GameScreen2();
             gameScreen2.create(gc);
-            gc.setGame(gameScreen2);
+            gc.setScreen(gameScreen2);
         }
     }
 

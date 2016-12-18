@@ -1,6 +1,7 @@
-package com.ebingine.utils;
+package com.ebingine.resources;
 
 import com.ebingine.GameContainer;
+import com.ebingine.utils.Drawable;
 
 import javax.imageio.ImageIO;
 import java.awt.*;

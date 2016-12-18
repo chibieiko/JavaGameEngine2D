@@ -1,4 +1,4 @@
-package com.ebingine.utils;
+package com.ebingine.resources;
 
 import javax.sound.sampled.*;
 import java.io.File;

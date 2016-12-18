@@ -1,6 +1,6 @@
 package com.ebingine.featureGame1;
 
-import com.ebingine.Game;
+import com.ebingine.Screen;
 import com.ebingine.GameContainer;
 
 /**
@@ -12,7 +12,7 @@ import com.ebingine.GameContainer;
  * @version 2016.1116
  * @since 1.7
  */
-public class GameScreen extends Game {
+public class GameScreen extends Screen {
     private Player player;
     private Player player2;
     private GameContainer gc;

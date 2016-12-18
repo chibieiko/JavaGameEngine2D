@@ -13,13 +13,10 @@ import com.ebingine.GameContainer;
  */
 public class FeatureGame1 {
 
-    GameScreen gameScreen;
-
     public FeatureGame1() {
-        gameScreen = new GameScreen();
-        GameContainer gc = new GameContainer(gameScreen);
-        gc.getCamera().setViewportSizeX(800);
-        gc.getCamera().setViewportSizeY(600);
+        GameContainer gc = new GameContainer(new GameScreen());
+        gc.getCamera().setViewportSizeX(3000);
+        gc.getCamera().setViewportSizeY(2000);
         // Scales down the game window if game size cannot fit to device screen.
         gc.getCamera().tieToScreenMaxBounds();
         gc.start();

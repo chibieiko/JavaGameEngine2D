@@ -1,6 +1,6 @@
-package com.ebingine.gameObjects;
+package com.ebingine.resources;
 
-import com.ebingine.utils.Texture;
+import com.ebingine.resources.Texture;
 
 /**
  * TODO Short Description

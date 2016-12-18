@@ -1,5 +1,7 @@
 package com.ebingine.utils;
 
+import com.ebingine.resources.Texture;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;

@@ -3,11 +3,10 @@ package com.ebingine.gameObjects;
 
 import com.ebingine.GameContainer;
 import com.ebingine.utils.Drawable;
-import com.ebingine.utils.Texture;
+import com.ebingine.resources.Texture;
 
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Rectangle2D;
-import java.awt.image.BufferedImage;
 import java.io.Serializable;
 
 /**
