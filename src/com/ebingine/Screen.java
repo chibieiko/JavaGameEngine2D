@@ -5,24 +5,48 @@ import java.nio.charset.Charset;
 import java.nio.file.Files;
 
 /**
- * TODO Short Description
+ * Provides methods for handling a game screen.
  * <p>
- * TODO description and @since
+ * All abstract methods are called by the GameContainer class. Class also
+ * provides save and load methods. Game maker can save whole objects or choose
+ * some values to save as text.
  *
  * @author Erika Sankari
- * @version 2016.1030
+ * @version 2016.1219
  * @since 1.7
  */
 public abstract class Screen {
 
+    /**
+     * Creates the contents of the game screen.
+     *
+     * @param gc a game container
+     */
     public abstract void create(GameContainer gc);
 
-    // To update game state.
+    /**
+     * Updates game state.
+     *
+     * @param gc a game container
+     * @param deltaTime a fixed time step
+     */
     public abstract void update(GameContainer gc, double deltaTime);
 
+    /**
+     * Clears game screen.
+     * <p>
+     * Called by the GameContainer class when the game is excited.
+     *
+     * @param gc a game container
+     */
     public abstract void clear(GameContainer gc);
 
-    // Saves objects as binary data.
+    /**
+     * Saves objects as binary data.
+     *
+     * @param path a path where to save the file
+     * @param object the object intended to save
+     */
     public void saveGame(String path, Object object) {
         File file = new File(path + ".dat");
         System.out.println(file);
@@ -35,7 +59,13 @@ public abstract class Screen {
         }
     }
 
-    // Loads binary data into an object.
+    /**
+     * Loads binary data into an object.
+     *
+     * @param path a path where to retrieve a save file from
+     * @return object including save file information
+     * @throws FileNotFoundException when the file is not valid
+     */
     public Object loadSave(String path) throws FileNotFoundException {
         File file = new File(path + ".dat");
         Object toReturn;
@@ -51,7 +81,12 @@ public abstract class Screen {
         return toReturn;
     }
 
-    // Saves string key value pairs to a text file.
+    /**
+     * Saves string key - value pairs to a text file.
+     *
+     * @param values the values intended to save
+     * @param path a path where to save the file
+     */
     public void saveInfo(String[] values, String path) {
         File file = new File(path + ".txt");
         Charset charset = Charset.defaultCharset();
@@ -67,6 +102,12 @@ public abstract class Screen {
         }
     }
 
+    /**
+     * Returns string key - value pairs.
+     *
+     * @param path a path where to retrieve a save file from
+     * @return key - value pairs as a String array
+     */
     public String[] loadInfo(String path) {
         File file = new File(path + ".txt");
         String[] values;
