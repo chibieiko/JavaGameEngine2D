@@ -86,7 +86,6 @@ public class Camera {
 
     public void setX(int x) {
         this.x = x;
-
         rectangle.setRect(x - viewportSizeX / 4,
                 y - viewportSizeY / 4,
                 rectangle.getWidth() + viewportSizeX / 2,

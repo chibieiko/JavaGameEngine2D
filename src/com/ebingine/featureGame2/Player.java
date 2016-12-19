@@ -9,6 +9,7 @@ import com.ebingine.tiled.TiledObject;
 import com.ebingine.resources.Texture;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 /**
  * TODO Short Description
@@ -38,6 +39,7 @@ public class Player extends Sprite {
     private boolean flip = false;
     private float boostSpeed;
     private boolean boost;
+    private ArrayList<Bullet> bullets = new ArrayList<>();
 
     /**
      * Constructor sets sprite's variable values.
@@ -57,6 +59,7 @@ public class Player extends Sprite {
         setSpeedY(5);
         currentFrame = getTexture();
         createWalkAnimation();
+        addDrawable();
     }
 
     @Override
@@ -70,6 +73,12 @@ public class Player extends Sprite {
             g2d.drawImage(currentFrame.getImage(), (int) getX(), (int) getY(),
                     getWidth(),
                     getHeight(), null);
+        }
+
+        if (bullets.size() > 0) {
+            for (Bullet bullet : bullets) {
+                bullet.draw(g2d);
+            }
         }
     }
 
@@ -86,7 +95,6 @@ public class Player extends Sprite {
         }
 
         if (isAlive()) {
-
             if (GameContainer.input.keyPressed("W")) {
                 boost = true;
             } else {
@@ -127,14 +135,25 @@ public class Player extends Sprite {
             } else {
                 currentFrame = getTexture();
             }
+
         } else {
             currentFrame = AssetManager.rosetteDead;
+        }
+
+        if (bullets.size() > 0) {
+            for (int i = bullets.size() - 1; i >= 0; i--) {
+                if (!bullets.get(i).isAlive()) {
+                    bullets.remove(bullets.get(i));
+                }
+            }
         }
     }
 
     public void createWalkAnimation() {
         Texture[] images = GameContainer.utils.splitImage(
                 AssetManager.rosetteWalk.getImage(), 4, 1);
+
+
         walk = new Animation(10d / 60d, images);
         walk.start();
     }
@@ -175,5 +194,35 @@ public class Player extends Sprite {
         }
 
         return platformCollision;
+    }
+
+    public void shoot() {
+        bullets.add(new Bullet((int) (getX()), (int) (getY()),
+                tiled.getTileWidth(),
+                tiled.getTileHeight(),
+                flip));
+    }
+
+    public void updateBullet(double delta, Monster monster) {
+        for (Bullet bullet : bullets) {
+            if (!checkBulletCollision(bullet, monster) && bullet.isAlive()) {
+                bullet.move(delta);
+            } else {
+                bullet.setCollision(true);
+                bullet.updateAnimations(delta);
+            }
+        }
+    }
+
+    public boolean checkBulletCollision(Bullet bullet, Monster monster) {
+        boolean collision = false;
+        if (bullet.collidesWith(leftBorder.getRectangle()) ||
+                bullet.collidesWith(rightBorder.getRectangle()) ||
+                bullet.collidesWith(monster.getRectangle())) {
+            collision = true;
+            bullet.playExplodeSound();
+        }
+
+        return collision;
     }
 }

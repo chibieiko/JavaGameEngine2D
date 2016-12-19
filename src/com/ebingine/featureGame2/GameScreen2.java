@@ -38,7 +38,7 @@ public class GameScreen2 extends Screen {
                 gc.getWidth()/2 - tiled.getTileWidth() * 4,
                 gc.getHeight()/3);
         text.setColor(Color.RED, gc);
-        text.setTTFFont("src/com/ebingine/featureGame1/assets" +
+        text.setTTFFont("src/com/ebingine/featureGame2/assets" +
                 "/font_1_honokamin.ttf");
 
         player = new Player(tiled.getObject("door-closed").getX(),
@@ -61,7 +61,7 @@ public class GameScreen2 extends Screen {
         player.jump();
 
         if (GameContainer.input.mouseClicked()) {
-            System.out.println("SHOOOOT!");
+            player.shoot();
         }
 
         if (player.collidesWith(monster.getRectangle())) {
@@ -69,6 +69,8 @@ public class GameScreen2 extends Screen {
         } else {
             player.setAlive(true);
         }
+
+        player.updateBullet(deltaTime, monster);
 
         if (player.collidesWith(tiled.getObject("door").getRectangle())) {
             gc.clearRender();

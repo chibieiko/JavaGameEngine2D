@@ -16,7 +16,7 @@ import java.io.IOException;
 public class Audio {
 
     private Clip clip;
-    private boolean playing;
+    private String path;
 
     /**
      * Supports only .wav file types.
@@ -24,11 +24,15 @@ public class Audio {
      * @param pathToWavFile
      */
     public Audio(String pathToWavFile) {
+        path = pathToWavFile;
+        makeClip();
+    }
+
+    private void makeClip() {
         try (AudioInputStream audioIn = AudioSystem.getAudioInputStream(
-                new File(pathToWavFile).getAbsoluteFile())) {
+                new File(path).getAbsoluteFile())) {
             clip = AudioSystem.getClip();
             clip.open(audioIn);
-            playing = false;
         } catch (UnsupportedAudioFileException | IOException
                 | LineUnavailableException e) {
             e.printStackTrace();
@@ -36,36 +40,28 @@ public class Audio {
     }
 
     public void play() {
-        if (!playing) {
+        clip.start();
+        System.out.println(clip.isRunning());
+        if (!clip.isRunning()) {
+            clip.setMicrosecondPosition(0);
             clip.start();
         }
-
-        playing = true;
     }
 
     public void playIndefinitely() {
-        if (!playing) {
+        if (!clip.isRunning()) {
             clip.loop(clip.LOOP_CONTINUOUSLY);
-        }
-
-        playing = true;
-    }
-
-    public void playWithLoopCount(int loopcount) {
-        if (!playing) {
-            clip.loop(loopcount);
         }
     }
 
     public void stop() {
-        if (playing) {
-            playing = false;
+        if (clip.isRunning()) {
             clip.stop();
         }
     }
 
     public boolean isPlaying() {
-        return playing;
+        return clip.isRunning();
     }
 
     public void dispose() {

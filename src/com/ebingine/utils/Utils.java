@@ -41,7 +41,8 @@ public class Utils {
         Texture[] images = new Texture[cols * rows];
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
-                images[j + i] = new Texture(image.getSubimage(chunkWidth * j,
+                images[cols * i + j] = new Texture(image.getSubimage(chunkWidth
+                                * j,
                         chunkHeight * i, chunkWidth, chunkHeight));
             }
         }

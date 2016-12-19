@@ -46,6 +46,7 @@ public class Monster extends Sprite {
         setSpeedX(75);
         setSpeedY(5);
         createWalkAnimation();
+        addDrawable();
     }
 
     @Override

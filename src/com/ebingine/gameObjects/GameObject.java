@@ -36,12 +36,12 @@ public abstract class GameObject implements Drawable, Serializable {
     private transient Texture texture;
     private float x;
     private float y;
-
     private Rectangle2D.Float rectangle;
-
     private Ellipse2D.Float ellipse;
 
-    public GameObject() {
+    public GameObject() {}
+
+    public void addDrawable() {
         synchronized (GameContainer.drawables) {
             GameContainer.drawables.add(this);
         }

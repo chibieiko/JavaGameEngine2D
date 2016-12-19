@@ -48,7 +48,7 @@ public class GameScreen extends Screen {
                 gc.getWidth() / 2 - tiled.getTileWidth() * 4,
                 gc.getHeight() / 3);
         text.setColor(Color.WHITE, gc);
-        text.setTTFFont("src/com/ebingine/featureGame1/assets"
+        text.setTTFFont("src/com/ebingine/featureGame2/assets"
                 + "/font_1_honokamin.ttf");
 
         if (object != null && exists) {

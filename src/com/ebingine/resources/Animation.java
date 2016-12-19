@@ -1,7 +1,5 @@
 package com.ebingine.resources;
 
-import com.ebingine.resources.Texture;
-
 /**
  * TODO Short Description
  * <p>
@@ -15,10 +13,12 @@ public class Animation {
 
     private Texture[] frames;
     private double time;
-    private double timeLimiter = 0;
-    private double frameCount = 0;
-    private int currentFrame = 0;
+    private double timeLimiter;
+    private double frameCount;
+    private int currentFrame;
     private boolean stopped;
+    private int totalFrames;
+    private boolean loopFull;
 
     public Animation(double time, Texture[] frames) {
         if (time <= 0) {
@@ -27,7 +27,12 @@ public class Animation {
 
         this.time = time;
         this.frames = frames;
+        timeLimiter = 0;
+        frameCount = 0;
+        currentFrame = 0;
         stopped = true;
+        totalFrames = 0;
+        loopFull = false;
     }
 
     public void start() {
@@ -64,7 +69,19 @@ public class Animation {
 
                 timeLimiter += stateTime;
                 frameCount = 0;
+                // Enables access to the info whether animation loop has
+                // looped once.
+                if (!loopFull) {
+                    totalFrames++;
+                    if (totalFrames == frames.length) {
+                        loopFull = true;
+                    }
+                }
             }
         }
+    }
+
+    public boolean isLoopFull() {
+        return loopFull;
     }
 }

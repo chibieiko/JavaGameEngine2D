@@ -31,6 +31,7 @@ public class Player extends Sprite {
         setSpeedX(300);
         setEllipse((int) getX(), (int) getY(), getWidth(),
                 getHeight());
+        addDrawable();
     }
 
     @Override
