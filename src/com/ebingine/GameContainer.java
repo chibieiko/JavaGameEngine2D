@@ -9,43 +9,99 @@ import com.ebingine.utils.Utils;
 import java.util.ArrayList;
 
 /**
- * TODO Short Description
+ * Holds the game loop.
  * <p>
- * TODO description and @since
+ * Creates necessary classes for the game loop and loops the game.
  *
  * @author Erika Sankari
- * @version 2016.1025
+ * @version 2016.1219
  * @since 1.7
  */
 public class GameContainer implements Runnable {
 
-    public static int width = 4000;
-    public static int height = 3000;
+    /**
+     * Holds the width of the game world.
+     */
+    public static int width;
 
+    /**
+     * Holds the height of the game world.
+     */
+    public static int height;
+
+    /**
+     * Name and version of the game engine.
+     */
     private String title = "Ebingine v0.0.1";
+
+    /**
+     * Helps to loop the game.
+     */
     private Thread thread;
+
+    /**
+     * The active game screen.
+     */
     private Screen screen;
+
+    /**
+     * The window that displays the game.
+     */
     private Window window;
+
+    /**
+     * Holds the input logic.
+     */
     public static Input input;
+
+    /**
+     * Contains few helpful methods.
+     */
     public static Utils utils;
+
+    /**
+     * Contains the things that will be drawn in the game.
+     */
     public static ArrayList<Drawable> drawables = new ArrayList<>();
+
+    /**
+     * Determines the size of the window, basically how much the player can
+     * see of the game world.
+     */
     private Camera camera;
-    // Indicates whether the screen loop is running or not.
+
+    /**
+     * Indicates whether the screen loop is running or not.
+     */
     private boolean running = false;
-    // Limits frame rate to 60fps.
+
+    /**
+     * Limits frame rate to fixed 60fps.
+     */
     private double deltaTime = 1.0 / 60.0;
 
+    /**
+     * Initializes the game container.
+     *
+     * @param screen currently active game screen
+     */
     public GameContainer(Screen screen) {
+        width = 2000;
+        height = 1500;
         this.screen = screen;
         camera = new Camera(this);
         // Draws images faster.
         System.setProperty("sun.java2d.opengl", "true");
     }
 
+    /**
+     * Initializes necessary classes and starts the game loop.
+     */
     public void start() {
         // If screen is running, doesn't start it again.
-        if (running)
+        if (running) {
             return;
+        }
 
         window = new Window(this);
         input = new Input(this, 0);
@@ -58,7 +114,9 @@ public class GameContainer implements Runnable {
         thread.start();
     }
 
-    // Runnable's run method;
+    /**
+     * Runs the game loop.
+     */
     @Override
     public void run() {
         running = true;
@@ -124,73 +182,135 @@ public class GameContainer implements Runnable {
         clear();
     }
 
+    /**
+     * Stops the game loop.
+     */
     public void stop() {
         // No need to stop if it's already stopped.
-        if (!running)
+        if (!running) {
             return;
+        }
 
-        // Stops the screen loop.
+        // Stops the screen's game loop.
         running = false;
     }
 
+    /**
+     * Clears window, screen and drawables array.
+     */
     public void clear() {
         window.clear();
         screen.clear(this);
         drawables.clear();
     }
 
-    public Input getInput() {
-        return input;
-    }
-
+    /**
+     * Returns game world's width.
+     *
+     * @return the width of the game world.
+     */
     public int getWidth() {
         return width;
     }
 
+    /**
+     * Sets game world's width.
+     *
+     * @param width the new width of the game world
+     */
     public void setWidth(int width) {
         this.width = width;
     }
 
+    /**
+     * Returns game world's height.
+     *
+     * @return the height of the game world
+     */
     public int getHeight() {
         return height;
     }
 
+    /**
+     * Sets game world's height.
+     *
+     * @param height the new height of the game world.
+     */
     public void setHeight(int height) {
         this.height = height;
     }
 
+    /**
+     * Returns game's title.
+     *
+     * @return the title of the game
+     */
     public String getTitle() {
         return title;
     }
 
+    /**
+     * Sets a new title for the game.
+     *
+     * @param title the new title for the game
+     */
     public void setTitle(String title) {
         this.title = title;
     }
 
+    /**
+     * Returns the game's window.
+     *
+     * @return the window of the game
+     */
     public Window getWindow() {
         return window;
     }
 
+    /**
+     * Returns the currently active game screen.
+     *
+     * @return the currently active game screen.
+     */
     public Screen getScreen() {
         return screen;
     }
 
-    // Stops one of screen's screens, changes to another screen and renders that
-    // screen.
+    /**
+     * Changes screens.
+     * <p>
+     * Stops the current game screen, changes to another screen and loops
+     * that screen.
+     *
+     * @param screen the screen to change to
+     */
     public void setScreen(Screen screen) {
         stop();
         this.screen = screen;
         run();
     }
 
+    /**
+     * Returns the game's camera.
+     *
+     * @return the game's camera
+     */
     public Camera getCamera() {
         return camera;
     }
 
+    /**
+     * Sets a new camera for the game.
+     *
+     * @param camera the new camera
+     */
     public void setCamera(Camera camera) {
         this.camera = camera;
     }
 
+    /**
+     * Clears the array of drawables.
+     */
     public void clearRender() {
         drawables.clear();
     }

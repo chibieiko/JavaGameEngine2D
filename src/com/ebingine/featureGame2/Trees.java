@@ -1,5 +1,6 @@
 package com.ebingine.featureGame2;
 
+import com.ebingine.GameContainer;
 import com.ebingine.gameObjects.GameObject;
 import com.ebingine.tiled.Layer;
 import com.ebingine.tiled.TiledMap;
@@ -26,6 +27,7 @@ public class Trees extends GameObject {
         this.tiled = tiled;
         trees = tiled.getLayer("trees");
         tileImages = tiled.getImages();
+        GameContainer.drawables.add(this);
     }
 
     @Override
