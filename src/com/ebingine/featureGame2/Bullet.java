@@ -37,7 +37,7 @@ public class Bullet extends Sprite {
                   boolean flip) {
         super(coordinateX, coordinateY, width, height);
         setRectangle(coordinateX, coordinateY, width, height);
-        setSpeedX(150);
+        setSpeedX(200);
         setTexture(AssetManager.bullet);
         explode = new Audio(
                 "src/com/ebingine/featureGame2/assets/explosionSound.wav");

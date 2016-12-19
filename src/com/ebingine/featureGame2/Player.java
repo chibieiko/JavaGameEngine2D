@@ -9,6 +9,7 @@ import com.ebingine.tiled.TiledObject;
 import com.ebingine.resources.Texture;
 
 import java.awt.*;
+import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 
 /**
@@ -152,8 +153,6 @@ public class Player extends Sprite {
     public void createWalkAnimation() {
         Texture[] images = GameContainer.utils.splitImage(
                 AssetManager.rosetteWalk.getImage(), 4, 1);
-
-
         walk = new Animation(10d / 60d, images);
         walk.start();
     }
@@ -205,8 +204,13 @@ public class Player extends Sprite {
 
     public void updateBullet(double delta, Monster monster) {
         for (Bullet bullet : bullets) {
-            if (!checkBulletCollision(bullet, monster) && bullet.isAlive()) {
+            if (!checkBulletCollision(bullet, monster) &&
+                    !checkBulletCollision(bullet) && bullet.isAlive()) {
                 bullet.move(delta);
+            } else if (checkBulletCollision(bullet, monster)){
+                bullet.setCollision(true);
+                monster.setAlive(false);
+                bullet.updateAnimations(delta);
             } else {
                 bullet.setCollision(true);
                 bullet.updateAnimations(delta);
@@ -214,11 +218,20 @@ public class Player extends Sprite {
         }
     }
 
-    public boolean checkBulletCollision(Bullet bullet, Monster monster) {
+    public boolean checkBulletCollision(Bullet bullet) {
         boolean collision = false;
         if (bullet.collidesWith(leftBorder.getRectangle()) ||
-                bullet.collidesWith(rightBorder.getRectangle()) ||
-                bullet.collidesWith(monster.getRectangle())) {
+                bullet.collidesWith(rightBorder.getRectangle())) {
+            collision = true;
+            bullet.playExplodeSound();
+        }
+
+        return collision;
+    }
+
+    public boolean checkBulletCollision(Bullet bullet, Monster monster) {
+        boolean collision = false;
+        if (bullet.collidesWith(monster.getRectangle())) {
             collision = true;
             bullet.playExplodeSound();
         }

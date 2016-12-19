@@ -51,38 +51,50 @@ public class Monster extends Sprite {
 
     @Override
     public void draw(Graphics2D g2d) {
-        if (flip) {
+        if (flip && isAlive()) {
             g2d.drawImage(currentFrame.getImage(), (int) getX() + getWidth(),
                     (int) getY(),
                     -getWidth(),
                     getHeight(), null);
-        } else {
+        } else if (flip && !isAlive()) {
+            g2d.drawImage(currentFrame.getImage(), (int) getX() + getWidth(),
+                    (int) getY() + getHeight(),
+                    -getWidth(),
+                    -getHeight(), null);
+        } else if (!flip && isAlive()) {
             g2d.drawImage(currentFrame.getImage(), (int) getX(), (int) getY(),
                     getWidth(),
                     getHeight(), null);
+        } else if (!flip && !isAlive()) {
+            g2d.drawImage(currentFrame.getImage(), (int) getX(),
+                    (int) getY() + getHeight(),
+                    getWidth(),
+                    -getHeight(), null);
         }
     }
 
     @Override
     public void move(double delta) {
-        if (collidesWith(ground.getRectangle()) || checkPlatforms()) {
-            fallDown = 0;
-            // Creates gravity.
-        } else {
-            setY(getY() + fallDown);
-            fallDown += gravity;
-        }
+        if (isAlive()) {
+            if (collidesWith(ground.getRectangle()) || checkPlatforms()) {
+                fallDown = 0;
+                // Creates gravity.
+            } else {
+                setY(getY() + fallDown);
+                fallDown += gravity;
+            }
 
-        if (collidesWith(leftBorder.getRectangle()) ||
-                collidesWith(rightBorder.getRectangle())) {
-            setSpeedX(-getSpeedX());
-            setX(getX() - (getSpeedX() * (float) delta));
-            flip = !flip;
-        } else {
-            setX(getX() - (getSpeedX() * (float) delta));
-        }
+            if (collidesWith(leftBorder.getRectangle()) ||
+                    collidesWith(rightBorder.getRectangle())) {
+                setSpeedX(-getSpeedX());
+                setX(getX() - (getSpeedX() * (float) delta));
+                flip = !flip;
+            } else {
+                setX(getX() - (getSpeedX() * (float) delta));
+            }
 
-        updateAnimations(delta);
+            updateAnimations(delta);
+        }
     }
 
     public void createWalkAnimation() {

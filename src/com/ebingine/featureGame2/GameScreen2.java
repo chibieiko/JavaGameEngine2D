@@ -21,6 +21,7 @@ public class GameScreen2 extends Screen {
     private Monster monster;
     private TiledMap tiled;
     private Text text;
+    private boolean screenOn;
 
     public GameScreen2(TiledMap tiled) {
         this.tiled = tiled;
@@ -30,6 +31,7 @@ public class GameScreen2 extends Screen {
         tiled = new TiledMap
                 ("src/com/ebingine/featureGame2/assets/testMap3.tmx",
                         "src/com/ebingine/featureGame2/assets/");
+        screenOn = false;
     }
 
     @Override
@@ -52,31 +54,35 @@ public class GameScreen2 extends Screen {
                 AssetManager.monster.getWidth() / 4,
                 AssetManager.monster.getHeight());
         monster.setTiled(tiled);
+        screenOn = true;
     }
 
     @Override
     public void update(GameContainer gc, double deltaTime) {
-        monster.move(deltaTime);
-        player.move(deltaTime);
-        player.jump();
+        if (screenOn) {
+            monster.move(deltaTime);
+            player.move(deltaTime);
+            player.jump();
 
-        if (GameContainer.input.mouseClicked()) {
-            player.shoot();
-        }
+            if (GameContainer.input.mouseClicked()) {
+                player.shoot();
+            }
 
-        if (player.collidesWith(monster.getRectangle())) {
-            player.setAlive(false);
-        } else {
-            player.setAlive(true);
-        }
+            if (player.collidesWith(monster.getRectangle())) {
+                player.setAlive(false);
+                monster.setAlive(true);
+            } else {
+                player.setAlive(true);
+            }
 
-        player.updateBullet(deltaTime, monster);
+            player.updateBullet(deltaTime, monster);
 
-        if (player.collidesWith(tiled.getObject("door").getRectangle())) {
-            gc.clearRender();
-            GameScreen gs = new GameScreen();
-            gs.create(gc);
-            gc.setScreen(gs);
+            if (player.collidesWith(tiled.getObject("door").getRectangle())) {
+                gc.clearRender();
+                GameScreen gs = new GameScreen();
+                gs.create(gc);
+                gc.setScreen(gs);
+            }
         }
     }
 
