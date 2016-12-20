@@ -104,8 +104,6 @@ public class GameScreen2 extends Screen {
             if (player.collidesWith(monster.getRectangle())) {
                 player.setAlive(false);
                 monster.setAlive(true);
-            } else {
-                player.setAlive(true);
             }
 
             player.updateBullet(deltaTime, monster);

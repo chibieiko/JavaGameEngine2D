@@ -132,8 +132,8 @@ public class TiledMap implements Drawable {
         mapHeight = Integer.parseInt(map.getAttribute("height"));
         tileWidth = Integer.parseInt(map.getAttribute("tilewidth"));
         tileHeight = Integer.parseInt(map.getAttribute("tileheight"));
-        pixelWidth = mapWidth * tileWidth;
-        pixelHeight = mapHeight * tileHeight;
+        pixelWidth = (int) Math.floor(mapWidth * tileWidth);
+        pixelHeight = (int) Math.floor(mapHeight * tileHeight);
 
         // Gets different tags and creates objects accordingly.
         layerNodes = doc.getElementsByTagName("layer");
@@ -353,10 +353,6 @@ public class TiledMap implements Drawable {
                         null);
             }
         }
-    }
-
-    public void scaleMap(float scale) {
-
     }
 
     /**

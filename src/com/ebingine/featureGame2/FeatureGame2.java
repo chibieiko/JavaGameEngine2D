@@ -19,10 +19,8 @@ public class FeatureGame2 {
     public FeatureGame2() {
         GameScreen gameScreen = new GameScreen();
         GameContainer gc = new GameContainer(gameScreen);
-        gc.setWidth((gameScreen.tiled.getMapWidth()
-                * gameScreen.tiled.getTileWidth()));
-        gc.setHeight(gameScreen.tiled.getMapHeight()
-                * gameScreen.tiled.getTileHeight());
+        gc.setWidth(gameScreen.tiled.getPixelWidth());
+        gc.setHeight(gameScreen.tiled.getPixelHeight());
         gc.getCamera().setViewportSizeX(gc.getWidth());
         gc.getCamera().setViewportSizeY(gc.getHeight());
         // Scales down the game window if game size cannot fit to device screen.
