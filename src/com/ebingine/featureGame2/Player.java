@@ -9,51 +9,115 @@ import com.ebingine.tiled.TiledObject;
 import com.ebingine.resources.Texture;
 
 import java.awt.*;
-import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 
 /**
- * TODO Short Description
- * <p>
- * TODO description and @since
+ * The player of the game.
  *
  * @author Erika Sankari
- * @version 2016.1204
+ * @version 2016.1220
  * @since 1.7
  */
 public class Player extends Sprite {
 
+    /**
+     * A tiled map.
+     */
     private transient TiledMap tiled;
-    private float gravity = 0.1f;
-    private float velocity = 5f;
-    private float currentVelocity = velocity;
-    private float fallDown = 0;
-    private boolean jumped = false;
+
+    /**
+     * Determines how strong the pull of gravity is.
+     */
+    private float gravity;
+
+    /**
+     * Determines jump velocity.
+     */
+    private float velocity;
+
+    /**
+     * Indicates current velocity.
+     */
+    private float currentVelocity;
+
+    /**
+     * Determines falling down speed.
+     */
+    private float fallDown;
+
+    /**
+     * Indicates whether the player has jumped and is still in jumping state.
+     */
+    private boolean jumped;
+
+    /**
+     * The ground of the tiled map.
+     */
     private transient TiledObject ground;
+
+    /**
+     * The left border of the tiled map.
+     */
     private transient TiledObject leftBorder;
+
+    /**
+     * The left border of the tiled map.
+     */
     private transient TiledObject rightBorder;
+
+    /**
+     * The platforms of the tiled map.
+     */
     private transient ObjectLayer platforms;
+
+    /**
+     * Animation for walking.
+     */
     private transient Animation walk;
-    private transient double statetime = 0;
+
+    /**
+     * The frame of the player to be drawn.
+     */
     private transient Texture currentFrame;
-    private boolean walking = false;
-    private boolean flip = false;
+
+    /**
+     * Indicates which way to draw the player.
+     */
+    private boolean flip;
+
+    /**
+     * Determines player's speed when boost is on.
+     */
     private float boostSpeed;
+
+    /**
+     * Indicates whether the boost is on(true) or not(false).
+     */
     private boolean boost;
+
+    /**
+     * Holds player's bullets.
+     */
     private ArrayList<Bullet> bullets = new ArrayList<>();
 
     /**
-     * Constructor sets sprite's variable values.
+     * Constructor sets and initiates player's variable values.
      *
-     * @param coordinateX int coordinate x
-     * @param coordinateY int coordinate y
-     * @param width       int width
-     * @param height      int height
+     * @param coordinateX coordinate x
+     * @param coordinateY coordinate y
+     * @param width width
+     * @param height height
      */
     public Player(int coordinateX, int coordinateY, int width, int height) {
         super(coordinateX, coordinateY, width, height);
         setTexture(AssetManager.rosette);
         setRectangle(coordinateX, coordinateY, width, height);
+        gravity = 0.1f;
+        velocity = 5f;
+        currentVelocity = velocity;
+        fallDown = 0;
+        jumped = false;
+        flip = false;
         setSpeedX(75);
         boostSpeed = getSpeedX() * 2;
         boost = false;
@@ -63,6 +127,11 @@ public class Player extends Sprite {
         addDrawable();
     }
 
+    /**
+     * Draws the player and bullets.
+     *
+     * @param g2d a graphics object for drawing
+     */
     @Override
     public void draw(Graphics2D g2d) {
         if (flip) {
@@ -83,6 +152,11 @@ public class Player extends Sprite {
         }
     }
 
+    /**
+     * Moves the player accordingly.
+     *
+     * @param delta game's delta time
+     */
     @Override
     public void move(double delta) {
         if (!jumped) {
@@ -102,7 +176,7 @@ public class Player extends Sprite {
                 boost = false;
             }
 
-            walking = false;
+            boolean walking = false;
             if (GameContainer.input.keyPressed("A") &&
                     !collidesWith(leftBorder.getRectangle())) {
                 if (boost) {
@@ -150,6 +224,9 @@ public class Player extends Sprite {
         }
     }
 
+    /**
+     * Creates player's walk animation.
+     */
     public void createWalkAnimation() {
         Texture[] images = GameContainer.utils.splitImage(
                 AssetManager.rosetteWalk.getImage(), 4, 1);
@@ -157,11 +234,19 @@ public class Player extends Sprite {
         walk.start();
     }
 
+    /**
+     * Updates animation state.
+     *
+     * @param delta game's delta time
+     */
     public void updateAnimations(double delta) {
         walk.update(delta);
         currentFrame.setImage(walk.getKeyFrame().getImage());
     }
 
+    /**
+     * Lifts player to the air when player jumps and brings her back down.
+     */
     public void jump() {
         if (jumped) {
             if (currentVelocity <= 0 && collidesWith(ground.getRectangle())
@@ -175,6 +260,11 @@ public class Player extends Sprite {
         }
     }
 
+    /**
+     * Initiates tiled map objects.
+     *
+     * @param tiled a tiled map
+     */
     public void setTiled(TiledMap tiled) {
         this.tiled = tiled;
         ground = tiled.getObject("border-bottom");
@@ -183,6 +273,11 @@ public class Player extends Sprite {
         platforms = tiled.getObjectLayer("platform-obj");
     }
 
+    /**
+     * Checks if player collides with a platform.
+     *
+     * @return true if collision, otherwise false
+     */
     public boolean checkPlatforms() {
         boolean platformCollision = false;
         for (int i = 0; i < platforms.getTiledObjects().size(); i++) {
@@ -195,6 +290,9 @@ public class Player extends Sprite {
         return platformCollision;
     }
 
+    /**
+     * Creates a new bullet when player shoots.
+     */
     public void shoot() {
         bullets.add(new Bullet((int) (getX()), (int) (getY()),
                 tiled.getTileWidth(),
@@ -202,6 +300,12 @@ public class Player extends Sprite {
                 flip));
     }
 
+    /**
+     * Updates bullet's state.
+     *
+     * @param delta game's delta time
+     * @param monster a monster in the game
+     */
     public void updateBullet(double delta, Monster monster) {
         for (Bullet bullet : bullets) {
             if (!checkBulletCollision(bullet, monster) &&
@@ -218,6 +322,12 @@ public class Player extends Sprite {
         }
     }
 
+    /**
+     * Checks if a bullet collides with right or left border.
+     *
+     * @param bullet player's bullet
+     * @return true if collides, otherwise false
+     */
     public boolean checkBulletCollision(Bullet bullet) {
         boolean collision = false;
         if (bullet.collidesWith(leftBorder.getRectangle()) ||
@@ -229,6 +339,13 @@ public class Player extends Sprite {
         return collision;
     }
 
+    /**
+     * Checks if bullet collides with a monster.
+     *
+     * @param bullet player's bullet
+     * @param monster game's monster
+     * @return true if collision, otherwise false
+     */
     public boolean checkBulletCollision(Bullet bullet, Monster monster) {
         boolean collision = false;
         if (bullet.collidesWith(monster.getRectangle())) {

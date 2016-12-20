@@ -10,19 +10,34 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 /**
- * TODO Short Description
- * <p>
- * TODO description and @since
+ * A tiled layer containing all the trees of the game.
  *
  * @author Erika Sankari
- * @version 2016.1210
+ * @version 2016.1220
  * @since 1.7
  */
 public class Trees extends GameObject {
-    TiledMap tiled;
-    Layer trees;
-    ArrayList<BufferedImage> tileImages;
 
+    /**
+     * A tiled map.
+     */
+    private TiledMap tiled;
+
+    /**
+     * The tiled map layer containing all the tree tiles.
+     */
+    private Layer trees;
+
+    /**
+     * All the tiles of the layer.
+     */
+    private ArrayList<BufferedImage> tileImages;
+
+    /**
+     * Creates an object of the trees layer.
+     *
+     * @param tiled a tiled map
+     */
     public Trees(TiledMap tiled) {
         this.tiled = tiled;
         trees = tiled.getLayer("trees");
@@ -30,11 +45,17 @@ public class Trees extends GameObject {
         GameContainer.drawables.add(this);
     }
 
+    /**
+     * No movement implemented.
+     */
     @Override
-    public void move(double delta) {
+    public void move(double delta) {}
 
-    }
-
+    /**
+     * Draws the tree tiles.
+     *
+     * @param g2d a graphics object for drawing
+     */
     @Override
     public void draw(Graphics2D g2d) {
         for (int i = 0; i < trees.getTiles().size(); i++) {

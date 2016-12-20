@@ -1,24 +1,23 @@
 package com.ebingine.featureGame2;
 
 import com.ebingine.GameContainer;
-import com.ebingine.tiled.TiledMap;
-import com.ebingine.utils.Input;
 
 /**
- * TODO Short Description
- * <p>
- * TODO description and @since
+ * Initializes the feature game 2.
  *
  * @author Erika Sankari
- * @version 2016.1204
+ * @version 2016.1220
  * @since 1.7
  */
 public class FeatureGame2 {
 
-    GameScreen gameScreen;
-
+    /**
+     * Creates the game screen and adds it to the game container.
+     * <p>
+     * Sets the available keys for the game.
+     */
     public FeatureGame2() {
-        gameScreen = new GameScreen();
+        GameScreen gameScreen = new GameScreen();
         GameContainer gc = new GameContainer(gameScreen);
         gc.setWidth(gameScreen.tiled.getMapWidth()
                 * gameScreen.tiled.getTileWidth());

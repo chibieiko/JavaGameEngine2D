@@ -15,33 +15,42 @@ import com.ebingine.resources.Texture;
 public class AssetManager {
 
     /**
-     * Holds image for Player.
+     * Holds texture of the player.
      */
     public static Texture rosette;
 
     /**
-     * Holds walking frames for player.
+     * Holds walking frames of player.
      */
     public static Texture rosetteWalk;
 
     /**
-     *
+     * Holds texture of a dead player.
      */
     public static Texture rosetteDead;
 
     /**
-     *
+     * Holds texture of the monster.
      */
     public static Texture monster;
 
+    /**
+     * Holds texture of an explosion.
+     */
     public static Texture explosion;
 
+    /**
+     * Holds texture of a bullet.
+     */
     public static Texture bullet;
 
+    /**
+     * Holds the audio of background music.
+     */
     public static Audio backgroundMusic;
 
     /**
-     * Loads the images from assets file.
+     * Loads the resources from file.
      */
     public AssetManager() {
         rosette = new Texture("src/com/ebingine/featureGame2/assets/"
@@ -60,6 +69,9 @@ public class AssetManager {
                 "src/com/ebingine/featureGame2/assets/Pinecones.wav");
     }
 
+    /**
+     * Disposes of all the resources.
+     */
     public static void dispose() {
         rosette.dispose();
         rosetteWalk.dispose();

@@ -8,25 +8,47 @@ import com.ebingine.tiled.TiledMap;
 import java.awt.*;
 
 /**
- * TODO Short Description
- * <p>
- * TODO description and @since
+ * Holds logic and the game loop for game screen 2.
  *
  * @author Erika Sankari
- * @version 2016.1211
+ * @version 2016.1220
  * @since 1.7
  */
 public class GameScreen2 extends Screen {
+
+    /**
+     * The player of the game.
+     */
     private Player player;
+
+    /**
+     * The game's monster.
+     */
     private Monster monster;
+
+    /**
+     * A tiled map for this screen.
+     */
     private TiledMap tiled;
-    private Text text;
+
+    /**
+     * Indicates whether this screen is on(true) or not(false).
+     */
     private boolean screenOn;
 
+    /**
+     * Initializes the game screen with a tiled map.
+     *
+     * @param tiled a tiled map
+     */
     public GameScreen2(TiledMap tiled) {
         this.tiled = tiled;
+        screenOn = true;
     }
 
+    /**
+     * Initializes the game screen and creates a tiled map.
+     */
     public GameScreen2() {
         tiled = new TiledMap
                 ("src/com/ebingine/featureGame2/assets/testMap3.tmx",
@@ -34,9 +56,14 @@ public class GameScreen2 extends Screen {
         screenOn = false;
     }
 
+    /**
+     * Creates all necessary components for the game screen.
+     *
+     * @param gc a game container
+     */
     @Override
     public void create(GameContainer gc) {
-        text = new Text("気おつけて帰ってください",
+        Text text = new Text("気おつけて帰ってください",
                 gc.getWidth()/2 - tiled.getTileWidth() * 4,
                 gc.getHeight()/3);
         text.setColor(Color.RED, gc);
@@ -57,6 +84,12 @@ public class GameScreen2 extends Screen {
         screenOn = true;
     }
 
+    /**
+     * Updates the game state.
+     *
+     * @param gc a game container
+     * @param deltaTime a fixed time step
+     */
     @Override
     public void update(GameContainer gc, double deltaTime) {
         if (screenOn) {
@@ -86,6 +119,11 @@ public class GameScreen2 extends Screen {
         }
     }
 
+    /**
+     * Disposes assets.
+     *
+     * @param gc a game container
+     */
     @Override
     public void clear(GameContainer gc) {
         AssetManager.dispose();

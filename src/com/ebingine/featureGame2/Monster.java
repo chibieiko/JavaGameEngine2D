@@ -11,44 +11,83 @@ import com.ebingine.resources.Texture;
 import java.awt.*;
 
 /**
- * TODO Short Description
- * <p>
- * TODO description and @since
+ * A monster that can kill the player.
  *
  * @author Erika Sankari
- * @version 2016.1215
+ * @version 2016.1220
  * @since 1.7
  */
 public class Monster extends Sprite {
 
-    private transient TiledMap tiled;
-    private float gravity = 0.1f;
-    private float fallDown = 0;
-    private transient TiledObject ground;
-    private transient TiledObject leftBorder;
-    private transient TiledObject rightBorder;
-    private transient ObjectLayer platforms;
-    private transient Animation walk;
-    private transient Texture currentFrame;
-    private boolean flip = true;
+    /**
+     * Determines how strong the pull of gravity is.
+     */
+    private float gravity;
 
     /**
-     * Constructor sets sprite's variable values.
+     * Determines falling down speed.
+     */
+    private float fallDown;
+
+    /**
+     * The ground of the tiled map.
+     */
+    private transient TiledObject ground;
+
+    /**
+     * The left border of the tiled map.
+     */
+    private transient TiledObject leftBorder;
+
+    /**
+     * The left border of the tiled map.
+     */
+    private transient TiledObject rightBorder;
+
+    /**
+     * The platforms of the tiled map.
+     */
+    private transient ObjectLayer platforms;
+
+    /**
+     * Animation for walking.
+     */
+    private transient Animation walk;
+
+    /**
+     * The frame of the monster to be drawn.
+     */
+    private transient Texture currentFrame;
+
+    /**
+     * Indicates which way to draw the monster.
+     */
+    private boolean flip;
+
+    /**
+     * Constructor sets monster's variable values.
      *
-     * @param coordinateX int coordinate x
-     * @param coordinateY int coordinate y
-     * @param width       int width
-     * @param height      int height
+     * @param coordinateX coordinate x
+     * @param coordinateY coordinate y
+     * @param width width
+     * @param height height
      */
     public Monster(int coordinateX, int coordinateY, int width, int height) {
         super(coordinateX, coordinateY, width, height);
         setRectangle(coordinateX, coordinateY, width, height);
         setSpeedX(75);
         setSpeedY(5);
+        gravity = 0.1f;
+        fallDown = 0;
         createWalkAnimation();
         addDrawable();
     }
 
+    /**
+     * Draws the monster depending on flip and isAlive() states.
+     *
+     * @param g2d a graphics object for drawing
+     */
     @Override
     public void draw(Graphics2D g2d) {
         if (flip && isAlive()) {
@@ -73,6 +112,11 @@ public class Monster extends Sprite {
         }
     }
 
+    /**
+     * Moves the monster accordingly.
+     *
+     * @param delta game's delta time
+     */
     @Override
     public void move(double delta) {
         if (isAlive()) {
@@ -97,7 +141,10 @@ public class Monster extends Sprite {
         }
     }
 
-    public void createWalkAnimation() {
+    /**
+     * Creates walking animation.
+     */
+    private void createWalkAnimation() {
         Texture[] images = GameContainer.utils.splitImage(
                 AssetManager.monster.getImage(), 4, 1);
         walk = new Animation(10d / 60d, images);
@@ -105,19 +152,33 @@ public class Monster extends Sprite {
         currentFrame = walk.getKeyFrame();
     }
 
+    /**
+     * Updates animation state.
+     *
+     * @param delta game's delta time
+     */
     public void updateAnimations(double delta) {
         walk.update(delta);
         currentFrame = walk.getKeyFrame();
     }
 
+    /**
+     * Initiates tiled map objects.
+     *
+     * @param tiled a tiled map
+     */
     public void setTiled(TiledMap tiled) {
-        this.tiled = tiled;
         ground = tiled.getObject("border-bottom");
         leftBorder = tiled.getObject("border-left");
         rightBorder = tiled.getObject("border-right");
         platforms = tiled.getObjectLayer("platform-obj");
     }
 
+    /**
+     * Checks if monster collides with platforms.
+     *
+     * @return true if collision, false otherwise
+     */
     public boolean checkPlatforms() {
         boolean platformCollision = false;
         for (int i = 0; i < platforms.getTiledObjects().size(); i++) {
