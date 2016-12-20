@@ -100,7 +100,7 @@ public class GameScreen extends Screen {
 
         if (GameContainer.input.keyTyped("G")) {
             String[] array = loadInfo
-                    ("src/com/ebingine/featureGame2/assets/saves/text");
+                    ("src/com/ebingine/featureGame2/assets/text");
 
             for (int i = 0; i < array.length; i++) {
                 System.out.println(array[i]);

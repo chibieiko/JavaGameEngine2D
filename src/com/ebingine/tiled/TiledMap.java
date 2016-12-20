@@ -232,7 +232,7 @@ public class TiledMap implements Drawable {
     /**
      * Creates objectLayer objects with corresponding tiledObjects.
      */
-    public void createObjectLayers() {
+    private void createObjectLayers() {
         for (int i = 0; i < objectNodes.getLength(); i++) {
             ArrayList<TiledObject> tiledObjects = new ArrayList<>();
 

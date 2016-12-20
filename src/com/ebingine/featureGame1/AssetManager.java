@@ -17,11 +17,6 @@ public class AssetManager {
     public static Texture player;
 
     /**
-     * Holds texture of monster.
-     */
-    public static Texture monster;
-
-    /**
      * Holds texture of background.
      */
     public static Texture background;
@@ -32,8 +27,6 @@ public class AssetManager {
     public AssetManager() {
         player = new Texture
                 ("src/com/ebingine/featureGame1/assets/mog.png");
-        monster = new Texture
-                ("src/com/ebingine/featureGame1/assets/enemy.png");
         background = new Texture
                 ("src/com/ebingine/featureGame1/assets/Background.png");
     }
@@ -43,7 +36,6 @@ public class AssetManager {
      */
     public static void dispose() {
         player.dispose();
-        monster.dispose();
         background.dispose();
     }
 }

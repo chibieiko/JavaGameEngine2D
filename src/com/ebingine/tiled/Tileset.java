@@ -135,7 +135,7 @@ public class Tileset {
      *
      * @return tileset's tile images
      */
-    ArrayList<BufferedImage> getTileImages() {
+    public ArrayList<BufferedImage> getTileImages() {
         return tileImages;
     }
 
