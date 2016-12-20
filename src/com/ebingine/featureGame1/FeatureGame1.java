@@ -3,16 +3,17 @@ package com.ebingine.featureGame1;
 import com.ebingine.GameContainer;
 
 /**
- * TODO Short Description
- * <p>
- * TODO description and @since
+ * Initializes the feature game.
  *
  * @author Erika Sankari
- * @version 2016.1025
+ * @version 2016.1220
  * @since 1.7
  */
 public class FeatureGame1 {
 
+    /**
+     * Adds the game screen to the game container and sets camera size.
+     */
     public FeatureGame1() {
         GameContainer gc = new GameContainer(new GameScreen());
         gc.getCamera().setViewportSizeX(3000);

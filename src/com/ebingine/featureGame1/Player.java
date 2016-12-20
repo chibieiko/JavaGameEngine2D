@@ -6,23 +6,21 @@ import com.ebingine.gameObjects.Sprite;
 import java.awt.*;
 
 /**
- * TODO Short Description
- * <p>
- * TODO description and @since
+ * The player of the game.
  *
  * @author Erika Sankari
- * @version 2016.1116
+ * @version 2016.1220
  * @since 1.7
  */
 public class Player extends Sprite {
 
     /**
-     * Constructor sets sprite's variable values.
+     * Constructor sets player's variable values.
      *
-     * @param coordinateX int coordinate x
-     * @param coordinateY int coordinate y
-     * @param height      int height
-     * @param width       int width
+     * @param coordinateX coordinate x
+     * @param coordinateY coordinate y
+     * @param height height
+     * @param width width
      */
     public Player(int coordinateX, int coordinateY, int width, int height) {
         super(coordinateX, coordinateY, width, height);
@@ -34,6 +32,11 @@ public class Player extends Sprite {
         addDrawable();
     }
 
+    /**
+     * Moves the player accordingly.
+     *
+     * @param delta game's delta time
+     */
     @Override
     public void move(double delta) {
 
@@ -57,6 +60,11 @@ public class Player extends Sprite {
         }
     }
 
+    /**
+     * Moves player2 with different keys than the player 1.
+     *
+     * @param delta game's delta time
+     */
     public void moveP2(double delta) {
         if (GameContainer.input.keyPressed("UP") &&
                 getY() > 0) {
@@ -78,6 +86,11 @@ public class Player extends Sprite {
         }
     }
 
+    /**
+     * Draws the player.
+     *
+     * @param g2d a graphics object for drawing
+     */
     @Override
     public void draw(Graphics2D g2d) {
         g2d.drawImage(getTexture().getImage(), (int) getX(), (int) getY(),

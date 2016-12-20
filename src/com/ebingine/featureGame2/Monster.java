@@ -79,6 +79,7 @@ public class Monster extends Sprite {
         setSpeedY(5);
         gravity = 0.1f;
         fallDown = 0;
+        flip = true;
         createWalkAnimation();
         addDrawable();
     }

@@ -3,38 +3,31 @@ package com.ebingine.featureGame1;
 import com.ebingine.resources.Texture;
 
 /**
- * TODO Short Description
- * <p>
- * TODO description and @since
+ * Loads resources, so that they are ready when they are needed.
  *
  * @author Erika Sankari
- * @version 2016.1115
+ * @version 2016.1220
  * @since 1.7
  */
 public class AssetManager {
 
     /**
-     * Holds image for Player.
+     * Holds texture of Player.
      */
     public static Texture player;
 
     /**
-     * Holds image for monster.
+     * Holds texture of monster.
      */
     public static Texture monster;
 
     /**
-     * Holds image for background.
+     * Holds texture of background.
      */
     public static Texture background;
 
     /**
-     * Holds image for bullet.
-     */
-    public static Texture bullet;
-
-    /**
-     * Constructor loads the images from assets file.
+     * Constructor loads the images from file.
      */
     public AssetManager() {
         player = new Texture
@@ -43,14 +36,14 @@ public class AssetManager {
                 ("src/com/ebingine/featureGame1/assets/enemy.png");
         background = new Texture
                 ("src/com/ebingine/featureGame1/assets/Background.png");
-        bullet = new Texture
-                ("src/com/ebingine/featureGame1/assets/bullet.png");
     }
 
+    /**
+     * Disposes assets.
+     */
     public static void dispose() {
         player.dispose();
         monster.dispose();
         background.dispose();
-        bullet.dispose();
     }
 }

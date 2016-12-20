@@ -4,12 +4,10 @@ import com.ebingine.resources.Audio;
 import com.ebingine.resources.Texture;
 
 /**
- * TODO Short Description
- * <p>
- * TODO description and @since
+ * Loads resources, so that they are ready when they are needed.
  *
  * @author Erika Sankari
- * @version 2016.1210
+ * @version 2016.1220
  * @since 1.7
  */
 public class AssetManager {

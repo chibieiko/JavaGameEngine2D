@@ -4,21 +4,34 @@ import com.ebingine.Screen;
 import com.ebingine.GameContainer;
 
 /**
- * TODO Short Description
- * <p>
- * TODO description and @since
+ * Holds logic and the game loop for game screen.
  *
  * @author Erika Sankari
- * @version 2016.1116
+ * @version 2016.1220
  * @since 1.7
  */
 public class GameScreen extends Screen {
+
+    /**
+     * The player of the game and who the camera follows.
+     */
     private Player player;
+
+    /**
+     * Player 2 of the game.
+     */
     private Player player2;
+
+    /**
+     * Game container.
+     */
     private GameContainer gc;
 
-    public GameScreen() {}
-
+    /**
+     * Creates all necessary components for the game screen.
+     *
+     * @param gc a game container
+     */
     @Override
     public void create(GameContainer gc) {
         this.gc = gc;
@@ -35,6 +48,15 @@ public class GameScreen extends Screen {
                 gc.getHeight() / 2 + player.getHeight(), 100, 100);
     }
 
+    /**
+     * Updates the game state.
+     * <p>
+     * If player 2 catches player, player cannot move as long as it is
+     * colliding with player 2.
+     *
+     * @param gc a game container
+     * @param deltaTime a fixed time step
+     */
     @Override
     public void update(GameContainer gc, double deltaTime) {
         if (player.collidesWith(player2.getEllipse())) {
@@ -56,11 +78,25 @@ public class GameScreen extends Screen {
         }
     }
 
+    /**
+     * Disposes assets.
+     *
+     * @param gc a game container
+     */
     @Override
     public void clear(GameContainer gc) {
         AssetManager.dispose();
     }
 
+    /**
+     * Updates camera's location.
+     * <p>
+     * Camera moves up, down, left and right if there is enough game world to
+     * show.
+     *
+     * @param x new position x
+     * @param y new position y
+     */
     public void updateCamera(int x, int y) {
         gc.getCamera().setPosition(x, y);
 
@@ -89,6 +125,9 @@ public class GameScreen extends Screen {
         }
     }
 
+    /**
+     * Adds the keys that will be reacted to.
+     */
     public void addKeys() {
         String[] keyArray = {"SPACE", "W", "A", "S", "D", "RIGHT", "LEFT",
                 "UP", "DOWN", "control E", "R"};
