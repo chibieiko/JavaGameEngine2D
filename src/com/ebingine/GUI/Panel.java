@@ -3,12 +3,10 @@ package com.ebingine.GUI;
 import com.ebingine.GameContainer;
 import com.ebingine.gameObjects.GameObject;
 import com.ebingine.utils.Drawable;
-import com.ebingine.utils.Utils;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
-import java.awt.image.BufferedImage;
 
 /**
  * TODO Short Description
@@ -16,83 +14,41 @@ import java.awt.image.BufferedImage;
  * TODO description and @since
  *
  * @author Erika Sankari
- * @version 2016.1112
+ * @version 2016.1220
  * @since 1.7
  */
 public class Panel extends JPanel {
 
-    private BufferedImage image;
+    /**
+     * Game container provides access to game engine components.
+     */
     private GameContainer gc;
-    Utils util = new Utils();
 
+    /**
+     * Creates the panel with black background.
+     *
+     * @param gc a game container
+     */
     public Panel(GameContainer gc) {
         this.gc = gc;
-
-        /* IMPLEMENTED IN CAMERA
-        // Resize game to fit screens that are smaller than the specified width
-        // and height in the game container.
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-
-        Rectangle screenMax = GraphicsEnvironment.getLocalGraphicsEnvironment()
-                .getMaximumWindowBounds();
-
-        // Height of the task bar.
-        int taskbarSize = screenSize.height - screenMax.height;
-
-        float ratio = (float) gc.getHeight() / (float) gc.getWidth();
-
-        if (screenMax.getWidth() < gc.getWidth() ||
-                screenMax.getHeight() - taskbarSize < gc.getHeight()) {
-            gc.setHeight((int) (Math.floor(screenMax.getHeight()))
-                    - taskbarSize);
-            gc.setWidth((int) Math.floor(screenMax.getHeight() / ratio));
-        }
-
-        // TODO
-        /*
-        GraphicsEnvironment env = GraphicsEnvironment
-                .getLocalGraphicsEnvironment();
-        Rectangle bounds = env.getMaximumWindowBounds();
-
-        GraphicsDevice device = env.getDefaultScreenDevice();
-        GraphicsConfiguration config = device.getDefaultConfiguration();
-
-        float ratio = (float) gc.getHeight() / (float) gc.getWidth();
-        if (config.getBounds().getWidth() < gc.getWidth() ||
-                config.getBounds().getHeight() - taskbarSize < gc.getHeight()) {
-            gc.setHeight((int) (Math.floor(config.getBounds().getHeight())) -
-                    taskbarSize);
-            gc.setWidth((int) Math.floor(config.getBounds().getHeight() / ratio));
-        }
-        */
-
-        image = new BufferedImage(gc.getWidth(), gc.getHeight(),
-                BufferedImage.TYPE_4BYTE_ABGR);
-/*
-        image = config.createCompatibleImage(gc.getWidth(), gc.getHeight
-                (), Transparency.TRANSLUCENT);*/
-
         setBackground(Color.black);
     }
 
     /**
-     * Sets the preferred size for the drawing area component.
+     * Returns the preferred size of the panel.
      *
-     * @return Dimension preferred size
+     * @return the preferred size
      */
     @Override
     public Dimension getPreferredSize() {
-        Dimension test = new Dimension(gc.getCamera().getViewportSizeX(),
+         return new Dimension(gc.getCamera().getViewportSizeX(),
                 gc.getCamera().getViewportSizeY());
-        System.out.println("dac: " + test.getWidth());
-        System.out.println("dac: " + test.getHeight());
-        return test;
     }
 
     /**
-     * Paints images to drawing area and updates it.
+     * Paints images to panel and updates it.
      *
-     * @param g Graphics object
+     * @param g a graphics object
      */
     @Override
     public void paintComponent(Graphics g) {
@@ -131,18 +87,10 @@ public class Panel extends JPanel {
     }
 
     /**
-     * Updates the drawing area component.
+     * Updates the panel.
      */
     public void update() {
         repaint();
         invalidate();
-    }
-
-    public void clear() {
-        image.flush();
-    }
-
-    public BufferedImage getImage() {
-        return image;
     }
 }

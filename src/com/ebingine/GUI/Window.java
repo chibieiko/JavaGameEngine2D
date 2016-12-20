@@ -6,22 +6,26 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * TODO Short Description
- * <p>
- * TODO description and @since
+ * The window in which the game will be shown.
  *
  * @author Erika Sankari
- * @version 2016.1025
+ * @version 2016.1220
  * @since 1.7
  */
 public class Window extends JFrame {
 
+    /**
+     * The panel where everything is drawn on.
+     */
     private Panel panel;
-    private GameContainer gc;
 
+    /**
+     * Creates the window and the panel.
+     *
+     * @param gc a game container
+     */
     public Window(GameContainer gc) {
         setResizable(false);
-        this.gc = gc;
         panel = new Panel(gc);
         setLayout(new BorderLayout());
         add(panel, BorderLayout.CENTER);
@@ -37,27 +41,25 @@ public class Window extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
+    /**
+     * Calls the panels to update itself.
+     */
     public void update() {
         panel.update();
     }
 
+    /**
+     * Disposes the window.
+     */
     public void clear() {
         this.dispose();
-        panel.clear();
     }
 
-    /*
-    // Defines which panel to show in the event of multiple screens.
-    public void setScreen(Panel panel) {
-        this.panel = panel;
-        add(panel, BorderLayout.CENTER);
-
-        // Sets the size to match drawing area component's preferred size.
-        setContentPane(panel);
-        pack();
-    }
-*/
-
+    /**
+     * Returns the panel.
+     *
+     * @return the panel
+     */
     public Panel getPanel() {
         return panel;
     }

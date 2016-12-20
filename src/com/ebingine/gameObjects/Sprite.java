@@ -6,10 +6,9 @@ import java.io.Serializable;
  * Handles variables for all objects extending Sprite.
  * <p>
  * Provides a constructor and set and get methods for all variables.
- * </p>
  *
  * @author Erika Sankari
- * @version 2016.1114
+ * @version 2016.1220
  * @since 1.7
  */
 public abstract class Sprite extends GameObject implements Serializable {
@@ -25,19 +24,22 @@ public abstract class Sprite extends GameObject implements Serializable {
     private float speedY;
 
     /**
-     * Indicates whether sprite is alive or not.
+     * Indicates whether the sprite is alive or not.
      */
     private boolean alive;
 
-    boolean canMove;
+    /**
+     * Indicates whether the sprite can move or not.
+     */
+    private boolean canMove;
 
     /**
      * Constructor sets sprite's variable values.
      *
-     * @param coordinateX int coordinate x
-     * @param coordinateY int coordinate y
-     * @param height int height
-     * @param width int width
+     * @param coordinateX coordinate x
+     * @param coordinateY coordinate y
+     * @param height sprite's height
+     * @param width sprite's width
      */
     public Sprite(int coordinateX, int coordinateY, int width, int height) {
         setX(coordinateX);
@@ -50,12 +52,17 @@ public abstract class Sprite extends GameObject implements Serializable {
         canMove = true;
     }
 
+    /**
+     * Determines in what way the sprite moves.
+     *
+     * @param delta game's delta time
+     */
     public abstract void move(double delta);
 
     /**
      * Gets speed for coordinate level x.
      *
-     * @return int speedX
+     * @return speed x
      */
     public float getSpeedX() {
         return speedX;
@@ -64,7 +71,7 @@ public abstract class Sprite extends GameObject implements Serializable {
     /**
      * Sets speed for coordinate level x.
      *
-     * @param speedX int speedX
+     * @param speedX new speed x
      */
     public void setSpeedX(float speedX) {
         this.speedX = speedX;
@@ -73,7 +80,7 @@ public abstract class Sprite extends GameObject implements Serializable {
     /**
      * Gets speed for coordinate level y.
      *
-     * @return int speedY
+     * @return speed y
      */
     public float getSpeedY() {
         return speedY;
@@ -82,7 +89,7 @@ public abstract class Sprite extends GameObject implements Serializable {
     /**
      * Sets speed for coordinate level y.
      *
-     * @param speedY int speedY
+     * @param speedY new speed y
      */
     public void setSpeedY(float speedY) {
         this.speedY = speedY;
@@ -91,7 +98,7 @@ public abstract class Sprite extends GameObject implements Serializable {
     /**
      * Indicates whether sprite is alive or not.
      *
-     * @return boolean alive
+     * @return true when alive, false when dead
      */
     public boolean isAlive() {
         return alive;
@@ -100,16 +107,26 @@ public abstract class Sprite extends GameObject implements Serializable {
     /**
      * Sets sprite alive or not alive.
      *
-     * @param alive boolean alive
+     * @param alive new alive state
      */
     public void setAlive(boolean alive) {
         this.alive = alive;
     }
 
+    /**
+     * Indicates whether the sprite can move.
+     *
+     * @return true when sprite can move, false otherwise
+     */
     public boolean canMove() {
         return canMove;
     }
 
+    /**
+     * Enables sprite to move or disables movement.
+     *
+     * @param canMove true if sprite can move, false otherwise
+     */
     public void setCanMove(boolean canMove) {
         this.canMove = canMove;
     }
