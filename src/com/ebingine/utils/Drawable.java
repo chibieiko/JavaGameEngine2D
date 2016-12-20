@@ -3,15 +3,20 @@ package com.ebingine.utils;
 import java.awt.*;
 
 /**
- * TODO Short Description
+ * Indicates which objects are drawable.
  * <p>
- * TODO description and @since
+ * Enforces draw method.
  *
  * @author Erika Sankari
- * @version 2016.1121
+ * @version 2016.1220
  * @since 1.7
  */
-// For objects, pictures, anything you want to draw.
 public interface Drawable {
+
+    /**
+     * Draws all the game elements.
+     *
+     * @param g2d a graphics object for drawing
+     */
     void draw(Graphics2D g2d);
 }

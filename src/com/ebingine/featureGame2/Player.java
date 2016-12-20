@@ -127,7 +127,7 @@ public class Player extends Sprite {
                 flip = false;
             }
 
-            if (GameContainer.input.keyTyped("SPACE")) {
+            if (GameContainer.input.keyReleased("SPACE")) {
                 jumped = true;
             }
 

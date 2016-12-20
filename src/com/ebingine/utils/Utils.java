@@ -8,16 +8,22 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * TODO Short Description
+ * Provides helper methods.
  * <p>
- * TODO description and @since
+ * Helper methods can be used by the game engine but also by the game maker.
  *
  * @author Erika Sankari
- * @version 2016.1122
+ * @version 2016.1220
  * @since 1.7
  */
 public class Utils {
 
+    /**
+     * Creates and returns a Font.
+     *
+     * @param filePath the path to a ttf file
+     * @return the created font
+     */
     public Font createFont(String filePath) {
         Font readyFont = null;
         try {
@@ -33,7 +39,14 @@ public class Utils {
         return readyFont;
     }
 
-    // Helper method splits image to chunks.
+    /**
+     * Splits an image to chunks.
+     *
+     * @param image an image to split into chunks
+     * @param cols determines to how many columns should the image be split
+     * @param rows determines to how many rows should the image be split
+     * @return the image chunks
+     */
     public Texture[] splitImage(BufferedImage image, int cols, int rows) {
         // Determines the image chunk's width and height.
         int chunkWidth = image.getWidth() / cols;

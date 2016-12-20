@@ -82,7 +82,7 @@ public abstract class Screen {
     }
 
     /**
-     * Saves string key - value pairs to a text file.
+     * Saves string key - value pairs to a text file separated by a comma.
      *
      * @param values the values intended to save
      * @param path a path where to save the file

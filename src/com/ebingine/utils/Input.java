@@ -3,26 +3,37 @@ package com.ebingine.utils;
 import com.ebingine.GameContainer;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
- * TODO Short Description
+ * Handles input.
  * <p>
- * TODO description and @since
+ * Enables the use of mouse and keyboard events. Supports multiple keys
+ * pressed at the same time.
  *
  * @author Erika Sankari
- * @version 2016.1112
+ * @version 2016.1220
  * @since 1.7
  */
 public class Input implements ActionListener, MouseListener,
         MouseMotionListener {
 
+    /**
+     * Indicates that a key is a pressed key.
+     */
     private final String PRESSED = "pressed ";
+
+    /**
+     * Indicates that a key is a released key.
+     */
     private final String RELEASED = "released ";
+
+    /**
+     *
+     */
     boolean pressed1 = false;
     // Makes sure key events are only queried when at least one key is down.
     boolean keyDown = false;
@@ -175,14 +186,7 @@ public class Input implements ActionListener, MouseListener,
 
     // Invoked whenever a key is pressed or released.
     private void handleKeyEvent(String key, boolean pressed) {
-        //  Keeps track of which keys are pressed.
-        // if (!pressed) {
-        //     pressedKeys.remove(key);
-        // } else {
-
-
         pressedKeys.put(key, pressed);
-        // }
 
         //  Starts the Timer when the first key is pressed.
         if (pressedKeys.size() == 1) {
@@ -195,7 +199,6 @@ public class Input implements ActionListener, MouseListener,
                 allReleased = false;
             }
 
-
             // In case typed key has been released, then removes it
             // from the typedKeys array.
             boolean remove = false;
@@ -205,8 +208,9 @@ public class Input implements ActionListener, MouseListener,
                 }
             }
 
-            if (remove)
+            if (remove) {
                 typedKeys.remove(key);
+            }
         }
 
         if (allReleased) {
@@ -215,17 +219,6 @@ public class Input implements ActionListener, MouseListener,
             timer.stop();
         }
     }
-
-    //  Stops the Timer when all keys have been released.
-    // if (pressedKeys.size() == 0) {
-    //     timer.stop();
-    //  }
-
-       /* for (Map.Entry<String,Boolean> entry : pressedKeys.entrySet()) {
-            String first = entry.getKey();
-            boolean value = entry.getValue();
-        } */
-
 
     public boolean keyTyped(String key) {
         boolean typed = false;
@@ -267,7 +260,7 @@ public class Input implements ActionListener, MouseListener,
         boolean isReleased = false;
         if (keyDown) {
             for (Map.Entry<String, Boolean> entry : pressedKeys.entrySet()) {
-                if (key.equals(entry.getKey()) && !pressed1) {
+                if (key.equals(entry.getKey()) && !entry.getValue()) {
                     isReleased = true;
                 }
             }
