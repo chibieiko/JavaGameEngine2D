@@ -355,6 +355,10 @@ public class TiledMap implements Drawable {
         }
     }
 
+    public void scaleMap(float scale) {
+
+    }
+
     /**
      * Returns map's height.
      *

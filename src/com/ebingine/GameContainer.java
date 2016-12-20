@@ -104,7 +104,7 @@ public class GameContainer implements Runnable {
         }
 
         window = new Window(this);
-        input = new Input(this, 0);
+        input = new Input(this);
         utils = new Utils();
         screen.create(this);
 
