@@ -65,7 +65,9 @@ public class GameContainer implements Runnable {
     public static ArrayList<Drawable> drawables = new ArrayList<>();
 
     /**
-     * Determines the size of the window, basically how much the player can
+     * Determines the size of the window.
+     *
+     * Basically determines how much the player can
      * see of the game world.
      */
     private Camera camera;
@@ -139,6 +141,7 @@ public class GameContainer implements Runnable {
             newTime = System.nanoTime() / 1_000_000_000.0;
             // Indicates how long it takes for the while loop to loop once.
             loopTime = newTime - currentTime;
+
             if (loopTime > 0.25)
                 loopTime = 0.25;
 
@@ -278,7 +281,7 @@ public class GameContainer implements Runnable {
 
     /**
      * Changes screens.
-     * <p>
+     *
      * Stops the current game screen, changes to another screen and loops
      * that screen.
      *

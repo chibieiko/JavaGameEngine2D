@@ -18,7 +18,7 @@ import java.util.Map;
  * @version 2016.1220
  * @since 1.7
  */
-public class Input implements ActionListener, MouseListener,
+public class Input implements MouseListener,
         MouseMotionListener {
 
     /**
@@ -44,7 +44,7 @@ public class Input implements ActionListener, MouseListener,
     /**
      * Holds all the keys that are in the input map and have been pressed.
      */
-    private Map<String, Boolean> pressedKeys = new HashMap<>();
+    private Map< String, Boolean > pressedKeys = new HashMap<>();
 
     /**
      * Holds all the keys that are in the input map and have been typed.
@@ -95,7 +95,6 @@ public class Input implements ActionListener, MouseListener,
         inputMap = gameContainer.getWindow().getPanel().
                 getInputMap(JPanel.WHEN_IN_FOCUSED_WINDOW);
         actionMap = gameContainer.getWindow().getPanel().getActionMap();
-
         gameContainer.getWindow().getPanel().addMouseListener(this);
         gameContainer.getWindow().getPanel().addMouseMotionListener(this);
         mouseClicked = false;
@@ -263,19 +262,19 @@ public class Input implements ActionListener, MouseListener,
         for (int i = 0; i < keyCodes.length; i++) {
             keyCode = keyCodes[i];
 
-            //  Separates the key identifier from the modifiers of the KeyStroke.
+            // Separates the key identifier from the modifiers of the KeyStroke.
             int offset = keyCode.lastIndexOf(" ");
             String key = offset == -1 ? keyCode : keyCode.substring(offset + 1);
             String modifiers = keyCode.replace(key, "");
 
-            //  Creates Action and adds binding for the pressed key.
+            // Creates Action and adds binding for the pressed key.
             Action pressedAction = new KeyAction(key, true);
             String pressedKey = modifiers + PRESSED + key;
             KeyStroke pressedKeyStroke = KeyStroke.getKeyStroke(pressedKey);
             inputMap.put(pressedKeyStroke, pressedKey);
             actionMap.put(pressedKey, pressedAction);
 
-            //  Creates Action and adds binding for the released key.
+            // Creates Action and adds binding for the released key.
             Action releasedAction = new KeyAction(key, false);
             String releasedKey = modifiers + RELEASED + key;
             KeyStroke releasedKeyStroke = KeyStroke.getKeyStroke(releasedKey);
@@ -295,18 +294,22 @@ public class Input implements ActionListener, MouseListener,
 
     /**
      * Handles key events.
-     * <p>
+     *
      * Invoked whenever a key is pressed or released.
      * Saves pressed keys to an array along with their state (boolean
      * pressed, released). Also maintains an array of typed keys.
      *
-     * @param key a key that was just released or pressed
+     * @param key     a key that was just released or pressed
      * @param pressed true if pressed, false if released
      */
     private void handleKeyEvent(String key, boolean pressed) {
         boolean keyFound = false;
+
         if (pressedKeys.size() > 0) {
-            for (Map.Entry<String, Boolean> entry : pressedKeys.entrySet()) {
+
+            for ( Map.Entry < String, Boolean > entry :
+                    pressedKeys.entrySet()) {
+
                 if (entry.getKey().equals(key)) {
                     keyFound = true;
                     entry.setValue(pressed);
@@ -316,7 +319,6 @@ public class Input implements ActionListener, MouseListener,
             if (!keyFound) {
                 pressedKeys.put(key, pressed);
             }
-
         } else {
             pressedKeys.put(key, pressed);
         }
@@ -324,7 +326,9 @@ public class Input implements ActionListener, MouseListener,
         // In case typed key has been released, then removes it
         // from the typedKeys array.
         boolean remove = false;
+
         for (String typedKey : typedKeys) {
+
             if (key.equals(typedKey) && !pressed) {
                 remove = true;
             }
@@ -344,13 +348,16 @@ public class Input implements ActionListener, MouseListener,
     public boolean keyTyped(String key) {
         boolean typed = false;
         boolean alreadyTyped = false;
+
         for (String typedKey : typedKeys) {
+
             if (key.equals(typedKey)) {
                 alreadyTyped = true;
             }
         }
 
-        for (Map.Entry<String, Boolean> entry : pressedKeys.entrySet()) {
+        for (Map.Entry < String, Boolean > entry : pressedKeys.entrySet()) {
+
             if (key.equals(entry.getKey()) && entry.getValue() &&
                     !alreadyTyped) {
                 typed = true;
@@ -371,7 +378,9 @@ public class Input implements ActionListener, MouseListener,
      */
     public boolean keyPressed(String key) {
         boolean isPressed = false;
-        for (Map.Entry<String, Boolean> entry : pressedKeys.entrySet()) {
+
+        for (Map.Entry < String, Boolean > entry : pressedKeys.entrySet()) {
+
             if (key.equals(entry.getKey()) && entry.getValue())
                 isPressed = true;
         }
@@ -387,7 +396,9 @@ public class Input implements ActionListener, MouseListener,
      */
     public boolean keyReleased(String key) {
         boolean isReleased = false;
-        for (Map.Entry<String, Boolean> entry : pressedKeys.entrySet()) {
+
+        for (Map.Entry < String, Boolean > entry : pressedKeys.entrySet()) {
+
             if (key.equals(entry.getKey()) && !entry.getValue()) {
                 isReleased = true;
             }
@@ -399,14 +410,6 @@ public class Input implements ActionListener, MouseListener,
 
         return isReleased;
     }
-
-    /**
-     * Listens for action events.
-     *
-     * @param e an action event
-     */
-    @Override
-    public void actionPerformed(ActionEvent e) {}
 
     /**
      * Input's inner class that handles key actions.
@@ -431,7 +434,7 @@ public class Input implements ActionListener, MouseListener,
         /**
          * Constructor sets key value and key's state.
          *
-         * @param key String key value
+         * @param key     String key value
          * @param pressed true if pressed, false if released
          */
         public KeyAction(String key, boolean pressed) {
@@ -441,7 +444,7 @@ public class Input implements ActionListener, MouseListener,
 
         /**
          * Receives performed actions and passes them to key event handler.
-         * <p>
+         *
          * Supports control and shift modifiers.
          *
          * @param e an action event
@@ -449,6 +452,7 @@ public class Input implements ActionListener, MouseListener,
         @Override
         public void actionPerformed(ActionEvent e) {
             name = (String) getValue(NAME);
+
             if (e.getModifiers() == InputEvent.CTRL_MASK) {
                 name = "control " + name;
             }

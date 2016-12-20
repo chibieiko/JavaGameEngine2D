@@ -50,7 +50,7 @@ public class GameScreen extends Screen {
 
     /**
      * Updates the game state.
-     * <p>
+     *
      * If player 2 catches player, player cannot move as long as it is
      * colliding with player 2.
      *
@@ -90,7 +90,7 @@ public class GameScreen extends Screen {
 
     /**
      * Updates camera's location.
-     * <p>
+     *
      * Camera moves up, down, left and right if there is enough game world to
      * show.
      *

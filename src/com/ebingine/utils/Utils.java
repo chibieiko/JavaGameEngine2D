@@ -52,6 +52,7 @@ public class Utils {
         int chunkWidth = image.getWidth() / cols;
         int chunkHeight = image.getHeight() / rows;
         Texture[] images = new Texture[cols * rows];
+
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
                 images[cols * i + j] = new Texture(image.getSubimage(chunkWidth

@@ -177,6 +177,7 @@ public class Player extends Sprite {
             }
 
             boolean walking = false;
+
             if (GameContainer.input.keyPressed("A") &&
                     !collidesWith(leftBorder.getRectangle())) {
                 if (boost) {
@@ -210,7 +211,6 @@ public class Player extends Sprite {
             } else {
                 currentFrame = getTexture();
             }
-
         } else {
             currentFrame = AssetManager.rosetteDead;
         }
@@ -280,6 +280,7 @@ public class Player extends Sprite {
      */
     public boolean checkPlatforms() {
         boolean platformCollision = false;
+
         for (int i = 0; i < platforms.getTiledObjects().size(); i++) {
             if (collidesWith(platforms.getTiledObjects().get(i)
                     .getRectangle())) {
@@ -330,6 +331,7 @@ public class Player extends Sprite {
      */
     public boolean checkBulletCollision(Bullet bullet) {
         boolean collision = false;
+
         if (bullet.collidesWith(leftBorder.getRectangle()) ||
                 bullet.collidesWith(rightBorder.getRectangle())) {
             collision = true;
@@ -348,6 +350,7 @@ public class Player extends Sprite {
      */
     public boolean checkBulletCollision(Bullet bullet, Monster monster) {
         boolean collision = false;
+
         if (bullet.collidesWith(monster.getRectangle())) {
             collision = true;
             bullet.playExplodeSound();

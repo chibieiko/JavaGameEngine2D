@@ -49,6 +49,7 @@ public class Bullet extends Sprite {
      * @param coordinateY coordinate y
      * @param width width
      * @param height height
+     * @param flip the direction to which the bullet will travel
      */
     public Bullet(int coordinateX, int coordinateY, int width, int height,
                   boolean flip) {

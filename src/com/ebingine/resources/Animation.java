@@ -49,6 +49,7 @@ public class Animation {
      *
      * @param time the speed of the animation
      * @param frames the frames of the animation
+     * @throws RuntimeException if given invalid time
      */
     public Animation(double time, Texture[] frames) {
         if (time <= 0) {
@@ -108,6 +109,7 @@ public class Animation {
     public void update(double stateTime) {
         if (!stopped) {
             frameCount += stateTime;
+
             if (frameCount > time) {
                 if (currentFrame < frames.length - 1) {
                     currentFrame++;
@@ -120,6 +122,7 @@ public class Animation {
                 // looped once.
                 if (!loopFull) {
                     totalFrames++;
+
                     if (totalFrames == frames.length) {
                         loopFull = true;
                     }
@@ -130,6 +133,8 @@ public class Animation {
 
     /**
      * Tells whether the animation has looped at least once.
+     *
+     * @return true if the animation has looped at least once, false otherwise
      */
     public boolean isLoopFull() {
         return loopFull;

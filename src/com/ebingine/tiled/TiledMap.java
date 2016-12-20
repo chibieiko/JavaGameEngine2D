@@ -161,6 +161,7 @@ public class TiledMap implements Drawable {
                 Element e = (Element) layerNodes.item(i);
                 Element data = (Element) e.getElementsByTagName("tiles").
                         item(0);
+
                 if (e.getElementsByTagName("tiles").item(0) == null) {
                     data = (Element) e.getElementsByTagName("data").item(0);
                 }
@@ -176,6 +177,7 @@ public class TiledMap implements Drawable {
                     }
 
                     mapIndex++;
+
                     if (mapIndex < mapWidth) {
                         coordinateX = coordinateX + tileWidth;
                     } else {
@@ -264,6 +266,7 @@ public class TiledMap implements Drawable {
      */
     public ObjectLayer getObjectLayer(String name) {
         ObjectLayer toReturn = null;
+
         for (int i = 0; i < objectLayers.size(); i++) {
             if (objectLayers.get(i).getName().equals(name)) {
                 toReturn = objectLayers.get(i);
@@ -281,6 +284,7 @@ public class TiledMap implements Drawable {
      */
     public TiledObject getObject(int id) {
         TiledObject toReturn = null;
+
         for (int i = 0; i < objectLayers.size(); i++) {
             for (int j = 0; j < objectLayers.get(i).getTiledObjects().size();
                  j++) {
@@ -302,6 +306,7 @@ public class TiledMap implements Drawable {
      */
     public TiledObject getObject(String name) {
         TiledObject toReturn = null;
+
         for (int i = 0; i < objectLayers.size(); i++) {
             for (int j = 0; j < objectLayers.get(i).getTiledObjects().size();
                  j++) {
@@ -323,6 +328,7 @@ public class TiledMap implements Drawable {
      */
     public Layer getLayer(String name) {
         Layer toReturn = null;
+
         for (int i = 0; i < layers.size(); i++) {
             if (layers.get(i).getName().equals(name)) {
                 toReturn = layers.get(i);
@@ -334,7 +340,7 @@ public class TiledMap implements Drawable {
 
     /**
      * Draws the tiled map.
-     * <p>
+     * 
      * The map layers are drawn in the following order: bottom to
      * top (from Tiled map layer view perspective).
      *

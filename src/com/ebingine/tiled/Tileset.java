@@ -45,7 +45,7 @@ public class Tileset {
     private int tileHeight;
 
     /**
-     * The path to the tileset image from the tiled map
+     * The path to the tileset image from the tiled map.
      */
     private String source;
 
@@ -103,7 +103,8 @@ public class Tileset {
      */
     private void loadImages(String path) {
         File file = new File(path + source);
-        try (FileInputStream fis = new FileInputStream(file)){
+
+        try (FileInputStream fis = new FileInputStream(file)) {
             sourceImage = ImageIO.read(fis);
         } catch (IOException e) {
             System.out.println("Could not load tileset image: " + name);
@@ -116,6 +117,7 @@ public class Tileset {
             // Determines the image chunk's width and height.
             int chunkWidth = sourceImage.getWidth() / cols;
             int chunkHeight = sourceImage.getHeight() / rows;
+
             for (int i = 0; i < rows; i++) {
                 for (int j = 0; j < cols; j++) {
                     tileImages.add(sourceImage.getSubimage(chunkWidth * j,

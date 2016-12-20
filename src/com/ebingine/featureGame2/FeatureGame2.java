@@ -13,7 +13,7 @@ public class FeatureGame2 {
 
     /**
      * Creates the game screen and adds it to the game container.
-     * <p>
+     *
      * Sets the available keys for the game.
      */
     public FeatureGame2() {

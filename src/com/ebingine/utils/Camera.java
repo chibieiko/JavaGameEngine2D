@@ -43,7 +43,7 @@ public class Camera {
 
     /**
      * Initializes camera to a default size of 800x600.
-     * <p>
+     *
      * The camera's rectangle is created to be slightly bigger than the
      * camera to ensure everything gets drawn.
      *
@@ -152,7 +152,7 @@ public class Camera {
 
     /**
      * Sets a new position x.
-     * <p>
+     *
      * Updates camera's rectangle's position x.
      *
      * @param x new position x
@@ -167,7 +167,7 @@ public class Camera {
 
     /**
      * Sets a new position y.
-     * <p>
+     *
      * Updates camera's rectangle's position y.
      *
      * @param y new position y

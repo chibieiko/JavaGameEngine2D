@@ -182,6 +182,7 @@ public class Monster extends Sprite {
      */
     public boolean checkPlatforms() {
         boolean platformCollision = false;
+
         for (int i = 0; i < platforms.getTiledObjects().size(); i++) {
             if (collidesWith(platforms.getTiledObjects().get(i)
                     .getRectangle())) {

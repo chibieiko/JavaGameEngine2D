@@ -1,6 +1,5 @@
 package com.ebingine.gameObjects;
 
-
 import com.ebingine.GameContainer;
 import com.ebingine.utils.Drawable;
 import com.ebingine.resources.Texture;
@@ -174,6 +173,7 @@ public abstract class GameObject implements Drawable, Serializable {
      */
     public void setX(float x) {
         this.x = x;
+
         if (rectangle != null)
             updateRect((int) x, (int) rectangle.getY());
 
@@ -198,6 +198,7 @@ public abstract class GameObject implements Drawable, Serializable {
      */
     public void setY(float y) {
         this.y = y;
+
         if (rectangle != null)
             updateRect((int) rectangle.getX(), (int) y);
 
@@ -220,7 +221,8 @@ public abstract class GameObject implements Drawable, Serializable {
      */
     public void updateRect(int x, int y) {
         if (rectangle != null) {
-            rectangle.setRect(x, y, rectangle.getWidth(), rectangle.getHeight());
+            rectangle.setRect(x, y, rectangle.getWidth(),
+                    rectangle.getHeight());
         }
     }
 
@@ -238,7 +240,7 @@ public abstract class GameObject implements Drawable, Serializable {
 
     /**
      * Checks collisions between game object and rectangle.
-     * <p>
+     *
      * If game object has a rectangle, checks collision between that rectangle
      * and the other rectangle. If there was no collision and game object has
      * an ellipse, then checks collisions between ellipse and the other
@@ -249,6 +251,7 @@ public abstract class GameObject implements Drawable, Serializable {
      */
     public boolean collidesWith(Rectangle2D rect) {
         boolean collision = false;
+
         if (rectangle != null && rectangle.intersects(rect)) {
             collision = true;
         }
@@ -262,7 +265,7 @@ public abstract class GameObject implements Drawable, Serializable {
 
     /**
      * Checks collisions between game object and another rectangle.
-     * <p>
+     *
      * Game maker can choose whether to check collision between game object's
      * rectangle and the other rectangle or between game object's ellipse and
      * the other rectangle.
@@ -274,6 +277,7 @@ public abstract class GameObject implements Drawable, Serializable {
      */
     public boolean collidesWith(Rectangle2D rect, boolean myRectangle) {
         boolean collision = false;
+
         if (myRectangle) {
             if (rectangle != null && rectangle.intersects(rect))
                 collision = true;
@@ -287,7 +291,7 @@ public abstract class GameObject implements Drawable, Serializable {
 
     /**
      * Checks collisions between game objects rectangle and another ellipse.
-     * <p>
+     *
      * If game object has a rectangle, checks collision between that rectangle
      * and the other ellipse. If there was no collision and game object has
      * an ellipse, then checks collisions between ellipse and the other

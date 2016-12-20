@@ -34,7 +34,7 @@ public abstract class Screen {
 
     /**
      * Clears game screen.
-     * <p>
+     *
      * Called by the GameContainer class when the game is excited.
      *
      * @param gc a game container
@@ -96,7 +96,6 @@ public abstract class Screen {
             for (int i = 0; i < values.length; i++) {
                 writer.write(values[i] + ",");
             }
-
         } catch (IOException e2) {
             e2.printStackTrace();
         }

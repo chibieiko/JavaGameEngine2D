@@ -47,6 +47,7 @@ public class Audio {
      */
     public void play() {
         clip.start();
+
         if (!clip.isRunning()) {
             clip.setMicrosecondPosition(0);
             clip.start();
